@@ -1,3 +1,6 @@
+package com.companyname.doAn;
+
+
 import java.util.Scanner;
 
 public class QL {
@@ -34,49 +37,49 @@ public class QL {
            System.out.print("[Nhap 1->4] : ");
            choice = Integer.parseInt(sc.nextLine());
            switch (choice) {
-               case 1 ->{
+               case 1 :{
                    menu_ns();
                    int k = Integer.parseInt(sc.nextLine());
                    switch (k) {
-                       case 1 ->{
+                       case 1 : {
                            int i = Integer.parseInt(sc.nextLine());
                             menu_con_ns();
                                 switch (i) {
-                                    case 1 ->{
+                                    case 1 :{
                                         ns = new nhanVien();
                                         ns.nhap();
                                     }
-                                    case 2 ->{
+                                    case 2 :{
                                         ns = new truongPhong();
                                         ns.nhap();
                                     }
-                                    case 3 ->{
+                                    case 3 :{
                                         ns = new giamDoc();
                                         ns.nhap();
                                     }
                                 }
                        }
-                       case 2 ->{
+                       case 2: {
                            //sua
                        }
-                       case 3 ->{
+                       case 3: {
                            //xoa
                        }
-                       case 4 ->{
+                       case 4: {
                            //in txt
                        }
-                       case 5 ->{
+                       case 5: {
                             int p = Integer.parseInt(sc.nextLine());
                             switch (p) {
-                                case 1 ->{
+                                case 1: {
                                     ns = new nhanVien();
                                     ns.nhap();
                                 }
-                                case 2 ->{
+                                case 2: {
                                     ns = new truongPhong();
                                     ns.xuat();
                                 }
-                                case 3 ->{
+                                case 3: {
                                     ns = new giamDoc();
                                     ns.xuat();
                                 }
@@ -87,9 +90,9 @@ public class QL {
                    }
 
                }
-               case 2 -> System.out.println("dag lam =)))");
-               case 3 -> System.out.println("dag lam luon =))");
-               case 4 -> {
+               case 2 : System.out.println("dag lam =)))");
+               case 3 : System.out.println("dag lam luon =))");
+               case 4 : {
                    System.out.println("Bye Bye !!");
                    flag = false;
                }

@@ -1,3 +1,6 @@
+package com.companyname.doAn;
+
+
 import java.util.Scanner;
 
 public abstract class nhanSu {
@@ -37,7 +40,7 @@ public abstract class nhanSu {
                 this.heSothidua = heSothidua;
                 break;
             }else{
-                System.out.println("Khong hop le !!!!");
+                System.out.println("Khong hop le !!!! hệ số thi dua từ A -> F");
                 heSothidua = sc.nextLine();
             }
         }

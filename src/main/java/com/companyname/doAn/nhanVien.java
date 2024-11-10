@@ -1,3 +1,6 @@
+
+package com.companyname.doAn;
+
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.Locale;
@@ -22,14 +25,14 @@ public class nhanVien extends nhanSu {
 
     @Override
     double bonusMoneyhesothidua() {
-        return switch (getHeSothidua()) {  //switch expression
-            case "A" -> luongCoban() * 3.5;
-            case "B" -> luongCoban() * 2.5;
-            case "C" -> luongCoban() * 1.5;
-            case "D" -> luongCoban() * 1;
-            case "E" -> luongCoban();
-            default -> 0;
-        };
+        switch (getHeSothidua()) {  //switch expression
+            case "A" : return luongCoban() * 3.5;
+            case "B" : return luongCoban() * 2.5;
+            case "C" : return luongCoban() * 1.5;
+            case "D" : return luongCoban() * 1;
+            case "E" : return luongCoban();
+            default : return 0;
+        }
     }
 
     @Override
