@@ -7,5 +7,9 @@ public class Main {
         nv.nhap();
         nv.xuat();
         System.out.println(nv.bonusChucvu() + "  " + nv.bonusChucvu()+ "  " );
+
+        QL ql = new QL();
+        ql.menu();
+
     }
 }
