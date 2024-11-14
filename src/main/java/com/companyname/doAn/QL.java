@@ -31,7 +31,7 @@ public class QL {
     public void menu(){
        int choice;
        boolean flag = true;
-       nhanSu ns;
+       NhanSu ns;
        while(flag){
            menu_chinh();
            System.out.print("[Nhap 1->4] : ");
@@ -46,7 +46,7 @@ public class QL {
                             menu_con_ns();
                                 switch (i) {
                                     case 1 :{
-                                        ns = new nhanVien();
+                                        ns = new NhanVien();
                                         ns.nhap();
                                     }
                                     case 2 :{
@@ -72,7 +72,7 @@ public class QL {
                             int p = Integer.parseInt(sc.nextLine());
                             switch (p) {
                                 case 1: {
-                                    ns = new nhanVien();
+                                    ns = new NhanVien();
                                     ns.nhap();
                                 }
                                 case 2: {

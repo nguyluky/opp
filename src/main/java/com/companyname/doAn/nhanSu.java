@@ -3,7 +3,7 @@ package com.companyname.doAn;
 
 import java.util.Scanner;
 
-public abstract class nhanSu {
+public abstract class NhanSu {
     private String id;
     private String name;
     private String phone;
@@ -19,10 +19,10 @@ public abstract class nhanSu {
     abstract double tienLuong();
     abstract double luongCoban();
 
-    public nhanSu() {
+    public NhanSu() {
     }
 
-    public nhanSu(String id, String name, String phone, String diaChi, int namVaolam) {
+    public NhanSu(String id, String name, String phone, String diaChi, int namVaolam) {
         this.id = id;
         this.name = name;
         this.phone = phone;

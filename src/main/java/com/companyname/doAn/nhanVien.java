@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.Locale;
 
-public class nhanVien extends nhanSu {
+public class NhanVien extends NhanSu {
     private int kinhNghiem;
     private double heSophucap;
     private double phuCapthamnien;
@@ -47,10 +47,10 @@ public class nhanVien extends nhanSu {
         return (luongCoban() + bonusChucvu() + bonusMoneyhesothidua() + getPhuCapthamnien()) - (d*200000)  ;
     }
 
-    public nhanVien() {
+    public NhanVien() {
     }
 
-    public nhanVien(String id, String name, String phone, String diaChi, int namVaolam, int kinhNghiem,  double phuCapthamnien, int soNgaynghi) {
+    public NhanVien(String id, String name, String phone, String diaChi, int namVaolam, int kinhNghiem,  double phuCapthamnien, int soNgaynghi) {
         super(id, name, phone, diaChi, namVaolam);
         this.kinhNghiem = kinhNghiem;
 

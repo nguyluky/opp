@@ -3,7 +3,7 @@ package com.companyname.doAn;
 
 import java.time.LocalDate;
 
-public class truongPhong extends nhanSu {
+public class truongPhong extends NhanSu {
     private int kinhNghiem;
     private double heSophucap;
     private double phuCapthamnien;

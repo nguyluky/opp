@@ -2,7 +2,7 @@ package com.companyname.doAn;
 
 import java.time.LocalDate;
 
-public class giamDoc extends nhanSu {
+public class giamDoc extends NhanSu {
     private int kinhNghiem;
     private double heSophucap;
     private double phuCapthamnien;
