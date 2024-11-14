@@ -1,14 +1,16 @@
 package com.companyname.doAn;
 
+import java.util.Scanner;
 import java.time.LocalDate;
 
-public class giamDoc extends nhanSu {
-    private int kinhNghiem;
-    private double heSophucap;
-    private double phuCapthamnien;
+public class GiamDoc extends NhanSu {
+    private int kinhNghiem = -1;
+    private double phuCapthamnien = -1;
     private int soNgaynghi;
     private  final String  chuVu = "Giam Doc";
     private final int soNgayduocphepnghi = 3;
+
+
 
     @Override
     double bonusChucvu() {
@@ -44,10 +46,10 @@ public class giamDoc extends nhanSu {
         return (luongCoban() + bonusChucvu() + bonusMoneyhesothidua() + getPhuCapthamnien()) - (d*300000)  ;
     }
 
-    public giamDoc() {
+    public GiamDoc() {
     }
 
-    public giamDoc(String id, String name, String phone, String diaChi, int namVaolam, int kinhNghiem, double phuCapthamnien, int soNgaynghi) {
+    public GiamDoc(String id, String name, String phone, String diaChi, int namVaolam, int kinhNghiem, double phuCapthamnien, int soNgaynghi) {
         super(id, name, phone, diaChi, namVaolam);
         this.kinhNghiem = kinhNghiem;
         this.phuCapthamnien = phuCapthamnien;
@@ -55,6 +57,10 @@ public class giamDoc extends nhanSu {
     }
 
     public int getKinhNghiem() {
+        if (this.kinhNghiem != 0) {
+            return this.kinhNghiem;
+        }
+
         LocalDate year = LocalDate.now();
         int y = year.getYear();
         return y - super.getNamVaolam();
@@ -76,14 +82,11 @@ public class giamDoc extends nhanSu {
         }else return 3.0;
     }
 
-    public void setHeSophucap(double heSophucap) {
-        this.heSophucap = heSophucap;
-    }
-
     public double getPhuCapthamnien() {
         return getKinhNghiem() * luongCoban()/100;
     }
 
+//    là sao tạo sao lưu vào biến là gì vậy
     public void setPhuCapthamnien(double phuCapthamnien) {
         this.phuCapthamnien = phuCapthamnien;
     }
@@ -104,17 +107,17 @@ public class giamDoc extends nhanSu {
         return soNgayduocphepnghi;
     }
 
-    public void nhap(){
-        super.nhap();
+    public void nhap(Scanner sc){
+        super.nhap(sc);
         System.out.println("So ngay nghi :");
         setSoNgaynghi(Integer.parseInt(sc.nextLine()));
     }
 
     @Override
     public String toString() {
-        return super.toString() + "\t\tKinh nghiem  :"+getKinhNghiem()+ "\t\tHe so phu cap  :" + getHeSophucap() +
-                "\t\tChuc vu  :" + getChuVu() + "\t\t So ngay nghi  :" +getSoNgaynghi() +
-                "\t\tTong tien luong :" +tienLuong();
+        return super.toString() + "\nKinh nghiem  :"+getKinhNghiem()+ "\nHe so phu cap  :" + getHeSophucap() +
+                "\nChuc vu  :" + getChuVu() + "\n So ngay nghi  :" +getSoNgaynghi() +
+                "\nTong tien luong :" +tienLuong();
     }
     public void xuat(){
         System.out.println(toString());

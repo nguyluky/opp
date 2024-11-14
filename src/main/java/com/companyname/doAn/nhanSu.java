@@ -3,7 +3,7 @@ package com.companyname.doAn;
 
 import java.util.Scanner;
 
-public abstract class nhanSu {
+public abstract class NhanSu {
     private String id;
     private String name;
     private String phone;
@@ -11,18 +11,15 @@ public abstract class nhanSu {
     private int namVaolam;
     private String heSothidua;
 
-
-    public static Scanner sc = new Scanner(System.in);
-
     abstract double bonusMoneyhesothidua();
     abstract double bonusChucvu();
     abstract double tienLuong();
     abstract double luongCoban();
 
-    public nhanSu() {
+    public NhanSu() {
     }
 
-    public nhanSu(String id, String name, String phone, String diaChi, int namVaolam) {
+    public NhanSu(String id, String name, String phone, String diaChi, int namVaolam) {
         this.id = id;
         this.name = name;
         this.phone = phone;
@@ -34,13 +31,13 @@ public abstract class nhanSu {
         return heSothidua;
     }
 
-    public void setHeSothidua(String heSothidua) {
+    public void setHeSothidua(String heSothidua, Scanner sc) {
         while(true){
             if(heSothidua.equals("A") || heSothidua.equals("B") || heSothidua.equals("C") || heSothidua.equals("D") || heSothidua.equals("E") || heSothidua.equals("F")){
                 this.heSothidua = heSothidua;
                 break;
             }else{
-                System.out.println("Khong hop le !!!! hệ số thi dua từ A -> F");
+                System.out.println("Khong hop le !!!! he so thi dua từ A -> F");
                 heSothidua = sc.nextLine();
             }
         }
@@ -86,8 +83,7 @@ public abstract class nhanSu {
         this.namVaolam = namVaolam;
     }
 
-
-    public void nhap(){
+    public void nhap(Scanner sc){
         System.out.println("Ma nhan su : ");
         setId(sc.nextLine());
         System.out.println("Ten nhan su :");
@@ -99,15 +95,15 @@ public abstract class nhanSu {
         System.out.println("Nam vao lam :");
         setNamVaolam(Integer.parseInt(sc.nextLine()));
         System.out.println("He so thi dua :");
-        setHeSothidua(sc.nextLine());
+        setHeSothidua(sc.nextLine(), sc);
     }
 
     @Override
     public String toString() {
         return "Nhan su :\n" +
-                "ID : " + this.getId() + "\t\tTen : " +this.getName() +
-                "\t\tDia chi : " + this.getDiaChi() +"\t\tSo dien thoai : " + this.getPhone() +
-                "\t\tNam vao lam : " + this.getNamVaolam();
+                "ID : " + this.getId() + "\nTen : " +this.getName() +
+                "\nDia chi : " + this.getDiaChi() +"\nSo dien thoai : " + this.getPhone() +
+                "\nNam vao lam : " + this.getNamVaolam();
     }
     public void xuat(){
         System.out.println(toString());

@@ -31,7 +31,7 @@ public class QL {
     public void menu(){
        int choice;
        boolean flag = true;
-       nhanSu ns;
+       NhanSu ns;
        while(flag){
            menu_chinh();
            System.out.print("[Nhap 1->4] : ");
@@ -46,16 +46,16 @@ public class QL {
                             menu_con_ns();
                                 switch (i) {
                                     case 1 :{
-                                        ns = new nhanVien();
-                                        ns.nhap();
+                                        ns = new NhanVien();
+                                        ns.nhap(sc);
                                     }
                                     case 2 :{
-                                        ns = new truongPhong();
-                                        ns.nhap();
+                                        ns = new TruongPhong();
+                                        ns.nhap(sc);
                                     }
                                     case 3 :{
-                                        ns = new giamDoc();
-                                        ns.nhap();
+                                        ns = new GiamDoc();
+                                        ns.nhap(sc);
                                     }
                                 }
                        }
@@ -72,15 +72,15 @@ public class QL {
                             int p = Integer.parseInt(sc.nextLine());
                             switch (p) {
                                 case 1: {
-                                    ns = new nhanVien();
-                                    ns.nhap();
+                                    ns = new NhanVien();
+                                    ns.nhap(sc);
                                 }
                                 case 2: {
-                                    ns = new truongPhong();
+                                    ns = new TruongPhong();
                                     ns.xuat();
                                 }
                                 case 3: {
-                                    ns = new giamDoc();
+                                    ns = new GiamDoc();
                                     ns.xuat();
                                 }
                             }

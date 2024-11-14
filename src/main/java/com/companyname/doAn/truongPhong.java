@@ -2,8 +2,9 @@ package com.companyname.doAn;
 
 
 import java.time.LocalDate;
+import java.util.Scanner;
 
-public class truongPhong extends nhanSu {
+public class TruongPhong extends NhanSu {
     private int kinhNghiem;
     private double heSophucap;
     private double phuCapthamnien;
@@ -45,10 +46,10 @@ public class truongPhong extends nhanSu {
         return (luongCoban() + bonusChucvu() + bonusMoneyhesothidua() + getPhuCapthamnien()) - (d*300000)  ;
     }
 
-    public truongPhong() {
+    public TruongPhong() {
     }
 
-    public truongPhong(String id, String name, String phone, String diaChi, int namVaolam, int kinhNghiem, double phuCapthamnien, int soNgaynghi) {
+    public TruongPhong(String id, String name, String phone, String diaChi, int namVaolam, int kinhNghiem, double phuCapthamnien, int soNgaynghi) {
         super(id, name, phone, diaChi, namVaolam);
         this.kinhNghiem = kinhNghiem;
 
@@ -106,8 +107,8 @@ public class truongPhong extends nhanSu {
         return soNgayduocphepnghi;
     }
 
-    public void nhap(){
-        super.nhap();
+    public void nhap(Scanner sc){
+        super.nhap(sc);
 //        System.out.println("He so phuc cap :");
 //        setHeSophucap(Double.parseDouble(sc.nextLine()));
         System.out.println("So ngay nghi :");
@@ -116,9 +117,9 @@ public class truongPhong extends nhanSu {
 
     @Override
     public String toString() {
-        return super.toString() + "\t\tKinh nghiem  :"+getKinhNghiem()+ "\t\tHe so phu cap  :" + getHeSophucap() +
-                "\t\tChuc vu  :" + getChuVu() + "\t\t So ngay nghi  :" +getSoNgaynghi() +
-                "\t\tTong tien luong :" +tienLuong();
+        return super.toString() + "\nKinh nghiem  :"+getKinhNghiem()+ "\nHe so phu cap  :" + getHeSophucap() +
+                "\nChuc vu  :" + getChuVu() + "\nSo ngay nghi  :" +getSoNgaynghi() +
+                "\nTong tien luong :" +tienLuong();
     }
     public void xuat(){
         System.out.println(toString());
