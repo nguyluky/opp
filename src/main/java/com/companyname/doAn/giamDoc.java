@@ -1,28 +1,30 @@
 package com.companyname.doAn;
 
 import java.time.LocalDate;
+import java.util.Scanner;
 
-public class giamDoc extends NhanSu {
+public class giamDoc extends nhanSu { // Đổi tên lớp theo quy tắc CamelCase
     private int kinhNghiem;
     private double heSophucap;
     private double phuCapthamnien;
     private int soNgaynghi;
-    private  final String  chuVu = "Giam Doc";
+    private final String chuVu = "Giám Đốc"; // Đổi tên cho chuẩn
     private final int soNgayduocphepnghi = 3;
+    private Scanner sc = new Scanner(System.in); // Thêm scanner để nhập dữ liệu
 
     @Override
     double bonusChucvu() {
-        return luongCoban()*2.25 + luongCoban() *getHeSophucap();
+        return luongCoban() * 2.25 + luongCoban() * getHeSophucap();
     }
 
     @Override
     double luongCoban() {
-        return 5000000;
+        return 5000000; // Lương cố định cho Giám đốc
     }
 
     @Override
     double bonusMoneyhesothidua() {
-        switch (getHeSothidua()) {  //switch expression
+        switch (getHeSothidua()) {  // switch expression
             case "A": return luongCoban() * 3.5;
             case "B": return luongCoban() * 2.5;
             case "C": return luongCoban() * 1.5;
@@ -34,17 +36,12 @@ public class giamDoc extends NhanSu {
 
     @Override
     double tienLuong() {
-        double d =0;
-        if(getSoNgayduocphepnghi() - getSoNgaynghi()>0){
-            d = (getSoNgayduocphepnghi() - getSoNgaynghi());
-        }else{
-            d = -(getSoNgayduocphepnghi() - getSoNgaynghi());
-        }
-
-        return (luongCoban() + bonusChucvu() + bonusMoneyhesothidua() + getPhuCapthamnien()) - (d*300000)  ;
+        double d = Math.max(0, getSoNgaynghi() - getSoNgayduocphepnghi());
+        return (luongCoban() + bonusChucvu() + bonusMoneyhesothidua() + getPhuCapthamnien()) - (d * 300000);
     }
 
     public giamDoc() {
+        // Constructor rỗng
     }
 
     public giamDoc(String id, String name, String phone, String diaChi, int namVaolam, int kinhNghiem, double phuCapthamnien, int soNgaynghi) {
@@ -56,36 +53,25 @@ public class giamDoc extends NhanSu {
 
     public int getKinhNghiem() {
         LocalDate year = LocalDate.now();
-        int y = year.getYear();
-        return y - super.getNamVaolam();
-    }
-
-    public void setKinhNghiem(int kinhNghiem) {
-        this.kinhNghiem = kinhNghiem;
+        return year.getYear() - super.getNamVaolam(); // Tính số năm kinh nghiệm
     }
 
     public double getHeSophucap() {
-        if(getKinhNghiem() < 3){
+        if (getKinhNghiem() < 3) {
             return 1.25;
         } else if (getKinhNghiem() < 5) {
             return 1.5;
-        } else if(getKinhNghiem() < 10){
+        } else if (getKinhNghiem() < 10) {
             return 2.0;
         } else if (getKinhNghiem() <= 15) {
             return 2.5;
-        }else return 3.0;
-    }
-
-    public void setHeSophucap(double heSophucap) {
-        this.heSophucap = heSophucap;
+        } else {
+            return 3.0;
+        }
     }
 
     public double getPhuCapthamnien() {
-        return getKinhNghiem() * luongCoban()/100;
-    }
-
-    public void setPhuCapthamnien(double phuCapthamnien) {
-        this.phuCapthamnien = phuCapthamnien;
+        return getKinhNghiem() * luongCoban() / 100; // Tính phụ cấp thâm niên
     }
 
     public int getSoNgaynghi() {
@@ -104,19 +90,23 @@ public class giamDoc extends NhanSu {
         return soNgayduocphepnghi;
     }
 
-    public void nhap(){
-        super.nhap();
-        System.out.println("So ngay nghi :");
+    public void nhap() {
+        super.nhap(); // Gọi phương thức nhập của lớp cha
+        System.out.print("Số ngày nghỉ: ");
         setSoNgaynghi(Integer.parseInt(sc.nextLine()));
     }
 
     @Override
     public String toString() {
-        return super.toString() + "\t\tKinh nghiem  :"+getKinhNghiem()+ "\t\tHe so phu cap  :" + getHeSophucap() +
-                "\t\tChuc vu  :" + getChuVu() + "\t\t So ngay nghi  :" +getSoNgaynghi() +
-                "\t\tTong tien luong :" +tienLuong();
+        return super.toString() +
+                "\t\tKinh nghiệm: " + getKinhNghiem() +
+                "\t\tHệ số phụ cấp: " + getHeSophucap() +
+                "\t\tChức vụ: " + getChuVu() +
+                "\t\tSố ngày nghỉ: " + getSoNgaynghi() +
+                "\t\tTổng tiền lương: " + tienLuong();
     }
-    public void xuat(){
+
+    public void xuat() {
         System.out.println(toString());
     }
 }

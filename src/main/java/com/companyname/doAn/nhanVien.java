@@ -1,67 +1,61 @@
-
 package com.companyname.doAn;
 
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.Locale;
 
-public class NhanVien extends NhanSu {
+public class nhanVien extends nhanSu {  // Đổi tên lớp theo quy tắc CamelCase
     private int kinhNghiem;
     private double heSophucap;
     private double phuCapthamnien;
     private int soNgaynghi;
-    private  final String  chuVu = "Nhan Vien";
+    private final String chuVu = "Nhan Vien";
     private final int soNgayduocphepnghi = 2;
 
     @Override
     double bonusChucvu() {
-        return luongCoban()*2.25 + luongCoban() *getHeSophucap();
+        return luongCoban() * 2.25 + luongCoban() * getHeSophucap();
     }
 
     @Override
     double luongCoban() {
-        return 3000000;
+        return 3000000;  // Lương cơ bản  
     }
 
     @Override
     double bonusMoneyhesothidua() {
-        switch (getHeSothidua()) {  //switch expression
-            case "A" : return luongCoban() * 3.5;
-            case "B" : return luongCoban() * 2.5;
-            case "C" : return luongCoban() * 1.5;
-            case "D" : return luongCoban() * 1;
-            case "E" : return luongCoban();
-            default : return 0;
+        switch (getHeSothidua()) {  // switch expression  
+            case "A":
+                return luongCoban() * 3.5;
+            case "B":
+                return luongCoban() * 2.5;
+            case "C":
+                return luongCoban() * 1.5;
+            case "D":
+                return luongCoban() * 1;
+            case "E":
+                return luongCoban();
+            default:
+                return 0;
         }
     }
 
     @Override
     double tienLuong() {
-        double d =0;
-        if(getSoNgayduocphepnghi() - getSoNgaynghi()>0){
-            d = 0;
-        }else{
-            d = -(getSoNgayduocphepnghi() - getSoNgaynghi());
-        }
-
-        return (luongCoban() + bonusChucvu() + bonusMoneyhesothidua() + getPhuCapthamnien()) - (d*200000)  ;
+        double deduction = Math.max(0, getSoNgaynghi() - getSoNgayduocphepnghi()) * 200000;  // Tính toán tiền phạt cho ngày nghỉ  
+        return (luongCoban() + bonusChucvu() + bonusMoneyhesothidua() + getPhuCapthamnien()) - deduction;
     }
 
-    public NhanVien() {
+    public nhanVien() {
     }
 
-    public NhanVien(String id, String name, String phone, String diaChi, int namVaolam, int kinhNghiem,  double phuCapthamnien, int soNgaynghi) {
+    public nhanVien(String id, String name, String phone, String diaChi, int namVaolam, int kinhNghiem, double phuCapthamnien, int soNgaynghi) {
         super(id, name, phone, diaChi, namVaolam);
         this.kinhNghiem = kinhNghiem;
-
         this.phuCapthamnien = phuCapthamnien;
         this.soNgaynghi = soNgaynghi;
     }
 
     public int getKinhNghiem() {
-        LocalDate year = LocalDate.now();
-        int y = year.getYear();
-        return y - super.getNamVaolam();
+        return LocalDate.now().getYear() - super.getNamVaolam();  // Tính số năm kinh nghiệm  
     }
 
     public void setKinhNghiem(int kinhNghiem) {
@@ -69,15 +63,17 @@ public class NhanVien extends NhanSu {
     }
 
     public double getHeSophucap() {
-        if(getKinhNghiem() < 3){
+        if (getKinhNghiem() < 3) {
             return 1.25;
         } else if (getKinhNghiem() < 5) {
             return 1.5;
-        } else if(getKinhNghiem() < 10){
+        } else if (getKinhNghiem() < 10) {
             return 2.0;
         } else if (getKinhNghiem() <= 15) {
             return 2.5;
-        }else return 3.0;
+        } else {
+            return 3.0;
+        }
     }
 
     public void setHeSophucap(double heSophucap) {
@@ -85,7 +81,7 @@ public class NhanVien extends NhanSu {
     }
 
     public double getPhuCapthamnien() {
-        return getKinhNghiem() * luongCoban()/100;
+        return getKinhNghiem() * luongCoban() / 100;  // Tính phụ cấp thâm niên  
     }
 
     public void setPhuCapthamnien(double phuCapthamnien) {
@@ -108,21 +104,25 @@ public class NhanVien extends NhanSu {
         return soNgayduocphepnghi;
     }
 
-    public void nhap(){
+    @Override
+    public void nhap() {
         super.nhap();
-//        System.out.println("He so phuc cap :");
-//        setHeSophucap(Double.parseDouble(sc.nextLine()));
-        System.out.println("So ngay nghi :");
+        System.out.println("Số ngày nghỉ:");
         setSoNgaynghi(Integer.parseInt(sc.nextLine()));
     }
 
     @Override
     public String toString() {
-        return super.toString() + "\t\tKinh nghiem  :"+getKinhNghiem()+ "\t\tHe so phu cap  :" + getHeSophucap() +
-                "\t\tChuc vu  :" + getChuVu() + "\t\t So ngay nghi  :" +getSoNgaynghi() +
-                "\t\tTong tien luong :" +tienLuong();
+        return super.toString() +
+                "\t\tKinh nghiệm: " + getKinhNghiem() +
+                "\t\tHệ số phụ cấp: " + getHeSophucap() +
+                "\t\tChức vụ: " + getChuVu() +
+                "\t\tSố ngày nghỉ: " + getSoNgaynghi() +
+                "\t\tTổng tiền lương: " + tienLuong();
     }
-    public void xuat(){
+
+    @Override
+    public void xuat() {
         System.out.println(toString());
     }
 }

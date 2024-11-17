@@ -4,57 +4,65 @@ import java.util.Arrays;
 
 public class QuanLyNhanVien {
     private int soLuongNhanVien;
-    private NhanVien dsNhanVien[];
-    private static QuanLyNhanVien instance;
+    private nhanVien[] dsNhanVien; // Changed nhanVien to NhanVien to follow naming conventions
+    private static QuanLyNhanVien instance = new QuanLyNhanVien(); // Singleton instance initialization
+
+    private QuanLyNhanVien() {
+        this.soLuongNhanVien = 0;
+        this.dsNhanVien = new nhanVien[0]; // Initialize with an empty array
+    }
 
     public static QuanLyNhanVien getInstance() {
         return instance;
     }
 
-    public QuanLyNhanVien(){}
-    
-    public QuanLyNhanVien(int soLuongNhanVien){
-        instance=this;
+    public QuanLyNhanVien(int soLuongNhanVien) {
+        this(); // Call the default constructor to initialize the instance
         this.soLuongNhanVien = soLuongNhanVien;
-        for(int i=0; i<this.soLuongNhanVien; i++){
-            this.dsNhanVien[i] = new NhanVien();
+        this.dsNhanVien = new nhanVien[soLuongNhanVien]; // Allocate the array based on the provided size
+
+        for (int i = 0; i < this.soLuongNhanVien; i++) {
+            this.dsNhanVien[i] = new nhanVien();
             this.dsNhanVien[i].nhap();
         }
-    };
+    }
 
     //----------------GET-------------------
-
-    public NhanVien[] getDanhSachNhanVien(){
+    public nhanVien[] getDanhSachNhanVien() {
         return this.dsNhanVien;
     }
 
-    public int getSoLuongNhanVien(){
+    public int getSoLuongNhanVien() {
         return this.soLuongNhanVien;
     }
 
     //-------------------------------------------
-    
-    public void printDanhSachIdNhanVien(){
-        for(int i=0; i<dsNhanVien.length; i++){
-            System.out.println("Id nhân viên" + i + 1 + ":");
-            String idNhanVien = dsNhanVien[i].getId();
-            System.out.println(idNhanVien);
+
+    public void printDanhSachIdNhanVien() {
+        if (dsNhanVien.length == 0) {
+            System.out.println("Danh sách nhân viên trống.");
+            return;
+        }
+
+        for (int i = 0; i < dsNhanVien.length; i++) {
+            System.out.println("Id nhân viên thứ " + (i + 1) + ": " + dsNhanVien[i].getId());
         }
     }
 
-    public void addNhanVien(String nameNhanvien){
+    public void addNhanVien() {
         this.dsNhanVien = Arrays.copyOf(this.dsNhanVien, this.dsNhanVien.length + 1);
-        this.dsNhanVien[this.dsNhanVien.length - 1] = new NhanVien();
+        this.dsNhanVien[this.dsNhanVien.length - 1] = new nhanVien();
         this.dsNhanVien[this.dsNhanVien.length - 1].nhap();
+        this.soLuongNhanVien++; // Update employee count
+        System.out.println("Nhân viên mới đã được thêm.");
     }
 
-    public NhanVien getNhanVienById(String id){
-        for(NhanVien nv : this.dsNhanVien){
-            if(nv.getId() == id){
+    public nhanVien getNhanVienById(String id) {
+        for (nhanVien nv : this.dsNhanVien) {
+            if (nv.getId().equals(id)) {
                 return nv;
             }
         }
-        return null;
+        return null; // Return null if no employee found with the given ID
     }
-    
 }

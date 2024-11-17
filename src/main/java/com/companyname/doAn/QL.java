@@ -1,16 +1,17 @@
 package com.companyname.doAn;
+
 import java.util.Arrays;
 import java.util.Scanner;
 
 public class QL {
-    nhanSu[] arr_nv ;
+    nhanSu[] arr_nv; // Đổi tên thành nhanSu
     Scanner sc = new Scanner(System.in);
 
-    public QL(){
-        arr_nv = new nhanSu[0];
+    public QL() {
+        arr_nv = new nhanSu[0]; // Đổi tên thành nhanSu
     }
 
-    public void menu_chinh(){
+    public void menu_chinh() {
         System.out.println("---------------------menu---------------------");
         System.out.println("1. Quan Ly Nhan Vien");
         System.out.println("2. Quan Ly Du An");
@@ -18,79 +19,38 @@ public class QL {
         System.out.println("4. Thoat");
         System.out.println("---------------------------------------------");
     }
-    public void menu_ns(){
-        System.out.println("1.Them nhan su");
-        System.out.println("2.Sua");
-        System.out.println("3.Xoa");
-        System.out.println("4.In tep txt");
-        System.out.println("5.Xuat");
+
+    public void menu_ns() {
+        System.out.println("1. Them nhan su");
+        System.out.println("2. Sua");
+        System.out.println("3. Xoa");
+        System.out.println("4. In tep txt");
+        System.out.println("5. Xuat");
     }
-    public void menu_con_ns(){
+
+    public void menu_con_ns() {
         System.out.println("1. Nhan vien");
         System.out.println("2. Truong phong");
         System.out.println("3. Giam doc");
     }
-    public void them_1_nhan_su(nhanSu ns){
+
+    public void them_1_nhan_su(nhanSu ns) { // Đổi tên thành nhanSu
         arr_nv = Arrays.copyOf(arr_nv, arr_nv.length + 1);
         arr_nv[arr_nv.length - 1] = ns;
     }
-    public void menu_con_xuat(){
+
+    public void menu_con_xuat() {
         System.out.println("1. Nhan vien");
         System.out.println("2. Truong phong");
         System.out.println("3. Giam doc");
         System.out.println("4. Tat ca");
     }
 
-    public void menu(){
-<<<<<<< HEAD
-       int choice;
-       boolean flag = true;
-       NhanSu ns;
-       while(flag){
-           menu_chinh();
-           System.out.print("[Nhap 1->4] : ");
-           choice = Integer.parseInt(sc.nextLine());
-           switch (choice) {
-               case 1 :{
-                   menu_ns();
-                   int k = Integer.parseInt(sc.nextLine());
-                   switch (k) {
-                       case 1 : {
-                           int i = Integer.parseInt(sc.nextLine());
-                            menu_con_ns();
-                                switch (i) {
-                                    case 1 :{
-                                        ns = new NhanVien();
-                                        ns.nhap();
-                                    }
-                                    case 2 :{
-                                        ns = new truongPhong();
-                                        ns.nhap();
-                                    }
-                                    case 3 :{
-                                        ns = new giamDoc();
-                                        ns.nhap();
-                                    }
-                                }
-                       }
-                       case 2: {
-                           //sua
-                       }
-                       case 3: {
-                           //xoa
-                       }
-                       case 4: {
-                           //in txt
-                       }
-                       case 5: {
-                            int p = Integer.parseInt(sc.nextLine());
-                            switch (p) {
-                                case 1: {
-                                    ns = new NhanVien();
-=======
+    public void menu() {
         int choice;
         boolean flag = true;
-        while(flag){
+        nhanSu ns; // Đổi tên thành nhanSu
+        while (flag) {
             menu_chinh();
             System.out.print("[Nhap 1->4] : ");
             choice = Integer.parseInt(sc.nextLine());
@@ -102,21 +62,19 @@ public class QL {
                         case 1 -> {
                             menu_con_ns();
                             int i = Integer.parseInt(sc.nextLine());
-                            nhanSu ns;
                             switch (i) {
                                 case 1 -> {
-                                    ns = new nhanVien();
->>>>>>> 5d7a372ed8be8bcd8739952eddea131e338d2d49
-                                    ns.nhap();
+                                    ns = new nhanVien(); // Đổi tên thành nhanVien
+                                    ns.nhap(); // Giả định nhap() được cài đặt chính xác trong nhanSu
                                     them_1_nhan_su(ns);
                                 }
                                 case 2 -> {
-                                    ns = new truongPhong();
+                                    ns = new truongPhong(); // Đổi tên thành truongPhong
                                     ns.nhap();
                                     them_1_nhan_su(ns);
                                 }
                                 case 3 -> {
-                                    ns = new giamDoc();
+                                    ns = new giamDoc(); // Đổi tên thành giamDoc
                                     ns.nhap();
                                     them_1_nhan_su(ns);
                                 }
@@ -128,13 +86,13 @@ public class QL {
                             System.out.print("Nhap ID hoac ten nhan su can sua: ");
                             String searchKey = sc.nextLine();
 
-                            for (nhanSu ns : arr_nv) {
-                                if (ns.getId().equals(searchKey) || ns.getName().equalsIgnoreCase(searchKey)) {
+                            for (nhanSu ns1 : arr_nv) {
+                                if (ns1.getId().equals(searchKey) || ns1.getName().equalsIgnoreCase(searchKey)) {
                                     System.out.println("Thong tin hien tai cua nhan su:");
-                                    System.out.println(ns);
+                                    System.out.println(ns1);
 
                                     System.out.println("Nhap thong tin moi cho nhan su:");
-                                    ns.nhap(); // Giả sử bạn có phương thức nhap() để nhập lại thông tin nhân sự
+                                    ns1.nhap(); // Giả định nhap() được cài đặt chính xác trong nhanSu
                                     System.out.println("Da cap nhat thong tin nhan su thanh cong.");
                                     return;
                                 }
@@ -143,13 +101,14 @@ public class QL {
                         }
                         case 3 -> {
                             // Xoa nhan su
+                            // Implementation needed for deletion.
                         }
                         case 4 -> {
                             // In ra file txt
-                            //thoi gian
+                            // Implementation needed for file output.
                         }
                         case 5 -> {
-                            menu_con_ns();
+                            menu_con_xuat();
                             int p = Integer.parseInt(sc.nextLine());
                             switch (p) {
                                 case 1 -> {
@@ -173,7 +132,7 @@ public class QL {
                                         }
                                     }
                                 }
-                                case 4 ->{
+                                case 4 -> {
                                     for (nhanSu tc : arr_nv) {
                                         System.out.println(tc);
                                     }

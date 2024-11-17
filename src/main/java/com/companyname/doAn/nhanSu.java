@@ -1,9 +1,8 @@
 package com.companyname.doAn;
 
-
 import java.util.Scanner;
 
-public abstract class NhanSu {
+public abstract class nhanSu {  // Đổi tên lớp theo quy tắc CamelCase
     private String id;
     private String name;
     private String phone;
@@ -11,18 +10,19 @@ public abstract class NhanSu {
     private int namVaolam;
     private String heSothidua;
 
-
     public static Scanner sc = new Scanner(System.in);
 
+    // Abstract methods
     abstract double bonusMoneyhesothidua();
     abstract double bonusChucvu();
     abstract double tienLuong();
     abstract double luongCoban();
 
-    public NhanSu() {
+    // Constructors
+    public nhanSu() {
     }
 
-    public NhanSu(String id, String name, String phone, String diaChi, int namVaolam) {
+    public nhanSu(String id, String name, String phone, String diaChi, int namVaolam) {
         this.id = id;
         this.name = name;
         this.phone = phone;
@@ -30,17 +30,18 @@ public abstract class NhanSu {
         this.namVaolam = namVaolam;
     }
 
+    // Getters and Setters
     public String getHeSothidua() {
         return heSothidua;
     }
 
     public void setHeSothidua(String heSothidua) {
-        while(true){
-            if(heSothidua.equals("A") || heSothidua.equals("B") || heSothidua.equals("C") || heSothidua.equals("D") || heSothidua.equals("E") || heSothidua.equals("F")){
+        while (true) {
+            if (heSothidua.matches("[A-F]")) {  // Kiểm tra hợp lệ sử dụng regex
                 this.heSothidua = heSothidua;
                 break;
-            }else{
-                System.out.println("Khong hop le !!!! hệ số thi dua từ A -> F");
+            } else {
+                System.out.println("Không hợp lệ! Hệ số thi đua từ A -> F. Nhập lại:");
                 heSothidua = sc.nextLine();
             }
         }
@@ -86,30 +87,33 @@ public abstract class NhanSu {
         this.namVaolam = namVaolam;
     }
 
-
-    public void nhap(){
-        System.out.println("Ma nhan su : ");
+    // Nhập thông tin nhân sự
+    public void nhap() {
+        System.out.println("Mã nhân sự: ");
         setId(sc.nextLine());
-        System.out.println("Ten nhan su :");
+        System.out.println("Tên nhân sự: ");
         setName(sc.nextLine());
-        System.out.println("Dia chi :");
+        System.out.println("Địa chỉ: ");
         setDiaChi(sc.nextLine());
-        System.out.println("So dien thoai :");
+        System.out.println("Số điện thoại: ");
         setPhone(sc.nextLine());
-        System.out.println("Nam vao lam :");
+        System.out.println("Năm vào làm: ");
         setNamVaolam(Integer.parseInt(sc.nextLine()));
-        System.out.println("He so thi dua :");
+        System.out.println("Hệ số thi đua: ");
         setHeSothidua(sc.nextLine());
     }
 
     @Override
     public String toString() {
-        return "Nhan su :\n" +
-                "ID : " + this.getId() + "\t\tTen : " +this.getName() +
-                "\t\tDia chi : " + this.getDiaChi() +"\t\tSo dien thoai : " + this.getPhone() +
-                "\t\tNam vao lam : " + this.getNamVaolam();
+        return "Nhân sự:\n" +
+                "ID: " + this.getId() +
+                "\t\tTên: " + this.getName() +
+                "\t\tĐịa chỉ: " + this.getDiaChi() +
+                "\t\tSố điện thoại: " + this.getPhone() +
+                "\t\tNăm vào làm: " + this.getNamVaolam();
     }
-    public void xuat(){
+
+    public void xuat() {
         System.out.println(toString());
     }
 }

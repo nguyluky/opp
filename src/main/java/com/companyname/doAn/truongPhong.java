@@ -1,93 +1,75 @@
 package com.companyname.doAn;
 
-
 import java.time.LocalDate;
+import java.util.Scanner;
 
-public class truongPhong extends NhanSu {
-    private int kinhNghiem;
-    private double heSophucap;
-    private double phuCapthamnien;
-    private int soNgaynghi;
-    private  final String  chuVu = "Truong Phong";
-    private final int soNgayduocphepnghi = 3;
-
-    @Override
-    double bonusChucvu() {
-        return luongCoban()*2.25 + luongCoban() *getHeSophucap();
-    }
-
-    @Override
-    double luongCoban() {
-        return 4000000;
-    }
-
-    @Override
-    double bonusMoneyhesothidua() {
-        switch (getHeSothidua()) {  //switch expression
-            case "A" : {return luongCoban() * 3.5;}
-            case "B" : {return luongCoban() * 2.5;}
-            case "C" : {return luongCoban() * 1.5;}
-            case "D" : {return luongCoban() * 1;}
-            case "E" : {return luongCoban();}
-            default : {return 0;}
-        }
-    }
-
-    @Override
-    double tienLuong() {
-        double d =0;
-        if(getSoNgayduocphepnghi() - getSoNgaynghi()>0){
-            d = (getSoNgayduocphepnghi() - getSoNgaynghi());
-        }else{
-            d = -(getSoNgayduocphepnghi() - getSoNgaynghi());
-        }
-
-        return (luongCoban() + bonusChucvu() + bonusMoneyhesothidua() + getPhuCapthamnien()) - (d*300000)  ;
-    }
+public class truongPhong extends nhanSu {
+    private int kinhNghiem; // Years of experience
+    private final double heSophucap; // Derived from kinhNghiem
+    private double phuCapthamnien; // Seniority allowance
+    private int soNgaynghi; // Number of days off
+    private final String chuVu = "Truong Phong"; // Position title
+    private final int soNgayduocphepnghi = 3; // Allowed days off
 
     public truongPhong() {
+        this.heSophucap = calculateHeSoPhucap(); // Calculate based on kinhNghiem
     }
 
     public truongPhong(String id, String name, String phone, String diaChi, int namVaolam, int kinhNghiem, double phuCapthamnien, int soNgaynghi) {
         super(id, name, phone, diaChi, namVaolam);
         this.kinhNghiem = kinhNghiem;
-
         this.phuCapthamnien = phuCapthamnien;
         this.soNgaynghi = soNgaynghi;
+        this.heSophucap = calculateHeSoPhucap(); // Calculate based on kinhNghiem
+    }
+
+    @Override
+    double bonusChucvu() {
+        return luongCoban() * 2.25 + luongCoban() * heSophucap;
+    }
+
+    @Override
+    double luongCoban() {
+        return 4000000; // Base salary
+    }
+
+    @Override
+    double bonusMoneyhesothidua() {
+        switch (getHeSothidua()) {
+            case "A": return luongCoban() * 3.5;
+            case "B": return luongCoban() * 2.5;
+            case "C": return luongCoban() * 1.5;
+            case "D": return luongCoban() * 1;
+            case "E": return luongCoban();
+            default: return 0;
+        }
+    }
+
+    @Override
+    double tienLuong() {
+        int daysOff = Math.max(0, soNgaynghi - soNgayduocphepnghi);
+        return (luongCoban() + bonusChucvu() + bonusMoneyhesothidua() + getPhuCapthamnien()) - (daysOff * 300000);
     }
 
     public int getKinhNghiem() {
-        LocalDate year = LocalDate.now();
-        int y = year.getYear();
-        return y - super.getNamVaolam();
-    }
-
-    public void setKinhNghiem(int kinhNghiem) {
-        this.kinhNghiem = kinhNghiem;
+        return LocalDate.now().getYear() - super.getNamVaolam(); // Calculate experience
     }
 
     public double getHeSophucap() {
-        if(getKinhNghiem() < 3){
-            return 1.25;
-        } else if (getKinhNghiem() < 5) {
-            return 1.5;
-        } else if(getKinhNghiem() < 10){
-            return 2.0;
-        } else if (getKinhNghiem() <= 15) {
-            return 2.5;
-        }else return 3.0;
+        return heSophucap; // Return calculated value
     }
 
-    public void setHeSophucap(double heSophucap) {
-        this.heSophucap = heSophucap;
+    private double calculateHeSoPhucap() {
+        int kinhNghiem = getKinhNghiem();
+        if (kinhNghiem < 3) return 1.25;
+        if (kinhNghiem < 5) return 1.5;
+        if (kinhNghiem < 10) return 2.0;
+        if (kinhNghiem <= 15) return 2.5;
+        return 3.0; // For more than 15 years
     }
 
     public double getPhuCapthamnien() {
-        return getKinhNghiem() * luongCoban()/100;
-    }
-
-    public void setPhuCapthamnien(double phuCapthamnien) {
-        this.phuCapthamnien = phuCapthamnien;
+        return getKinhNghiem() * luongCoban() / 100; // 1% of base salary per year of experience
     }
 
     public int getSoNgaynghi() {
@@ -106,21 +88,20 @@ public class truongPhong extends NhanSu {
         return soNgayduocphepnghi;
     }
 
-    public void nhap(){
+    public void nhap() {
         super.nhap();
-//        System.out.println("He so phuc cap :");
-//        setHeSophucap(Double.parseDouble(sc.nextLine()));
-        System.out.println("So ngay nghi :");
+        Scanner sc = new Scanner(System.in);
+        System.out.println("So ngay nghi:");
         setSoNgaynghi(Integer.parseInt(sc.nextLine()));
     }
 
     @Override
     public String toString() {
-        return super.toString() + "\t\tKinh nghiem  :"+getKinhNghiem()+ "\t\tHe so phu cap  :" + getHeSophucap() +
-                "\t\tChuc vu  :" + getChuVu() + "\t\t So ngay nghi  :" +getSoNgaynghi() +
-                "\t\tTong tien luong :" +tienLuong();
+        return String.format("%s\t\tKinh nghiem: %d\t\tHe so phu cap: %.2f\t\tChuc vu: %s\t\tSo ngay nghi: %d\t\tTong tien luong: %.2f",
+                super.toString(), getKinhNghiem(), getHeSophucap(), getChuVu(), getSoNgaynghi(), tienLuong());
     }
-    public void xuat(){
+
+    public void xuat() {
         System.out.println(toString());
     }
 }
