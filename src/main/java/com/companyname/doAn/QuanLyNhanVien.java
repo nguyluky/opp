@@ -18,7 +18,8 @@ public class QuanLyNhanVien {
         this.soLuongNhanVien = soLuongNhanVien;
         for(int i=0; i<this.soLuongNhanVien; i++){
             this.dsNhanVien[i] = new NhanVien();
-            this.dsNhanVien[i].nhap();
+            // TODO: nhớ là bỏ comment dòng này ra
+            // this.dsNhanVien[i].nhap();
         }
     };
 
@@ -31,6 +32,10 @@ public class QuanLyNhanVien {
     public int getSoLuongNhanVien(){
         return this.soLuongNhanVien;
     }
+
+    //-------------------------------------
+
+    
 
     //-------------------------------------------
     
@@ -45,7 +50,8 @@ public class QuanLyNhanVien {
     public void addNhanVien(String nameNhanvien){
         this.dsNhanVien = Arrays.copyOf(this.dsNhanVien, this.dsNhanVien.length + 1);
         this.dsNhanVien[this.dsNhanVien.length - 1] = new NhanVien();
-        this.dsNhanVien[this.dsNhanVien.length - 1].nhap();
+        // TODO: nhớ là bỏ comment dòng này ra
+        // this.dsNhanVien[this.dsNhanVien.length - 1].nhap();
     }
 
     public NhanVien getNhanVienById(String id){

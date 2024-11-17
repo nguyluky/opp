@@ -1,80 +1,52 @@
 package com.companyname.doAn;
-import java.util.Scanner;
 import java.util.Arrays;
 
 public class QuanLyPhongBan {
-    private int soLuongPhongBan;
     private PhongBan dsPhongBan[];
 
-    public QuanLyPhongBan(){}
+    private static QuanLyPhongBan instance = null;
 
-    public QuanLyPhongBan(int soLuongPhongBan, PhongBan dsPhongBan[]){
-        this.soLuongPhongBan = soLuongPhongBan;
-        this.dsPhongBan = dsPhongBan;
+    public static QuanLyPhongBan getInstance(){
+        if(instance == null){
+            instance = new QuanLyPhongBan();
+        }
+        return instance;
     }
 
-    //-----GET---------
-    public int getSoLuongPhongBan(){
-        return this.soLuongPhongBan;
+    public QuanLyPhongBan(){
+        instance = this;
+        this.dsPhongBan = new PhongBan[0];
     }
 
-    public PhongBan[] getDanhSachPhngBan(){
+    public void addPhongBan(PhongBan phongBan){
+        this.dsPhongBan = Arrays.copyOf(this.dsPhongBan, this.dsPhongBan.length + 1);
+        this.dsPhongBan[this.dsPhongBan.length - 1] = phongBan;
+    }
+
+    public PhongBan[] getDanhSachPhongBan(){
         return this.dsPhongBan;
-    }   
-    //-----------------
-    //-----SET------------
-    public void setSoLuongPhongBan(int sl){
-        this.soLuongPhongBan = sl;
     }
 
-    public void setDanhSachPhongBan(PhongBan dsPhongBan[]){
-        this.dsPhongBan = dsPhongBan;
-    }
-    //---------------------
-    public void printDanhSachIdPhongBan(){
+    public void deletePhongBan(String id){
         for(int i=0; i<this.dsPhongBan.length; i++){
-            System.out.println("Id phòng ban thứ " + (i+1) + " :");
-            System.out.println(this.dsPhongBan[i].getIdPhongBan());
+            if(this.dsPhongBan[i].getIdPhongBan().equals(id)){
+                this.dsPhongBan[i] = this.dsPhongBan[this.dsPhongBan.length - 1];
+                break;
+            }
         }
+
+        this.dsPhongBan[this.dsPhongBan.length - 1].setIsDelete(true);
     }
 
-    public void addPhongBan(){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Nhập số lượng phòng ban muốn thêm:");
-        int sl = Integer.parseInt(sc.nextLine());
-        for(int i=0; i<sl; i++){
-            this.dsPhongBan = Arrays.copyOf(this.dsPhongBan, this.dsPhongBan.length + 1);
-            this.dsPhongBan[this.dsPhongBan.length - 1] = new PhongBan();
-            this.dsPhongBan[this.dsPhongBan.length - 1].nhap();
+    public int getSoLuongPhongBan(){
+        int count = 0;
+        for(PhongBan pb : this.dsPhongBan){
+            if(!pb.getIsDelete()){
+                count++;
+            }
         }
-    }
 
-    public void deletePhongBan(){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Nhập số lượng phòng ban muốn xóa:");
-        int sl = Integer.parseInt(sc.nextLine());
-        printDanhSachIdPhongBan();
-        for(int i=0; i<sl; i++){
-            System.out.println("Nhập id phòng ban muốn xóa");
-            String id = sc.nextLine();
-            boolean check = false;
-            for(PhongBan pb : this.dsPhongBan){
-                if(pb.getIdPhongBan() == id){
-                    check = true;
-                    return;
-                }
-            }
-            if(!check){
-                System.out.println("Id phòng ban không tồn tại trong công ty");
-                return;
-            }
-            for(PhongBan pb : this.dsPhongBan){
-                if(pb.getIdPhongBan() == id){
-                    pb.setIsDelete(true);
-                    return;
-                }
-            }
-        }
+        return count;
     }
 }
 

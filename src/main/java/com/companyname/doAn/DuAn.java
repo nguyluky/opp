@@ -32,8 +32,8 @@ public class DuAn{
         return this.soLuongNhanVien;
     }
 
-    public void getIsDelete(){
-        System.out.println(this.isDelete);
+    public boolean getIsDelete(){
+        return this.isDelete;
     }
 
     public NhanVien[] getArrayNhanVienDuAn(){

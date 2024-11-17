@@ -5,14 +5,16 @@ import java.util.Scanner;
 
 public class QuanLyDuAn {
     private DuAn dsDuAn[];
-    private int soLuongDuAn;
     private static QuanLyDuAn instance;
 
     public static QuanLyDuAn getInstance() {
         return instance;
     }
 
-    public QuanLyDuAn(){};
+    public QuanLyDuAn(){
+        this.dsDuAn = new DuAn[0];
+        
+    };
 
     //--------------GET-----------------------------
 
@@ -20,17 +22,39 @@ public class QuanLyDuAn {
         return this.dsDuAn;
     }
 
-    public int getSoLuongDuAn(){
-        return this.soLuongDuAn;
-    }
-    //--------------------------------------------------------------------
 
-    //------------SET------------------
-    public void setSoLuongDuAn(int sl){
-        this.soLuongDuAn = sl;
-        this.dsDuAn = Arrays.copyOf(this.dsDuAn, sl);
+
+    // ---------------------------------------------
+
+
+    public void addDuAn(DuAn duAn){
+        this.dsDuAn = Arrays.copyOf(this.dsDuAn, this.dsDuAn.length + 1);
+        this.dsDuAn[this.dsDuAn.length - 1] = duAn;
     }
-    //---------------------------------
+
+    public void removeDuAn(String id){
+        for(int i=0; i<this.dsDuAn.length; i++){
+            if(this.dsDuAn[i].getIdDuAn().equals(id)){
+                this.dsDuAn[i] = this.dsDuAn[this.dsDuAn.length - 1];
+                break;
+            }
+        }
+
+        this.dsDuAn[this.dsDuAn.length - 1].setIsDelete(true);
+    }
+
+    public int getSoLuongDuAn(){
+        int count = 0;
+        for(DuAn da : this.dsDuAn){
+            if(!da.getIsDelete()){
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    // ---------------------------------------------
 
     public void printDanhSachIdDuAn(){
         for(int i=0; i<this.dsDuAn.length; i++){

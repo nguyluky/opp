@@ -11,7 +11,7 @@ public class NhanVien extends NhanSu {
     private double heSophucap;
     private double phuCapthamnien;
     private int soNgaynghi;
-    private  final String  chuVu = "Nhan Vien";
+    private  final String chuVu = "Nhan Vien";
     private final int soNgayduocphepnghi = 2;
 
     @Override

@@ -10,6 +10,7 @@ public abstract class NhanSu {
     private String diaChi;
     private int namVaolam;
     private String heSothidua;
+    private boolean isDelete;
 
     abstract double bonusMoneyhesothidua();
     abstract double bonusChucvu();
@@ -41,6 +42,13 @@ public abstract class NhanSu {
                 heSothidua = sc.nextLine();
             }
         }
+    }
+
+    public boolean isDelete() {
+        return isDelete;
+    }
+    public void setDelete(boolean isDelete) {
+        this.isDelete = isDelete;
     }
 
     public String getId() {

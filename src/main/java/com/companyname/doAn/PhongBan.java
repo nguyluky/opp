@@ -5,13 +5,18 @@ import java.util.Scanner;
 
 public class PhongBan {
     private String namePhongBan;
-    private String idPhongBan; 
-    private int soLuongNhanVien;
+    private String idPhongBan;
     private NhanVien dsNhanVien[];
     private DuAn dsDuAn[];
     private boolean isDelete;
 
-    public PhongBan(){}
+    public PhongBan(String name, String idPhongBan){
+        this.namePhongBan = name;
+        this.idPhongBan = idPhongBan;
+        this.dsNhanVien = new NhanVien[0];
+        this.dsDuAn = new DuAn[0];
+        this.isDelete = false;
+    }
 
     //----------GET--------------
     public String getNamePhongBan(){
@@ -20,10 +25,6 @@ public class PhongBan {
 
     public String getIdPhongBan(){
         return this.idPhongBan;
-    }
-
-    public int getSoLuongNhanVien(){
-        return this.soLuongNhanVien;
     }
 
     public NhanVien[] getDsNhanVien(){
@@ -48,10 +49,6 @@ public class PhongBan {
         this.idPhongBan = id;
     }
 
-    public void setSoLuongNhanVien(int sl){
-        this.soLuongNhanVien = sl;
-    }
-
     public void setDsNhanVien(NhanVien dsnv[]){
         this.dsNhanVien = dsnv;
     }
@@ -65,6 +62,47 @@ public class PhongBan {
     }
     //--------------------------
 
+    public void addNhanVien(NhanVien nv){
+        this.dsNhanVien = Arrays.copyOf(this.dsNhanVien, this.dsNhanVien.length + 1);
+        this.dsNhanVien[this.dsNhanVien.length - 1] = nv;
+    }
+
+    public void removeNhanVien(String id){
+        for(int i=0; i<this.dsNhanVien.length; i++){
+            if(this.dsNhanVien[i].getId().equals(id)){
+                this.dsNhanVien[i] = this.dsNhanVien[this.dsNhanVien.length - 1];
+                break;
+            }
+        }
+        this.dsNhanVien = Arrays.copyOf(this.dsNhanVien, this.dsNhanVien.length - 1);
+    }
+
+    public NhanSu[] getNhanSu(){
+        return this.dsNhanVien;
+    }
+
+    public void addDuAn(DuAn da){
+        this.dsDuAn = Arrays.copyOf(this.dsDuAn, this.dsDuAn.length + 1);
+        this.dsDuAn[this.dsDuAn.length - 1] = da;
+    }
+
+    public void removeDuAn(String id){
+        for(int i=0; i<this.dsDuAn.length; i++){
+            if(this.dsDuAn[i].getIdDuAn().equals(id)){
+                this.dsDuAn[i] = this.dsDuAn[this.dsDuAn.length - 1];
+                break;
+            }
+        }
+        this.dsDuAn[this.dsDuAn.length - 1].setIsDelete(true);
+    }
+
+    public DuAn[] getDuAn(){
+        return this.dsDuAn;
+    }
+
+
+    // ================== Các hàm nhập, xuất thông tin ==================
+
     public void nhap(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Nhập tên phòng ban:");
@@ -75,11 +113,10 @@ public class PhongBan {
         this.idPhongBan = id;
         System.out.println("Nhập số lượng nhân viên phòng ban:");
         int sl = Integer.parseInt(sc.nextLine());
-        this.soLuongNhanVien = sl;
         this.dsNhanVien = new NhanVien[sl];
         for(int i=0; i<sl; i++){
             this.dsNhanVien[i] = new NhanVien();
-            this.dsNhanVien[i].nhap();
+            this.dsNhanVien[i].nhap(sc);
         }
     }
 
