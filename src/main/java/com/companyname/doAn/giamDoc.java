@@ -6,6 +6,7 @@ import java.time.LocalDate;
 public class GiamDoc extends NhanSu {
     private int kinhNghiem = -1;
     private double phuCapthamnien = -1;
+    private double heSophucap;
     private int soNgaynghi;
     private  final String  chuVu = "Giam Doc";
     private final int soNgayduocphepnghi = 3;
