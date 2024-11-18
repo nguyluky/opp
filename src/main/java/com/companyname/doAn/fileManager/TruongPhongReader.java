@@ -37,11 +37,11 @@ public class TruongPhongReader implements BaseReader<TruongPhong> {
 
         while (sc.hasNextLine()) {
             String data = sc.nextLine();
-            String[] arr = data.split(" ");
+            String[] arr = BaseReader.split(data);
             truongPhong = Arrays.copyOf(truongPhong, truongPhong.length + 1);
             truongPhong[truongPhong.length] = new TruongPhong(arr[0], arr[1], arr[2], arr[3],
                     Double.parseDouble(arr[4]), arr[5], Integer.parseInt(arr[6]), Double.parseDouble(arr[7]),
-                    Integer.parseInt(arr[8]));
+                    Integer.parseInt(arr[8]), Boolean.parseBoolean(arr[9]));
         }
 
         return truongPhong;

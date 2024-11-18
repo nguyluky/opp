@@ -15,7 +15,7 @@ public abstract class NhanSu  {
 
     public NhanSu() {};
 
-    public NhanSu(String id, String name, String phone, String daiChi, int namVaoLam, String heSoThiDua, int heSoPhuLoi, int kingNghiep, int soNgayNghi) {
+    public NhanSu(String id, String name, String phone, String daiChi, int namVaoLam, String heSoThiDua, int heSoPhuLoi, int kingNghiep, int soNgayNghi, boolean isDelete) {
         this.id = id;
         this.name = name;
         this.phone = phone;
@@ -25,6 +25,7 @@ public abstract class NhanSu  {
         this.heSoPhuLoi = heSoPhuLoi;
         this.kingNghiep = kingNghiep;
         this.soNgayNghi = soNgayNghi;
+        this.isDelete = isDelete;
     }
 
     //---------------------------------//
@@ -84,10 +85,6 @@ public abstract class NhanSu  {
 
     public void setSoNgayNghi(int soNgayNghi) {
         this.soNgayNghi = soNgayNghi;
-    }
-
-    public int getHeSoPhuLoi() {
-        return heSoPhuLoi;
     }
 
     public boolean isDelete() {

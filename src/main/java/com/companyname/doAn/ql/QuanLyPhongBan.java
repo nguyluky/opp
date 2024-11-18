@@ -37,13 +37,13 @@ public class QuanLyPhongBan {
             }
         }
 
-        this.dsPhongBan[this.dsPhongBan.length - 1].setIsDelete(true);
+        this.dsPhongBan[this.dsPhongBan.length - 1].setDelete(true);
     }
 
     public int getSoLuongPhongBan(){
         int count = 0;
         for(PhongBan pb : this.dsPhongBan){
-            if(!pb.getIsDelete()){
+            if(!pb.isDelete()){
                 count++;
             }
         }

@@ -8,8 +8,8 @@ public class GiamDoc extends NhanSu {
     public GiamDoc() {
     }
 
-    public GiamDoc(String id, String name,String phone,String diaChi,double namVaolam, String heSothidua,int kinhNghiem,double heSophucap, int soNgaynghi) {
-        super(id, name, phone, diaChi, soNgaynghi, heSothidua, soNgaynghi, kinhNghiem, soNgaynghi);
+    public GiamDoc(String id, String name,String phone,String diaChi,double namVaolam, String heSothidua,int kinhNghiem,double heSophucap, int soNgaynghi, boolean isDelete) {
+        super(id, name, phone, diaChi, soNgaynghi, heSothidua, soNgaynghi, kinhNghiem, soNgaynghi, isDelete);
     }
 
     @Override
@@ -29,6 +29,7 @@ public class GiamDoc extends NhanSu {
 
     @Override
     public double luongCoBan() {
+
         return 5_000_000;
     }
 

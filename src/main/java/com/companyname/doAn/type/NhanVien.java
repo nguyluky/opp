@@ -10,8 +10,8 @@ public class NhanVien extends NhanSu {
     public NhanVien() {
     }
 
-    public NhanVien(String id, String name,String phone,String diaChi,double namVaolam, String heSothidua,int kinhNghiem,double heSophucap, int soNgaynghi) {
-        super(id, name, phone, diaChi, soNgaynghi, heSothidua, soNgaynghi, kinhNghiem, soNgaynghi);
+    public NhanVien(String id, String name,String phone,String diaChi,double namVaolam, String heSothidua,int kinhNghiem,double heSophucap, int soNgaynghi, boolean isDelete) {
+        super(id, name, phone, diaChi, soNgaynghi, heSothidua, soNgaynghi, kinhNghiem, soNgaynghi, isDelete);
     }
 
     @Override

@@ -7,15 +7,17 @@ public class PhongBan {
     private String namePhongBan;
     private String idPhongBan;
     private NhanVien dsNhanVien[];
+    private TruongPhong truongPhong;
     private DuAn dsDuAn[];
     private boolean isDelete;
 
-    public PhongBan(String name, String idPhongBan){
+    public PhongBan(String name, String idPhongBan, TruongPhong truongPhong){
         this.namePhongBan = name;
         this.idPhongBan = idPhongBan;
         this.dsNhanVien = new NhanVien[0];
         this.dsDuAn = new DuAn[0];
         this.isDelete = false;
+        this.truongPhong = truongPhong;
     }
 
     //----------GET--------------
@@ -35,7 +37,7 @@ public class PhongBan {
         return this.dsDuAn;
     }
 
-    public boolean getIsDelete(){
+    public boolean isDelete(){
        return this.isDelete;
     }
     //--------------------------
@@ -56,10 +58,7 @@ public class PhongBan {
     public void setDsDuAn(DuAn dsda[]){
         this.dsDuAn = dsda;
     }
-
-    public void setIsDelete(boolean status){
-        this.isDelete = status;
-    }
+    
     //--------------------------
 
     public void addNhanVien(NhanVien nv){
@@ -93,10 +92,28 @@ public class PhongBan {
                 break;
             }
         }
-        this.dsDuAn[this.dsDuAn.length - 1].setIsDelete(true);
+        this.dsDuAn = Arrays.copyOf(this.dsDuAn, this.dsDuAn.length - 1);
     }
 
     public DuAn[] getDuAn(){
         return this.dsDuAn;
+    }
+
+
+
+    public TruongPhong getTruongPhong() {
+        return truongPhong;
+    }
+
+
+
+    public void setTruongPhong(TruongPhong truongPhong) {
+        this.truongPhong = truongPhong;
+    }
+
+
+
+    public void setDelete(boolean isDelete) {
+        this.isDelete = isDelete;
     }
 }

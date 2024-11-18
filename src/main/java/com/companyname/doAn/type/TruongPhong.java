@@ -4,8 +4,8 @@ public class TruongPhong extends NhanSu {
     private  final String chuVu = "Truong Phong";
     private final int soNgayduocphepnghi = 3;
 
-    public TruongPhong(String id, String name,String phone,String diaChi,double namVaolam, String heSothidua,int kinhNghiem,double heSophucap, int soNgaynghi) {
-        super(id, name, phone, diaChi, soNgaynghi, heSothidua, soNgaynghi, kinhNghiem, soNgaynghi);
+    public TruongPhong(String id, String name,String phone,String diaChi,double namVaolam, String heSothidua,int kinhNghiem,double heSophucap, int soNgaynghi, boolean isDelete) {
+        super(id, name, phone, diaChi, soNgaynghi, heSothidua, soNgaynghi, kinhNghiem, soNgaynghi, isDelete);
     }
 
     @Override

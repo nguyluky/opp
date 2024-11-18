@@ -13,7 +13,7 @@ public class DuAn {
     public DuAn(String nameDuAn, String idDuAn, String namePhongBan){
         this.nameDuAn = nameDuAn;
         this.idDuAn = idDuAn;
-        this.dsNhanVien = new NhanVien[1];
+        this.dsNhanVien = new NhanVien[0];
     }
     
     //--------------GET-------------------------------------

@@ -35,12 +35,11 @@ public class QuanLyDuAn {
     public void removeDuAn(String id){
         for(int i=0; i<this.dsDuAn.length; i++){
             if(this.dsDuAn[i].getIdDuAn().equals(id)){
-                this.dsDuAn[i] = this.dsDuAn[this.dsDuAn.length - 1];
+                this.dsDuAn[i].setIsDelete(true);
                 break;
             }
         }
 
-        this.dsDuAn[this.dsDuAn.length - 1].setIsDelete(true);
     }
 
     public int getSoLuongDuAn(){
