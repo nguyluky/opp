@@ -1,5 +1,7 @@
-package com.companyname.doAn;
+package com.companyname.doAn.ql;
 import java.util.Arrays;
+
+import com.companyname.doAn.type.PhongBan;
 
 public class QuanLyPhongBan {
     private PhongBan dsPhongBan[];
