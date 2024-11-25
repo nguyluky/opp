@@ -13,18 +13,21 @@ public class QuanLyDuAn {
 
     public QuanLyDuAn(){
         this.dsDuAn = new DuAn[0];
-        
     };
 
     //--------------GET-----------------------------
 
-    public DuAn[] getDanhSachDuAn(){
+    public DuAn[] getDsDuAn(){
         return this.dsDuAn;
     }
-
-
-
     // ---------------------------------------------
+    //---------------SET--------------------------
+    
+    public void setDsDuAn(DuAn dsDuAn[]){
+        this.dsDuAn = dsDuAn;
+    }
+
+    //----------------------------------------------
 
 
     public void addDuAn(DuAn duAn){
@@ -35,12 +38,10 @@ public class QuanLyDuAn {
     public void removeDuAn(String id){
         for(int i=0; i<this.dsDuAn.length; i++){
             if(this.dsDuAn[i].getIdDuAn().equals(id)){
-                this.dsDuAn[i] = this.dsDuAn[this.dsDuAn.length - 1];
+                this.dsDuAn[i].setIsDelete(true);
                 break;
             }
         }
-
-        this.dsDuAn[this.dsDuAn.length - 1].setIsDelete(true);
     }
 
     public int getSoLuongDuAn(){
@@ -50,17 +51,26 @@ public class QuanLyDuAn {
                 count++;
             }
         }
-
         return count;
     }
 
+    public void printDsDuAn(){
+        for(int i=0; i<this.dsDuAn.length; i++){
+            System.out.println("Dự án thứ nhất " + (i+1) + ":" + this.dsDuAn[i].getNameDuAn());
+        }
+    }
+
+    public DuAn getDuAnById(String id){
+        for(int i=0; i<this.dsDuAn.length; i++){
+            if(this.dsDuAn[i].getIdDuAn().equals(id)){
+                return this.dsDuAn[i];
+            }
+        }
+        return null;
+    }
     // // ---------------------------------------------
 
-    // public void printDanhSachIdDuAn(){
-    //     for(int i=0; i<this.dsDuAn.length; i++){
-    //         System.out.println("Id của dự án thứ " + (i+1) + ":" + this.dsDuAn[i].getNameDuAn());
-    //     }
-    // }
+ 
 
     // public void addDuAn(){
     //     Scanner sc = new Scanner(System.in);

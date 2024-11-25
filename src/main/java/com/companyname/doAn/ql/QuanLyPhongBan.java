@@ -20,24 +20,35 @@ public class QuanLyPhongBan {
         this.dsPhongBan = new PhongBan[0];
     }
 
+    //---------GET------------------------------------
+    public PhongBan[] getDsPhongBan(){
+        return this.dsPhongBan;
+    }
+    //------------------------------------------------
+    //------------SET---------------------------------
+    public void setDsPhongBan(PhongBan dsPhongBan[]){
+        this.dsPhongBan = dsPhongBan;
+    }
+    //------------------------------------------------
+
+    public void printDsPhongBan(){
+        for(int i=0; i<this.dsPhongBan.length; i++){
+            System.out.println("Phòng ban " + this.dsPhongBan[i].getNamePhongBan());
+        }
+    }
+
     public void addPhongBan(PhongBan phongBan){
         this.dsPhongBan = Arrays.copyOf(this.dsPhongBan, this.dsPhongBan.length + 1);
         this.dsPhongBan[this.dsPhongBan.length - 1] = phongBan;
     }
 
-    public PhongBan[] getDanhSachPhongBan(){
-        return this.dsPhongBan;
-    }
-
     public void deletePhongBan(String id){
         for(int i=0; i<this.dsPhongBan.length; i++){
             if(this.dsPhongBan[i].getIdPhongBan().equals(id)){
-                this.dsPhongBan[i] = this.dsPhongBan[this.dsPhongBan.length - 1];
+                this.dsPhongBan[i].setIsDelete(true);
                 break;
             }
         }
-
-        this.dsPhongBan[this.dsPhongBan.length - 1].setIsDelete(true);
     }
 
     public int getSoLuongPhongBan(){
@@ -47,8 +58,25 @@ public class QuanLyPhongBan {
                 count++;
             }
         }
-
         return count;
+    }
+
+    public PhongBan getPhongBanByID(String id){
+        for(PhongBan pb : this.getDsPhongBan()){
+            if(pb.getIdPhongBan().equals(id)){
+                return pb;
+            }
+        }
+        return null;
+    }
+
+    public PhongBan getPhongBanByName(String name){
+        for(PhongBan pb : this.getDsPhongBan()){
+            if(pb.getNamePhongBan().equals(name)){
+                return pb;
+            }
+        }
+        return null;
     }
 }
 

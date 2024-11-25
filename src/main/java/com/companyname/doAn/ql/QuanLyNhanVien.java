@@ -7,7 +7,7 @@ import com.companyname.doAn.type.NhanVien;
 public class QuanLyNhanVien {
     // private int soLuongNhanVien;
     private NhanVien dsNhanVien[];
-    private static QuanLyNhanVien instance;
+    private static QuanLyNhanVien instance = new QuanLyNhanVien();
 
     public static QuanLyNhanVien getInstance() {
         return instance;
@@ -29,7 +29,7 @@ public class QuanLyNhanVien {
 
     //----------------GET-------------------
 
-    public NhanVien[] getDanhSachNhanVien(){
+    public NhanVien[] getDsNhanVien(){
         return this.dsNhanVien;
     }
 
@@ -64,6 +64,14 @@ public class QuanLyNhanVien {
         return count;
     }
 
+    public NhanVien getNhanVienById(String id){
+        for(NhanVien nv : this.dsNhanVien){
+            if(nv.getId().equals(id)){
+                return nv;
+            }
+        }
+        return null;
+    }
     //-------------------------------------------
     
     // public void printDanhSachIdNhanVien(){
