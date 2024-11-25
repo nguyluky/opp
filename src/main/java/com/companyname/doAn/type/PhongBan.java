@@ -61,6 +61,20 @@ public class PhongBan {
     
     //--------------------------
 
+    public void printThongTinPhongBan(){
+        System.out.println("Tên: " + this.namePhongBan);
+        System.out.println("ID: " + this.idPhongBan);
+        System.out.println("Số lượng nhân viên: " + this.dsNhanVien.length);
+        System.out.println("Số lượng dự án: " + this.dsDuAn.length);
+    }
+
+    public void printDsNhanVienPhongBan(){
+        for(int i=0; i<this.dsNhanVien.length; i++){
+            System.out.println("Nhân viên thứ " + i + " :");
+            System.out.println(this.dsNhanVien[i].getName() + ";" + this.dsNhanVien[i].getId());
+        }        
+    }
+
     public void addNhanVien(NhanVien nv){
         this.dsNhanVien = Arrays.copyOf(this.dsNhanVien, this.dsNhanVien.length + 1);
         this.dsNhanVien[this.dsNhanVien.length - 1] = nv;
@@ -76,8 +90,11 @@ public class PhongBan {
         this.dsNhanVien = Arrays.copyOf(this.dsNhanVien, this.dsNhanVien.length - 1);
     }
 
-    public NhanSu[] getNhanSu(){
-        return this.dsNhanVien;
+    public void printDsDuAn(){
+        for(int i=0; i<this.dsDuAn.length; i++){
+            System.out.println("Dự án thứ " + i + " :");
+            System.out.println(this.dsDuAn[i].getNameDuAn() + ";" + this.dsDuAn[i].getIdDuAn());
+        }
     }
 
     public void addDuAn(DuAn da){
@@ -88,15 +105,20 @@ public class PhongBan {
     public void removeDuAn(String id){
         for(int i=0; i<this.dsDuAn.length; i++){
             if(this.dsDuAn[i].getIdDuAn().equals(id)){
-                this.dsDuAn[i] = this.dsDuAn[this.dsDuAn.length - 1];
+                this.dsDuAn[i].setIsDelete(true);
                 break;
             }
         }
-        this.dsDuAn = Arrays.copyOf(this.dsDuAn, this.dsDuAn.length - 1);
+        this.dsDuAn[this.dsDuAn.length - 1].setIsDelete(true);
     }
 
-    public DuAn[] getDuAn(){
-        return this.dsDuAn;
+    public NhanVien getNhanVienById(String id){
+        for(NhanVien nv : this.getDsNhanVien()){
+            if(nv.getId().equals(id)){
+                return nv;
+            }
+        }
+        return null;
     }
 
 

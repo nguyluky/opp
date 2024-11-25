@@ -14,6 +14,10 @@ public class NhanVien extends NhanSu {
         super(id, name, phone, diaChi, soNgaynghi, heSothidua, soNgaynghi, kinhNghiem, soNgaynghi, isDelete);
     }
 
+    public String toString(){
+        return super.getName() + ";" + super.getId() + ";" + super.getPhone();
+    }
+
     @Override
     public double bonusChucVu() {
         return this.luongCoBan() * 0.25;

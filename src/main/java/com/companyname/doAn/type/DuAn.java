@@ -10,10 +10,11 @@ public class DuAn {
 
     public DuAn(){};
 
-    public DuAn(String nameDuAn, String idDuAn, String namePhongBan){
+    public DuAn(String nameDuAn, String idDuAn, NhanVien dsNhanVien[], boolean isDelete){
         this.nameDuAn = nameDuAn;
         this.idDuAn = idDuAn;
-        this.dsNhanVien = new NhanVien[0];
+        this.dsNhanVien = dsNhanVien;
+        this.isDelete = isDelete;
     }
     
     //--------------GET-------------------------------------
@@ -25,21 +26,16 @@ public class DuAn {
         return this.idDuAn;
     }
 
-    public boolean getIsDelete(){
-        return this.isDelete;
+    public NhanVien[] getDsNhanVienDuAn(){
+        return this.dsNhanVien;
     }
 
-    public NhanVien[] getArrayNhanVienDuAn(){
-        return this.dsNhanVien;
+    public boolean getIsDelete(){
+        return this.isDelete;
     }
     //--------------------------------------------------------
 
     //----------------------SET-----------------------------
-
-    public void setArrayNhanVienDuAn(NhanVien array[]){
-        this.dsNhanVien = array;
-    }
-
     public void setNameDuAn(String nameDuAn){
         this.nameDuAn = nameDuAn;
     }
@@ -57,8 +53,10 @@ public class DuAn {
     }
 
     // ========================================================
-
-
+    public String toString(){
+        return this.nameDuAn + ";" + this.idDuAn + ";" + this.dsNhanVien.length;
+    }
+    
     public void addNhanVien(NhanVien nv){
         this.dsNhanVien = Arrays.copyOf(this.dsNhanVien, this.dsNhanVien.length + 1);
         this.dsNhanVien[this.dsNhanVien.length - 1] = nv;
@@ -76,31 +74,19 @@ public class DuAn {
         this.dsNhanVien = newNv;
     }
 
-    public NhanVien[] getNhanVien(){
-        return this.dsNhanVien;
+     public void printDsNhanVienDuAn(){
+        if(this.dsNhanVien.length == 0){
+            System.out.println("Không có nhân viên nào!");
+            return;
+        }
+        System.out.println("Danh sách nhân viên của dự án " + this.nameDuAn + ":");
+        for(int i=0; i<this.dsNhanVien.length; i++){
+            System.out.println("Nhân viên " + (i+1) + ":");
+            System.out.println(this.dsNhanVien[i].getName());
+        }
     }
 
     // //--------------------------------------------------------------------
-    // public void nhap(){
-    //     Scanner sc = new Scanner(System.in);
-    //     System.out.println("Nhập tên dự án:");
-    //     String name = sc.nextLine();
-    //     this.nameDuAn = name;
-    //     System.out.println("Nhập id dự án:");
-    //     String id = sc.nextLine();
-    //     this.idDuAn = id;
-    //     System.out.println("Nhập số lượng nhân viên trong dự án:");
-    //     int sl = Integer.parseInt(sc.nextLine());
-    //     this.soLuongNhanVien = sl;
-    //     this.dsNhanVien = new NhanVien[sl];
-
-    //     QuanLyNhanVien qlnv = QuanLyNhanVien.getInstance();
-    //     qlnv.printDanhSachIdNhanVien(); // in ra danh sách tất cả nhân viên công ty
-    //     for(int i=0; i<sl; i++){
-    //         this.dsNhanVien[i] = new NhanVien();
-    //         addNhanVien(sl);
-    //     }
-    // }
 
     // public void printDanhSachNhanVienDuAn(){
     //     if(dsNhanVien.length == 0){
