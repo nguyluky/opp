@@ -109,4 +109,13 @@ public class QuanLyNhanSu {
             this.addNhanSu(truongPhong);
         }
     }
+
+    public NhanVien getNhanVienById(String id) {
+        for (NhanVien nhanVien : this.getNhanViens()) {
+            if (nhanVien.getId().equals(id)) {
+                return nhanVien;
+            }
+        }
+        return null;
+    }
 }

@@ -43,7 +43,8 @@ public class DuAnReader implements BaseReader<DuAn> {
             String data = sc.nextLine();
             String[] arr = data.split(" ");
             duAn = Arrays.copyOf(duAn, duAn.length + 1);
-            duAn[duAn.length - 1] = new DuAn(arr[0], arr[1], arr[2]);
+            NhanVien []arrtem = new NhanVien[0];
+            duAn[duAn.length - 1] = new DuAn(arr[0], arr[1], arrtem , Boolean.parseBoolean(arr[2]));
 
             String[] dsNhanVienID = getDsNhanVienID(arr[3]);
             for (String id : dsNhanVienID) {

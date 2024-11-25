@@ -2,7 +2,7 @@
 import java.util.Scanner;
 
 import com.companyname.doAn.ql.QuanLyDuAn;
-import com.companyname.doAn.ql.QuanLyNhanVien;
+import com.companyname.doAn.ql.QuanLyNhanSu;
 import com.companyname.doAn.ql.QuanLyPhongBan;
 import com.companyname.doAn.type.NhanVien;
 
@@ -111,8 +111,8 @@ public class OptionMenu implements ShowOption{
         int choice = Integer.parseInt(sc.nextLine());
         switch(choice){
             case 1: 
-            QuanLyNhanVien qlnv = QuanLyNhanVien.getInstance();
-            for(NhanVien nv : qlnv.getDsNhanVien()){
+            QuanLyNhanSu qlnv = QuanLyNhanSu.getInstance();
+            for(NhanVien nv : qlnv.getNhanViens()){
                 nv.toString();
             }
             break;

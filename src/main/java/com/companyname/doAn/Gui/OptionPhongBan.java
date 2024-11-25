@@ -3,7 +3,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 import com.companyname.doAn.ql.QuanLyDuAn;
-import com.companyname.doAn.ql.QuanLyNhanVien;
+import com.companyname.doAn.ql.QuanLyNhanSu;
 import com.companyname.doAn.ql.QuanLyPhongBan;
 import com.companyname.doAn.type.DuAn;
 import com.companyname.doAn.type.PhongBan;
@@ -48,7 +48,7 @@ public class OptionPhongBan {
             }
 
             NhanVien dsNhanVien[] = new NhanVien[slNhanVien];
-            QuanLyNhanVien qlnv = QuanLyNhanVien.getInstance();
+            QuanLyNhanSu qlnv = QuanLyNhanSu.getInstance();
 
             for(int j=0; j<slNhanVien; j++){
                 System.out.printf("%d","Nhập id nhân viên thứ " + (j + 1) + " muốn thêm vào dự án:");
@@ -121,7 +121,7 @@ public class OptionPhongBan {
         for(int i=0; i<slNhanVien; i++){
             String idNhanVien = sc.nextLine();
             QuanLyPhongBan qlpb = QuanLyPhongBan.getInstance();
-            QuanLyNhanVien qlnv = QuanLyNhanVien.getInstance();
+            QuanLyNhanSu qlnv = QuanLyNhanSu.getInstance();
 
             if(qlnv.getNhanVienById(idNhanVien) == null){
                 System.out.println("Id nhân viên không tồn tại. Quay lại menu trước");
@@ -181,7 +181,7 @@ public class OptionPhongBan {
         for(int i=0; i<slNhanVien; i++){
             String idNhanVien = sc.nextLine();
              //kiểm tra id nhân viên có tồn tại trong công ty hay không
-            QuanLyNhanVien qlnv = QuanLyNhanVien.getInstance();
+            QuanLyNhanSu qlnv = QuanLyNhanSu.getInstance();
             if(qlnv.getNhanVienById(idNhanVien) != null){
                 if(currentPhongBan.getNhanVienById(idNhanVien) != null){
                     currentPhongBan.removeNhanVien(idNhanVien);

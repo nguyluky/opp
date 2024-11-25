@@ -41,15 +41,11 @@ public class PhongBanReaderWriter implements BaseReader<PhongBan> , BaseWriter<P
 
         PhongBan[] phongBan = new PhongBan[0];
 
-        QuanLyNhanSu qlns = QuanLyNhanSu.getInstance();
-
         while (sc.hasNextLine()) {
             String data = sc.nextLine();
             String[] arr = BaseReader.split(data);
             phongBan = Arrays.copyOf(phongBan, phongBan.length + 1);
-
-            TruongPhong tp = (TruongPhong) qlns.getNhanSuById(arr[2]);
-            phongBan[phongBan.length] = new PhongBan(arr[0], arr[1], tp);
+            phongBan[phongBan.length] = new PhongBan(arr[0], arr[1], Boolean.parseBoolean(arr[2]));
         }
 
         return phongBan;
@@ -70,7 +66,7 @@ public class PhongBanReaderWriter implements BaseReader<PhongBan> , BaseWriter<P
 
 
 
-            for (NhanSu ns: pb.getNhanSu()) {
+            for (NhanSu ns: pb.getDsNhanVien()) {
                 data[3] += ns.getId() + ",";
             }
 

@@ -1,7 +1,7 @@
 package com.companyname.doAn.Gui;
 import java.util.Scanner;
 
-import com.companyname.doAn.ql.QuanLyNhanVien;
+import com.companyname.doAn.ql.QuanLyNhanSu;
 import com.companyname.doAn.ql.QuanLyPhongBan;
 import com.companyname.doAn.type.DuAn;
 import com.companyname.doAn.type.NhanVien;
@@ -15,11 +15,9 @@ public class OptionQuanLyPhongBan {
         String namePhongBan = sc.nextLine();
         System.out.printf("Nhập id phòng ban: ");
         String idPhongBan = sc.nextLine();
-        NhanVien dsnhanVien[] = new NhanVien[0];
-        DuAn dsDuAn[] = new DuAn[0];
 
         QuanLyPhongBan qlpb = QuanLyPhongBan.getInstance();
-        PhongBan currentPhongBan = new PhongBan(namePhongBan, idPhongBan, dsnhanVien, dsDuAn, false);
+        PhongBan currentPhongBan = new PhongBan(namePhongBan, idPhongBan, false);
         qlpb.addPhongBan(currentPhongBan);
 
         System.out.println("---------------------------------------");
@@ -87,7 +85,7 @@ public class OptionQuanLyPhongBan {
         String id = sc.nextLine();
         QuanLyPhongBan qlpb = QuanLyPhongBan.getInstance();
         if(qlpb.getPhongBanByID(id) != null){
-            qlpb.getPhongBanByID(id).setIsDelete(true);
+            qlpb.getPhongBanByID(id).setDelete(true);
         }
         else{
             System.out.println("ID phòng ban không tồn tại. Quay lại menu trước.");
@@ -112,7 +110,7 @@ public class OptionQuanLyPhongBan {
         System.out.printf("Nhập ID nhân viên muốn di chuyển phòng ban: ");
         String idNhanVien = sc.nextLine();
         //kiểm tra xem ID nhân viên có tồn tại trong công ty không
-        QuanLyNhanVien qlnv = QuanLyNhanVien.getInstance();
+       QuanLyNhanSu qlnv =QuanLyNhanSu.getInstance();
         if(qlnv.getNhanVienById(idNhanVien) != null){
             //kiểm tra xem nhân viên đang ở phòng ban nào, hay chưa có phòng ban
             boolean checkTonTaiPhongBan = false;

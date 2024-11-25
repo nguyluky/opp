@@ -1,7 +1,7 @@
 package com.companyname.doAn.Gui;
 
 import com.companyname.doAn.ql.QuanLyDuAn;
-import com.companyname.doAn.ql.QuanLyNhanVien;
+import com.companyname.doAn.ql.QuanLyNhanSu;
 import com.companyname.doAn.type.DuAn;
 import com.companyname.doAn.type.NhanVien;
 import java.util.Scanner;
@@ -22,7 +22,7 @@ public class OptionQuanLyDuAn {
             return;
         }
         NhanVien dsNhanVien[] = new NhanVien[slNhanVien];
-        QuanLyNhanVien qlnv = QuanLyNhanVien.getInstance();
+        QuanLyNhanSu qlnv = QuanLyNhanSu.getInstance();
 
         for(int i=0; i<slNhanVien; i++){
             System.out.printf("%d","Nhập id nhân viên thứ " + (i + 1) + " muốn thêm vào dự án:");

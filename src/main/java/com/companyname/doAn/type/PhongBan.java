@@ -11,13 +11,13 @@ public class PhongBan {
     private DuAn dsDuAn[];
     private boolean isDelete;
 
-    public PhongBan(String name, String idPhongBan, TruongPhong truongPhong){
+    public PhongBan(String name, String idPhongBan, boolean isDelete){
         this.namePhongBan = name;
         this.idPhongBan = idPhongBan;
         this.dsNhanVien = new NhanVien[0];
         this.dsDuAn = new DuAn[0];
-        this.isDelete = false;
-        this.truongPhong = truongPhong;
+        this.isDelete = isDelete;
+        // this.truongPhong = truongPhong;
     }
 
     //----------GET--------------
@@ -132,8 +132,6 @@ public class PhongBan {
     public void setTruongPhong(TruongPhong truongPhong) {
         this.truongPhong = truongPhong;
     }
-
-
 
     public void setDelete(boolean isDelete) {
         this.isDelete = isDelete;
