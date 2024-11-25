@@ -6,8 +6,11 @@ import com.companyname.doAn.ql.QuanLyPhongBan;
 import com.companyname.doAn.type.DuAn;
 import com.companyname.doAn.type.NhanVien;
 import com.companyname.doAn.type.PhongBan;
-public class OptionQuanLyPhongBan {
+public class OptionQuanLyPhongBan implements ShowOption{
     public OptionQuanLyPhongBan(){}
+    Scanner sc = StaticScanner.sc;
+    QuanLyPhongBan qlpb = QuanLyPhongBan.getInstance();
+    OptionPhongBan optionPhongBan = new OptionPhongBan();
 
     public void themPhongBan(){
         Scanner sc = new Scanner(System.in);
@@ -152,6 +155,49 @@ public class OptionQuanLyPhongBan {
         }
         else{
             System.out.println("ID nhân viên không tồn tại");
+        }
+    }
+
+    @Override
+    public void show(){
+        System.out.printf("Nhập ID phòng ban cụ thể: ");
+        String idPhongBan = sc.nextLine();
+        if(qlpb.getPhongBanByID(idPhongBan) == null){
+            System.out.println("ID phòng ban không tồn tại");
+            return;
+        }
+        PhongBan currentPhongBan = qlpb.getPhongBanByID(idPhongBan);
+        System.out.println("---------------------------------------");
+        System.out.println("Chọn chức năng tiếp theo đối với phòng ban: ");
+        System.out.println("1: Thêm nhân viên");
+        System.out.println("2: Xóa nhân viên");
+        System.out.println("3: Thêm dự án");
+        System.out.println("2: Xóa dự án");
+        System.out.println("5: Chức năng đối với dự án cụ thể");
+        System.out.println("0: Quay lại menu trước");
+        int choice = Integer.parseInt(sc.nextLine());
+        switch (choice) {
+            case 1:
+                optionPhongBan.themNhanVien(currentPhongBan);
+                break;
+            case 2:
+                optionPhongBan.xoaNhanVien(currentPhongBan);
+                break;
+            case 3:
+                optionPhongBan.themDuAn(currentPhongBan);
+                break;
+            case 4:
+                optionPhongBan.xoaDuAn(currentPhongBan);
+                break;
+            case 5: 
+                optionPhongBan.show();
+                break;
+            case 0:
+
+                break;
+            default:
+                System.out.println("Cần nhập lựa chọn hợp lý");
+                break;
         }
     }
 }

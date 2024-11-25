@@ -9,10 +9,14 @@ import com.companyname.doAn.type.NhanVien;
 public class OptionMenu implements ShowOption{
 
     public OptionMenu(){}
+    Scanner sc = StaticScanner.sc;
+    QuanLyPhongBan qlpb = QuanLyPhongBan.getInstance();
+    QuanLyDuAn qlda = QuanLyDuAn.getInstance();
+    OptionQuanLyPhongBan optionQuanLyPhongBan = new OptionQuanLyPhongBan();
+    OptionQuanLyDuAn optionQuanLyDuAn = new OptionQuanLyDuAn();
 
     @Override
     public void show(){
-        Scanner sc = new Scanner(System.in);
         System.out.println("---------------------------------------");
         System.out.println("Chọn chức năng quản lý");
         System.out.println("1: Quản lý dự án");
@@ -30,9 +34,8 @@ public class OptionMenu implements ShowOption{
     }
 
     public void chucNangQuanLyDuAn(){
-        Scanner sc = new Scanner(System.in);
         System.out.println("---------------------------------------");
-        System.out.println("Chọn chức năng đối với dự án:");
+        System.out.println("Chọn chức năng đối với quản lý tất cả dự án:");
         System.out.println("1: Xem danh sách toàn bộ dự án");
         System.out.println("2: Thêm dự án");
         System.out.println("3: Xóa dự án");
@@ -40,26 +43,29 @@ public class OptionMenu implements ShowOption{
         System.out.println("5: Chức năng đối với dự án cụ thể. Cần nhập id dự án");
         System.out.println("0: Quay lại menu trước");
         int choice = Integer.parseInt(sc.nextLine());
-        OptionQuanLyDuAn optionDuAn = new OptionQuanLyDuAn();
         switch (choice) {
             case 1: 
-                QuanLyDuAn qlda = QuanLyDuAn.getInstance();
                 qlda.printDsDuAn();
-                chucNangQuanLyDuAn();
                 break;
             case 2:
-                optionDuAn.themDuAn();
+                optionQuanLyDuAn.themDuAn();
                 chucNangQuanLyDuAn();
                 break;
             case 3:
-                optionDuAn.xoaDuAn();
-                chucNangQuanLyDuAn();
+                optionQuanLyDuAn.xoaDuAn();    
+                chucNangQuanLyDuAn();   
                 break;
             case 4:
-                optionDuAn.getThongTinDuAnById();
+                optionQuanLyDuAn.getThongTinDuAnById();
+                chucNangQuanLyDuAn();
+                break;
+            case 5:
+                optionQuanLyDuAn.show();
                 chucNangQuanLyDuAn();
                 break;
             case 0:
+                show();
+                break;
             default:
                 System.out.println("Cần nhập lựa chọn hợp lý");
                 chucNangQuanLyDuAn();
@@ -68,9 +74,8 @@ public class OptionMenu implements ShowOption{
     }
 
     public void chucNangQuanLyPhongBan(){
-        Scanner sc = new Scanner(System.in);
         System.out.println("---------------------------------------");
-        System.out.println("Chọn chức năng đối với phòng ban:");
+        System.out.println("Chọn chức năng đối với quản lý tất cả phòng ban:");
         System.out.println("1: Xem danh sách toàn bộ phòng ban");
         System.out.println("2: Thêm phòng ban");
         System.out.println("3: Xóa phòng ban");
@@ -84,25 +89,39 @@ public class OptionMenu implements ShowOption{
             case 1:
                 QuanLyPhongBan qlpb = QuanLyPhongBan.getInstance();
                 qlpb.printDsPhongBan();
+                chucNangQuanLyPhongBan();
                 break;
             case 2:
+                optionQuanLyPhongBan.themPhongBan();
+                chucNangQuanLyPhongBan();
                 break;
             case 3:
+                optionQuanLyPhongBan.xoaPhongBan();
+                chucNangQuanLyPhongBan();
                 break;
             case 4:
+                optionQuanLyPhongBan.searchPhongBanByName();
+                chucNangQuanLyPhongBan();
                 break;
             case 5:
+                optionQuanLyPhongBan.moveNhanVien();
+                chucNangQuanLyPhongBan();
                 break;
-            case 0:
+            case 6:
+                optionQuanLyPhongBan.show();
+                chucNangQuanLyPhongBan();
+                break;
+            case 0: 
+                show();
                 break;
             default:
-            System.out.println("Cần nhập lựa chọn hợp lý");
+                System.out.println("Cần nhập lựa chọn hợp lý");
+                chucNangQuanLyPhongBan();
                 break;
         }
     }
 
     public void chucNangQuanLyNhanVien(){
-        Scanner sc = new Scanner(System.in);
         System.out.println("Nhập chức năng muốn chọn:");
         System.out.println("1: Xem danh sách nhân viên đang làm");
         System.out.println("2: Xem danh sách nhân viên đã nghỉ");

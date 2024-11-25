@@ -9,22 +9,25 @@ import com.companyname.doAn.type.DuAn;
 import com.companyname.doAn.type.PhongBan;
 import com.companyname.doAn.type.NhanVien;
 
-public class OptionPhongBan {
+public class OptionPhongBan implements ShowOption{
     public OptionPhongBan(){}
+    Scanner sc = StaticScanner.sc;
 
     public void themDuAn(PhongBan currentPhongBan){
-        Scanner sc = new Scanner(System.in);
         System.out.println("Nhập số dự án muốn thêm");
         int slDa;
-        try {
-            slDa = Integer.parseInt(sc.nextLine());
-        } catch (NumberFormatException e) {
-            System.out.println("Vui lòng nhập số");
-            return;
-        }
-        if(slDa<0){
-            System.out.println("Nhập số âm là lỗi. Thoát");
-            return;
+        while(true){
+            try {
+                slDa = Integer.parseInt(sc.nextLine());
+                if(slDa<0){
+                    System.out.println("Nhập số âm là lỗi");
+                }
+                else{
+                    break;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Vui lòng nhập số");
+            }
         }
 
         DuAn dsDuAn[] = new DuAn[slDa];
@@ -63,7 +66,9 @@ public class OptionPhongBan {
                     j--;
                 }
             }
-            dsDuAn[i] = new DuAn(nameDuAn, idDuAn, dsNhanVien, false);
+            dsDuAn[i] = new DuAn(nameDuAn, idDuAn, false);
+            dsDuAn[i].setDsNhanVien(dsNhanVien);
+            
             QuanLyDuAn qlda = QuanLyDuAn.getInstance();
             qlda.addDuAn(dsDuAn[i]);
         }
@@ -193,5 +198,11 @@ public class OptionPhongBan {
                 return;
             }
         }
+    }
+
+    @Override
+    public void show(){
+        OptionQuanLyDuAn optionQuanLyDuAn = new OptionQuanLyDuAn();
+        optionQuanLyDuAn.show();
     }
 }

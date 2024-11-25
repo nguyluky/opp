@@ -10,10 +10,10 @@ public class DuAn {
 
     public DuAn(){};
 
-    public DuAn(String nameDuAn, String idDuAn, NhanVien dsNhanVien[], boolean isDelete){
+    public DuAn(String nameDuAn, String idDuAn, boolean isDelete){
         this.nameDuAn = nameDuAn;
         this.idDuAn = idDuAn;
-        this.dsNhanVien = dsNhanVien;
+        this.dsNhanVien = new NhanVien[0];
         this.isDelete = isDelete;
     }
     
@@ -81,9 +81,18 @@ public class DuAn {
         }
         System.out.println("Danh sách nhân viên của dự án " + this.nameDuAn + ":");
         for(int i=0; i<this.dsNhanVien.length; i++){
-            System.out.println("Nhân viên " + (i+1) + ":");
-            System.out.println(this.dsNhanVien[i].getName());
+            System.out.println("Tên nhân viên " + (i+1) + ": " + this.dsNhanVien[i].getName());
+            System.out.println("ID của nhân viên" + (i+1) + ": " + this.dsNhanVien[i].getId());
         }
+    }
+
+    public NhanVien getNhanVienByID(String id){
+        for(NhanVien nv : this.getDsNhanVienDuAn()){
+            if(nv.getId().equals(id)){
+                return nv;
+            }
+        }
+        return null;
     }
 
     // //--------------------------------------------------------------------
