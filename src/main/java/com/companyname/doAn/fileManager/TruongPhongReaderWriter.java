@@ -8,10 +8,11 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 import com.companyname.doAn.type.NhanVien;
+import com.companyname.doAn.type.TruongPhong;
 
-public class NhanVienReaderWriter implements BaseReader<NhanVien>, BaseWriter<NhanVien> {
+public class TruongPhongReaderWriter implements BaseReader<TruongPhong>, BaseWriter<TruongPhong> {
 
-    private final String FILE_NAME = "NhanViens.txt";
+    private final String FILE_NAME = "TruongPhongs.txt";
 
     private String filePath;
     File file;
@@ -21,7 +22,7 @@ public class NhanVienReaderWriter implements BaseReader<NhanVien>, BaseWriter<Nh
         return FILE_NAME;
     }
 
-    public NhanVienReaderWriter(String folder) {
+    public TruongPhongReaderWriter(String folder) {
         this.filePath = folder + FILE_NAME;
         file = new File(this.filePath);
         if (!file.exists()) {
@@ -33,10 +34,10 @@ public class NhanVienReaderWriter implements BaseReader<NhanVien>, BaseWriter<Nh
         }
     }
 
-    public NhanVien[] read() throws FileNotFoundException {
+    public TruongPhong[] read() throws FileNotFoundException {
         sc = new Scanner(file);
 
-        NhanVien[] nhanVienS = new NhanVien[0];
+        TruongPhong[] truongPhongs = new TruongPhong[0];
 
         while (sc.hasNextLine()) {
             String data = sc.nextLine();
@@ -47,8 +48,8 @@ public class NhanVienReaderWriter implements BaseReader<NhanVien>, BaseWriter<Nh
                 continue;
             }
 
-            nhanVienS = Arrays.copyOf(nhanVienS, nhanVienS.length + 1);
-            nhanVienS[nhanVienS.length - 1] = new NhanVien(
+            truongPhongs = Arrays.copyOf(truongPhongs, truongPhongs.length + 1);
+            truongPhongs[truongPhongs.length - 1] = new TruongPhong(
                 arr[0], 
                 arr[1], 
                 arr[2], 
@@ -62,14 +63,14 @@ public class NhanVienReaderWriter implements BaseReader<NhanVien>, BaseWriter<Nh
         }
 
         sc.close();
-        return nhanVienS;
+        return truongPhongs;
     }
 
-    public void save(NhanVien[] dNhanViens) throws IOException {
+    public void save(TruongPhong[] dTruongPhong) throws IOException {
 
         FileWriter fw = new FileWriter(this.file);
 
-        for (NhanVien nv: dNhanViens) {
+        for (TruongPhong nv: dTruongPhong) {
             String[] data = {
                 nv.getId(),
                 nv.getName(),

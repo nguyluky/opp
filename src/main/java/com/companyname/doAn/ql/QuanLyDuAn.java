@@ -8,6 +8,9 @@ public class QuanLyDuAn {
     private static QuanLyDuAn instance;
 
     public static QuanLyDuAn getInstance() {
+        if (instance == null) {
+            instance = new QuanLyDuAn();
+        }
         return instance;
     }
 

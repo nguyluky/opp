@@ -40,20 +40,13 @@ public class QuanLyNhanSu {
     }
 
     public NhanSu[] getNhanSus() {
-        NhanSu newNhanSus[] = new NhanSu[0];
-        for (NhanSu nhanSu : this.nhanSus) {
-            if (!nhanSu.isDelete()) {
-                newNhanSus = Arrays.copyOf(newNhanSus, newNhanSus.length + 1);
-                newNhanSus[newNhanSus.length - 1] = nhanSu;
-            }
-        }
-        return newNhanSus;
+        return nhanSus;
     }
 
     public NhanVien[] getNhanViens() {
         NhanVien[] nhanViens = new NhanVien[0];
         for (NhanSu nhanSu : this.nhanSus) {
-            if (nhanSu instanceof NhanVien && !nhanSu.isDelete()) {
+            if (nhanSu instanceof NhanVien) {
                 nhanViens = Arrays.copyOf(nhanViens, nhanViens.length + 1);
                 nhanViens[nhanViens.length - 1] = (NhanVien) nhanSu;
             }

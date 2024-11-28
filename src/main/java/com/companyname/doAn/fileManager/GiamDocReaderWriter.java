@@ -7,11 +7,12 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import com.companyname.doAn.type.GiamDoc;
 import com.companyname.doAn.type.NhanVien;
 
-public class NhanVienReaderWriter implements BaseReader<NhanVien>, BaseWriter<NhanVien> {
+public class GiamDocReaderWriter implements BaseReader<GiamDoc>, BaseWriter<GiamDoc> {
 
-    private final String FILE_NAME = "NhanViens.txt";
+    private final String FILE_NAME = "GiamDocs.txt";
 
     private String filePath;
     File file;
@@ -21,7 +22,7 @@ public class NhanVienReaderWriter implements BaseReader<NhanVien>, BaseWriter<Nh
         return FILE_NAME;
     }
 
-    public NhanVienReaderWriter(String folder) {
+    public GiamDocReaderWriter(String folder) {
         this.filePath = folder + FILE_NAME;
         file = new File(this.filePath);
         if (!file.exists()) {
@@ -33,10 +34,10 @@ public class NhanVienReaderWriter implements BaseReader<NhanVien>, BaseWriter<Nh
         }
     }
 
-    public NhanVien[] read() throws FileNotFoundException {
+    public GiamDoc[] read() throws FileNotFoundException {
         sc = new Scanner(file);
 
-        NhanVien[] nhanVienS = new NhanVien[0];
+        GiamDoc[] giamDoc = new GiamDoc[0];
 
         while (sc.hasNextLine()) {
             String data = sc.nextLine();
@@ -47,8 +48,8 @@ public class NhanVienReaderWriter implements BaseReader<NhanVien>, BaseWriter<Nh
                 continue;
             }
 
-            nhanVienS = Arrays.copyOf(nhanVienS, nhanVienS.length + 1);
-            nhanVienS[nhanVienS.length - 1] = new NhanVien(
+            giamDoc = Arrays.copyOf(giamDoc, giamDoc.length + 1);
+            giamDoc[giamDoc.length - 1] = new GiamDoc(
                 arr[0], 
                 arr[1], 
                 arr[2], 
@@ -62,14 +63,14 @@ public class NhanVienReaderWriter implements BaseReader<NhanVien>, BaseWriter<Nh
         }
 
         sc.close();
-        return nhanVienS;
+        return giamDoc;
     }
 
-    public void save(NhanVien[] dNhanViens) throws IOException {
+    public void save(GiamDoc[] dGiamDocs) throws IOException {
 
         FileWriter fw = new FileWriter(this.file);
 
-        for (NhanVien nv: dNhanViens) {
+        for (GiamDoc nv: dGiamDocs) {
             String[] data = {
                 nv.getId(),
                 nv.getName(),
