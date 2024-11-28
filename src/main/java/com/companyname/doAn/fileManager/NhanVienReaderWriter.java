@@ -21,7 +21,7 @@ public class NhanVienReaderWriter implements BaseReader<NhanVien>, BaseWriter<Nh
         return FILE_NAME;
     }
 
-    NhanVienReaderWriter(String folder) {
+    public NhanVienReaderWriter(String folder) {
         this.filePath = folder + FILE_NAME;
         file = new File(this.filePath);
         if (!file.exists()) {
