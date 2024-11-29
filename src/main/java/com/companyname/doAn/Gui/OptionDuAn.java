@@ -21,7 +21,7 @@ public class OptionDuAn {
         while(true){
             try {
                 slNhanVien = Integer.parseInt(sc.nextLine());
-                if(slNhanVien>0){
+                if(slNhanVien>=0){
                     break;
                 }
                 else{

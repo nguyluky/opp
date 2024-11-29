@@ -44,7 +44,7 @@ public class OptionQuanLyDuAn implements ShowOption{
             System.out.println("1: Thêm nhân viên");
             System.out.println("2: Xóa nhân viên");
             System.out.println("3: Đổi tên dự án");
-            System.out.println("0: Không làm gì hết");
+            System.out.println("0: Quay lại menu trước");
             int choice = Integer.parseInt(sc.nextLine());
             switch(choice){
                 case 1:

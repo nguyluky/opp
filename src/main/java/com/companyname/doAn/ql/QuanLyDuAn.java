@@ -70,25 +70,4 @@ public class QuanLyDuAn {
     }
     // // ---------------------------------------------
 
- 
-
-    // public void addDuAn(){
-    //     Scanner sc = new Scanner(System.in);
-    //     System.out.println("Nhập số lượng dự án muốn thêm");
-    //     int sl = Integer.parseInt(sc.nextLine());
-    //     for(int i=0; i<sl; i++){
-    //         this.dsDuAn = Arrays.copyOf(this.dsDuAn, this.dsDuAn.length + 1);
-    //         this.dsDuAn[this.dsDuAn.length - 1] = new DuAn();
-    //         this.dsDuAn[this.dsDuAn.length - 1].nhap();
-    //     }
-    // }
-
-    // public void deleteDuAn(String idDuAn){
-    //     printDanhSachIdDuAn();
-    //     for(DuAn da : this.dsDuAn){
-    //         if(da.getIdDuAn() == idDuAn){
-    //             da.setIsDelete(true);
-    //         }
-    //     }
-    // }
 }

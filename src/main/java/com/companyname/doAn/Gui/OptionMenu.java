@@ -1,19 +1,20 @@
 ﻿package com.companyname.doAn.Gui;
+import com.companyname.doAn.ql.QuanLyDuAn;
+import com.companyname.doAn.ql.QuanLyNhanSu;
+import com.companyname.doAn.ql.QuanLyPhongBan;
+
 import java.util.Scanner;
 
-import com.companyname.doAn.ql.QuanLyDuAn;
-import com.companyname.doAn.ql.QuanLyNhanVien;
-import com.companyname.doAn.ql.QuanLyPhongBan;
-import com.companyname.doAn.type.NhanVien;
-
 public class OptionMenu implements ShowOption{
+    Scanner sc = StaticScanner.sc;
 
     public OptionMenu(){}
-    Scanner sc = StaticScanner.sc;
     QuanLyPhongBan qlpb = QuanLyPhongBan.getInstance();
     QuanLyDuAn qlda = QuanLyDuAn.getInstance();
+    QuanLyNhanSu qlns = QuanLyNhanSu.getInstance();
     OptionQuanLyPhongBan optionQuanLyPhongBan = new OptionQuanLyPhongBan();
     OptionQuanLyDuAn optionQuanLyDuAn = new OptionQuanLyDuAn();
+    ChucNangQuanLyNhanVien chucNangQuanLyNhanVien = new ChucNangQuanLyNhanVien();
 
     @Override
     public void show(){
@@ -21,7 +22,8 @@ public class OptionMenu implements ShowOption{
         System.out.println("Chọn chức năng quản lý");
         System.out.println("1: Quản lý dự án");
         System.out.println("2: Quản lý phòng ban");
-        System.out.println("3: Quản lý nhân viên");
+        System.out.println("3: Quản lý nhân sự");
+        System.out.println("0: Thoát chương trình");
         int choice = Integer.parseInt(sc.nextLine());
         switch (choice) {
             case 1:
@@ -30,6 +32,13 @@ public class OptionMenu implements ShowOption{
             case 2:
                 chucNangQuanLyPhongBan();
                 break;
+            case 3:
+                chucNangQuanLyNhanSu();
+                break;
+            case 0:
+                return;
+            default:
+                System.out.println("Không hợp lệ! Thoát");
         }
     }
 
@@ -121,20 +130,42 @@ public class OptionMenu implements ShowOption{
         }
     }
 
-    public void chucNangQuanLyNhanVien(){
+    public void chucNangQuanLyNhanSu(){
         System.out.println("Nhập chức năng muốn chọn:");
-        System.out.println("1: Xem danh sách nhân viên đang làm");
-        System.out.println("2: Xem danh sách nhân viên đã nghỉ");
-        System.out.println("3: Thêm nhân viên");
-        System.out.println("4: Xóa nhân viên");
+        System.out.println("1: Xem danh sách nhân sự đang làm");
+        System.out.println("2: Xem danh sách nhân sự đã nghỉ");
+        System.out.println("3: Thêm nhân sự");
+        System.out.println("4: Xóa nhân sự");
+        System.out.println("0: Quay lại menu trước");
         int choice = Integer.parseInt(sc.nextLine());
-        switch(choice){
-            case 1: 
-            QuanLyNhanVien qlnv = QuanLyNhanVien.getInstance();
-            for(NhanVien nv : qlnv.getDsNhanVien()){
-                nv.toString();
+        while(true){
+            try {
+                 choice = Integer.parseInt(sc.nextLine());
+                if(choice>4){
+                    System.out.println("Vui lòng nhập đúng lựa chọn");
+                }
+                else{
+                    break;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Vui lòng nhập số");
             }
-            break;
+        }
+        switch (choice){
+            case 1:
+                qlns.pirntDsNhanSuDangLam();
+                break;
+            case 2:
+                qlns.pirntDsNhanSuDaNghi();
+                break;
+            case 3:
+                chucNangQuanLyNhanVien.show();
+                break;
+            case 4:
+                break;
+            case 0:
+                break;
+
         }
     }
 }

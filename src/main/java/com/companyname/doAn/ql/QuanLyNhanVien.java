@@ -16,16 +16,6 @@ public class QuanLyNhanVien {
     public QuanLyNhanVien(){
         this.dsNhanVien = new NhanVien[0];
     }
-    
-    // public QuanLyNhanVien(int soLuongNhanVien){
-    //     instance=this;
-    //     this.soLuongNhanVien = soLuongNhanVien;
-    //     for(int i=0; i<this.soLuongNhanVien; i++){
-    //         this.dsNhanVien[i] = new NhanVien();
-    //         // TODO: nhớ là bỏ comment dòng này ra
-    //         // this.dsNhanVien[i].nhap();
-    //     }
-    // };
 
     //----------------GET-------------------
 
@@ -56,7 +46,7 @@ public class QuanLyNhanVien {
     public int getSoLuongNhanVien(){
         int count = 0;
         for(NhanVien nv : this.dsNhanVien){
-            if(!nv.isDelete()){
+            if(!nv.getIsDelete()){
                 count++;
             }
         }
