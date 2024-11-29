@@ -4,16 +4,19 @@ import java.util.Arrays;
 import com.companyname.doAn.type.DuAn;
 
 public class QuanLyDuAn {
-    private DuAn dsDuAn[];
-    private static QuanLyDuAn instance;
+    private DuAn[] dsDuAn;
+    private static QuanLyDuAn instance = null;
 
     public static QuanLyDuAn getInstance() {
+        if (instance == null) {
+            instance = new QuanLyDuAn();
+        }
         return instance;
     }
 
     public QuanLyDuAn(){
         this.dsDuAn = new DuAn[0];
-    };
+    }
 
     //--------------GET-----------------------------
 
@@ -23,7 +26,7 @@ public class QuanLyDuAn {
     // ---------------------------------------------
     //---------------SET--------------------------
     
-    public void setDsDuAn(DuAn dsDuAn[]){
+    public void setDsDuAn(DuAn[] dsDuAn){
         this.dsDuAn = dsDuAn;
     }
 
@@ -35,14 +38,14 @@ public class QuanLyDuAn {
         this.dsDuAn[this.dsDuAn.length - 1] = duAn;
     }
 
-    public void removeDuAn(String id){
-        for(int i=0; i<this.dsDuAn.length; i++){
-            if(this.dsDuAn[i].getIdDuAn().equals(id)){
-                this.dsDuAn[i].setIsDelete(true);
-                break;
-            }
-        }
-    }
+//    public void removeDuAn(String id){
+//        for(int i=0; i<this.dsDuAn.length; i++){
+//            if(this.dsDuAn[i].getIdDuAn().equals(id)){
+//                this.dsDuAn[i].setIsDelete(true);
+//                break;
+//            }
+//        }
+//    }
 
     public int getSoLuongDuAn(){
         int count = 0;
@@ -55,8 +58,10 @@ public class QuanLyDuAn {
     }
 
     public void printDsDuAn(){
-        for(int i=0; i<this.dsDuAn.length; i++){
-            System.out.println("Dự án thứ nhất " + (i+1) + ":" + this.dsDuAn[i].getNameDuAn());
+        for(int i=0; i<this.dsDuAn.length; i++) {
+            if (!this.dsDuAn[i].getIsDelete()) {
+                System.out.println("Dự án thứ " + (i + 1) + ": " + this.dsDuAn[i].getNameDuAn() + "ID: " + this.dsDuAn[i].getNameDuAn());
+            }
         }
     }
 

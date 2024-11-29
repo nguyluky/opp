@@ -40,20 +40,13 @@ public class QuanLyNhanSu {
     }
 
     public NhanSu[] getDsNhanSu() {
-        NhanSu newNhanSus[] = new NhanSu[0];
-        for (NhanSu nhanSu : this.dsNhanSu) {
-            if (!nhanSu.getIsDelete()) {
-                newNhanSus = Arrays.copyOf(newNhanSus, newNhanSus.length + 1);
-                newNhanSus[newNhanSus.length - 1] = nhanSu;
-            }
-        }
-        return newNhanSus;
+        return dsNhanSu;
     }
 
-    public NhanVien[] getDsNhanVien() {
+    public NhanVien[] getNhanViens() {
         NhanVien[] nhanViens = new NhanVien[0];
         for (NhanSu nhanSu : this.dsNhanSu) {
-            if (nhanSu instanceof NhanVien && !nhanSu.getIsDelete()) {
+            if (nhanSu instanceof NhanVien) {
                 nhanViens = Arrays.copyOf(nhanViens, nhanViens.length + 1);
                 nhanViens[nhanViens.length - 1] = (NhanVien) nhanSu;
             }
@@ -73,7 +66,7 @@ public class QuanLyNhanSu {
     public GiamDoc[] getGiamDocs() {
         GiamDoc[] giamDocs = new GiamDoc[0];
         for (NhanSu nhanSu : this.dsNhanSu) {
-            if (nhanSu instanceof GiamDoc && !nhanSu.getIsDelete()) {
+            if (nhanSu instanceof GiamDoc && !nhanSu.isDelete()) {
                 giamDocs = Arrays.copyOf(giamDocs, giamDocs.length + 1);
                 giamDocs[giamDocs.length - 1] = (GiamDoc) nhanSu;
             }
@@ -83,8 +76,8 @@ public class QuanLyNhanSu {
 
     public TruongPhong[] getTruongPhongs() {
         TruongPhong[] truongPhongs = new TruongPhong[0];
-        for (NhanSu nhanSu : this.dsNhanSu) {
-            if (nhanSu instanceof TruongPhong && !nhanSu.getIsDelete()) {
+        for (NhanSu nhanSu : this.dsNhanSu ) {
+            if (nhanSu instanceof TruongPhong && !nhanSu.isDelete()) {
                 truongPhongs = Arrays.copyOf(truongPhongs, truongPhongs.length + 1);
                 truongPhongs[truongPhongs.length - 1] = (TruongPhong) nhanSu;
             }
@@ -110,25 +103,41 @@ public class QuanLyNhanSu {
         }
     }
 
+    public NhanVien getNhanVienById(String id) {
+        for (NhanVien nhanVien : this.getNhanViens()) {
+            if (nhanVien.getId().equals(id)) {
+                return nhanVien;
+            }
+        }
+        return null;
+    }
 
-    public void pirntDsNhanSuDangLam(){
-        int i=1;
-        System.out.println("Danh sách nhân sự đang làm:");
-        for(NhanSu ns : this.getDsNhanSu()){
-            if(ns.getIsDelete()) {
-                System.out.println("Nhân sự thứ " + i + " :" + ns.getName() + ". Mã: " + ns.getId());
-                i++;
+    public void printDsNhanSuDangLam(){
+        int i = 1;
+        for(NhanSu nhanSu : this.dsNhanSu){
+            if(!nhanSu.getIsDelete()){
+                if(nhanSu instanceof NhanVien){
+                    System.out.println("Nhân sự thứ " + i + ": " + nhanSu.getName() + nhanSu.getId() + "Chức vụ: Nhân viên");
+                }
+                else{
+                    System.out.println("Nhân sự thứ " + i + ": " + nhanSu.getName() + nhanSu.getId() + "Chức vụ: Trưởng phòng");
+                }
             }
         }
     }
-    public void pirntDsNhanSuDaNghi(){
-        int i=1;
-        System.out.println("Danh sách nhân sự đã nghỉ:");
-        for(NhanSu ns : this.getDsNhanSu()){
-            if(!ns.getIsDelete()) {
-                System.out.println("Nhân sự thứ " + i + " :" + ns.getName() + ". Mã: " + ns.getId());
-                i++;
+
+    public void printDsNhanSuDaNghi(){
+        int i = 1;
+        for(NhanSu nhanSu : this.dsNhanSu){
+            if(nhanSu.getIsDelete()){
+                if(nhanSu instanceof NhanVien){
+                    System.out.println("Nhân sự thứ " + i + ": " + nhanSu.getName() + nhanSu.getId() + "Chức vụ: Nhân viên");
+                }
+                else{
+                    System.out.println("Nhân sự thứ " + i + ": " + nhanSu.getName() + nhanSu.getId() + "Chức vụ: Trưởng phòng");
+                }
             }
         }
+
     }
 }

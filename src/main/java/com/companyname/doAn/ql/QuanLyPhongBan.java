@@ -4,7 +4,7 @@ import java.util.Arrays;
 import com.companyname.doAn.type.PhongBan;
 
 public class QuanLyPhongBan {
-    private PhongBan dsPhongBan[];
+    private PhongBan[] dsPhongBan;
 
     private static QuanLyPhongBan instance = null;
 
@@ -26,15 +26,18 @@ public class QuanLyPhongBan {
     }
     //------------------------------------------------
     //------------SET---------------------------------
-    public void setDsPhongBan(PhongBan dsPhongBan[]){
+    public void setDsPhongBan(PhongBan[] dsPhongBan){
         this.dsPhongBan = dsPhongBan;
     }
     //------------------------------------------------
 
     public void printDsPhongBan(){
         for(int i=0; i<this.dsPhongBan.length; i++){
-            System.out.println("Phòng ban " + this.dsPhongBan[i].getNamePhongBan());
+            if(!this.dsPhongBan[i].getIsDelete()){
+                System.out.println("Phòng ban: " + this.dsPhongBan[i].getNamePhongBan() + ". ID: " + this.dsPhongBan[i].getIdPhongBan());
+            }
         }
+        System.out.println("-----------------------------------");
     }
 
     public void addPhongBan(PhongBan phongBan){
@@ -42,24 +45,24 @@ public class QuanLyPhongBan {
         this.dsPhongBan[this.dsPhongBan.length - 1] = phongBan;
     }
 
-    public void deletePhongBan(String id){
-        for(int i=0; i<this.dsPhongBan.length; i++){
-            if(this.dsPhongBan[i].getIdPhongBan().equals(id)){
-                this.dsPhongBan[i].setIsDelete(true);
-                break;
-            }
-        }
-    }
+//    public void deletePhongBan(String id){
+//        for(int i=0; i<this.dsPhongBan.length; i++){
+//            if(this.dsPhongBan[i].getIdPhongBan().equals(id)){
+//                this.dsPhongBan[i].setIsDelete(true);
+//                break;
+//            }
+//        }
+//    }
 
-    public int getSoLuongPhongBan(){
-        int count = 0;
-        for(PhongBan pb : this.dsPhongBan){
-            if(!pb.getIsDelete()){
-                count++;
-            }
-        }
-        return count;
-    }
+//    public int getSoLuongPhongBan(){
+//        int count = 0;
+//        for(PhongBan pb : this.dsPhongBan){
+//            if(!pb.getIsDelete()){
+//                count++;
+//            }
+//        }
+//        return count;
+//    }
 
     public PhongBan getPhongBanByID(String id){
         for(PhongBan pb : this.getDsPhongBan()){
@@ -70,13 +73,13 @@ public class QuanLyPhongBan {
         return null;
     }
 
-    public PhongBan getPhongBanByName(String name){
-        for(PhongBan pb : this.getDsPhongBan()){
-            if(pb.getNamePhongBan().equals(name)){
-                return pb;
-            }
-        }
-        return null;
-    }
+//    public PhongBan getPhongBanByName(String name){
+//        for(PhongBan pb : this.getDsPhongBan()){
+//            if(pb.getNamePhongBan().equals(name)){
+//                return pb;
+//            }
+//        }
+//        return null;
+//    }
 }
 

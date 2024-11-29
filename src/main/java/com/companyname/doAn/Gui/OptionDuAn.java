@@ -1,23 +1,17 @@
 package com.companyname.doAn.Gui;
 
 import java.util.Scanner;
-
-import com.companyname.doAn.ql.QuanLyDuAn;
-import com.companyname.doAn.ql.QuanLyNhanVien;
+import com.companyname.doAn.ql.QuanLyNhanSu;
 import com.companyname.doAn.type.DuAn;
-import com.companyname.doAn.type.NhanVien;
 
 public class OptionDuAn {
     public OptionDuAn(){}
     Scanner sc = StaticScanner.sc;
-    QuanLyDuAn qlda = QuanLyDuAn.getInstance();
-    QuanLyNhanVien qlnv = QuanLyNhanVien.getInstance();
+    QuanLyNhanSu qlns = QuanLyNhanSu.getInstance();
 
     public void themNhanVien(DuAn currentDuAn){ //thêm nhân viên vào dự án
-        System.out.printf("Nhập số lượng nhân viên muốn thêm vào dự án: ");
+        System.out.print("Nhập số lượng nhân viên muốn thêm vào dự án: ");
         int slNhanVien;
-
-        //nhập đến khi nào nhập số > 0
         while(true){
             try {
                 slNhanVien = Integer.parseInt(sc.nextLine());
@@ -38,8 +32,8 @@ public class OptionDuAn {
         for(int i=0; i<slNhanVien; i++){
             System.out.printf("Nhập ID nhân viên " + (i+1) + "muốn thêm vào dự án: ");
             String idNhanVien = sc.nextLine();
-            if(qlnv.getNhanVienById(idNhanVien) != null){
-                currentDuAn.addNhanVien(qlnv.getNhanVienById(idNhanVien));
+            if(qlns.getNhanVienById(idNhanVien) != null){
+                currentDuAn.addNhanVien(qlns.getNhanVienById(idNhanVien));
             }
             else{
                 //nếu ID không tồn tại, bỏ qua nhập ID tiếp theo
@@ -51,7 +45,7 @@ public class OptionDuAn {
     }
 
     public void xoaNhanVien(DuAn currentDuAn){ // xóa nhân viên khỏi dự án
-        System.out.printf("Nhập số lượng nhân viên muốn xóa khỏi dự án: ");
+        System.out.print("Nhập số lượng nhân viên muốn xóa khỏi dự án: ");
         int slNhanVien;
         //kiểm tra nhập đúng số >0 thì dừng
         while(true){
@@ -71,20 +65,20 @@ public class OptionDuAn {
         for(int i=0; i<slNhanVien; i++){
             System.out.printf("Nhập ID nhân viên thứ: " + (i+1) + " muốn xóa khỏi dự án: ");
             String idNhanVien = sc.nextLine();
-            if(currentDuAn.getNhanVienByID(idNhanVien) != null){ // nếu ID nhân viên tồn tại trong công ty
-                currentDuAn.removeNhanVien(idNhanVien);
+            //nếu ID không tồn tại, bỏ qua
+            if(currentDuAn.getNhanVienByID(idNhanVien) == null || currentDuAn.getNhanVienByID(idNhanVien).getIsDelete()){
+                System.out.println("ID nhân viên không tồn tại trong dự án");
             }
             else{
-                //nếu ID không tồn tại, bỏ qua 
-                System.out.println("ID nhân viên không tồn tại trong dự án");
+                currentDuAn.removeNhanVien(idNhanVien);
             }
         }
     }
 
     public void doiTenDuAn(DuAn currentDuAn){
-        System.out.printf("Nhập tên mới cho dự án: ");
+        System.out.print("Nhập tên mới cho dự án: ");
         String newName = sc.nextLine();
         currentDuAn.setNameDuAn(newName);
-        System.out.printf("Thêm thành công");
+        System.out.print("Thêm thành công");
     }
 }

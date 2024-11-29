@@ -121,6 +121,7 @@ public abstract class NhanSu  {
     public abstract int getSoNgayNghiToiDa();
     public abstract int getTienKyLuat();
     public abstract int getTienKhenThuong();
+    public abstract void printThongTinCoBan();
 
 //    ---------------------------------
     public String toString() {
@@ -142,28 +143,5 @@ public abstract class NhanSu  {
             System.out.println("Lần " + i + ": " + kt.getLyDo() + ". Nội dung: " + kt.getTienThuong());
         }
     }
-//    public static double convertHeSoThiDua(String heSoThiDua) {
-//        if (heSoThiDua.equals("A")) {
-//            return 1.0;
-//        } else if (heSoThiDua.equals("B")) {
-//            return 0.75;
-//        } else if (heSoThiDua.equals("C")) {
-//            return 0.5;
-//        } else if (heSoThiDua.equals("D")) {
-//            return 0.25;
-//        } else if (heSoThiDua.equals("E")) {
-//            return -0.5;
-//        }
-//        return 0;
-//    }
-//
-//    public double getPhuCapThamNien() {
-//        return this.kinhNghiem * luongCoBan() / 100;
-//    }
-//
-//    public double bonusMoneyHeSoThiDua() {
-//        return this.luongCoBan() * this.getHeSoPhucLoi() + NhanSu.convertHeSoThiDua(this.getHeSoThiDua());
-//    }
-
 
 }

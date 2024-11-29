@@ -1,5 +1,7 @@
 package com.companyname.doAn.type;
 
+import com.companyname.doAn.ql.QuanLyNhanSu;
+
 import java.util.Arrays;
 
 
@@ -10,12 +12,20 @@ public class PhongBan {
     private DuAn dsDuAn[];
     private boolean isDelete;
 
-    public PhongBan(String name, String id, NhanVien dsNhanVien[], DuAn dsDuAn[], boolean isDelete){
+    public PhongBan(String name, String id, NhanVien dsNhanVien[], DuAn dsDuAn[]){
         this.namePhongBan = name;
         this.idPhongBan = id;
         this.dsNhanVien = dsNhanVien;
         this.dsDuAn = dsDuAn;
-        this.isDelete = isDelete;
+        this.isDelete = false;
+    }
+
+    public PhongBan(String name, String id){
+        this.namePhongBan = name;
+        this.idPhongBan = id;
+        this.dsNhanVien = new NhanVien[0];
+        this.dsDuAn = new DuAn[0];
+        this.isDelete = false;
     }
 
     //----------GET--------------
@@ -70,10 +80,15 @@ public class PhongBan {
     }
 
     public void printDsNhanVienPhongBan(){
-        for(int i=0; i<this.dsNhanVien.length; i++){
-            System.out.println("Nhân viên thứ " + i + " :");
-            System.out.println(this.dsNhanVien[i].getName() + ";" + this.dsNhanVien[i].getId());
-        }        
+        int i=0;
+        for(NhanVien nv : this.dsNhanVien){
+            if(!nv.getIsDelete()){
+                System.out.println("Nhân viên thứ " + i+1 + " :");
+                System.out.println(nv.getName() + ". ID: " + nv.getId());
+                i++;
+            }
+        }
+        if(i==0) System.out.println("Khong co nhan vien");
     }
 
     public void addNhanVien(NhanVien nv){
@@ -119,5 +134,40 @@ public class PhongBan {
             }
         }
         return null;
+    }
+
+    public DuAn getDuAnById(String id){
+        for(DuAn da : this.getDsDuAn()){
+            if(da.getIdDuAn().equals(id)){
+                return da;
+            }
+        }
+        return null;
+    }
+
+    public void printDsNhanSu(){
+        TruongPhong tmpTruongPhong = null;
+        QuanLyNhanSu qlns = new QuanLyNhanSu();
+        for(NhanSu ns : qlns.getDsNhanSu()){
+            if(ns instanceof TruongPhong){
+                if(((TruongPhong) ns).getPhongBan().getIdPhongBan().equals(this.idPhongBan)){
+                    tmpTruongPhong = (TruongPhong) ns;
+                }
+            }
+        }
+        if(tmpTruongPhong != null && !tmpTruongPhong.getIsDelete()){
+            System.out.println("Truong phong: " + tmpTruongPhong.getName() + ". ID: " + tmpTruongPhong.getId());
+        }
+        else  System.out.println("Truong phong: chua co");
+        int i=0;
+        for(NhanVien nv : this.getDsNhanVien()){
+            if(!nv.getIsDelete()){
+                System.out.println("Nhân viên thứ " + i+1 + " :");
+                System.out.println(nv.getName() + ". ID: " + nv.getId());
+                i++;
+            }
+        }
+        if(i==0) System.out.println("Khong co nhan vien");
+        System.out.println("---------------------------------------------");
     }
 }

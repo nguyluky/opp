@@ -5,16 +5,16 @@ import java.util.Arrays;
 public class DuAn {
     private String nameDuAn;
     private String idDuAn;
-    private NhanVien dsNhanVien[];
-    private boolean isDelete = false;
+    private NhanVien[] dsNhanVien;
+    private boolean isDelete;
 
-    public DuAn(){};
+    public DuAn(){}
 
-    public DuAn(String nameDuAn, String idDuAn, boolean isDelete){
+    public DuAn(String nameDuAn, String idDuAn){
         this.nameDuAn = nameDuAn;
         this.idDuAn = idDuAn;
         this.dsNhanVien = new NhanVien[0];
-        this.isDelete = isDelete;
+        this.isDelete = false;
     }
     
     //--------------GET-------------------------------------
@@ -44,7 +44,7 @@ public class DuAn {
         this.idDuAn = idDuAn;
     }
 
-    public void setDsNhanVien (NhanVien array[]){
+    public void setDsNhanVien (NhanVien[] array){
         this.dsNhanVien = array;
     }
 
@@ -63,10 +63,10 @@ public class DuAn {
     }
 
     public void removeNhanVien(String id){
-        NhanVien newNv[] = new NhanVien[this.dsNhanVien.length - 1];
+        NhanVien[] newNv = new NhanVien[this.dsNhanVien.length - 1];
         int k=0;
         for(NhanVien nv : this.dsNhanVien){
-            if(nv.getId() != id){
+            if(!nv.getId().equals(id)){
                 newNv[k] = nv;
                 k++;
             }

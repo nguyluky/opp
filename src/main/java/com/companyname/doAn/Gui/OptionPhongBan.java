@@ -1,17 +1,19 @@
 package com.companyname.doAn.Gui;
-import java.util.Arrays;
-import java.util.Scanner;
 
+import java.util.Scanner;
 import com.companyname.doAn.ql.QuanLyDuAn;
-import com.companyname.doAn.ql.QuanLyNhanVien;
+import com.companyname.doAn.ql.QuanLyNhanSu;
 import com.companyname.doAn.ql.QuanLyPhongBan;
-import com.companyname.doAn.type.DuAn;
-import com.companyname.doAn.type.PhongBan;
-import com.companyname.doAn.type.NhanVien;
+import com.companyname.doAn.type.*;
 
 public class OptionPhongBan implements ShowOption{
-    public OptionPhongBan(){}
+    QuanLyPhongBan qlpb = QuanLyPhongBan.getInstance();
+    QuanLyNhanSu qlns = QuanLyNhanSu.getInstance();
+    OptionQuanLyDuAn optionQuanLyDuAn = new OptionQuanLyDuAn();
     Scanner sc = StaticScanner.sc;
+
+    public OptionPhongBan(){}
+
 
     public void themDuAn(PhongBan currentPhongBan){
         System.out.println("Nhập số dự án muốn thêm");
@@ -30,7 +32,7 @@ public class OptionPhongBan implements ShowOption{
             }
         }
 
-        DuAn dsDuAn[] = new DuAn[slDa];
+        DuAn[] dsDuAn = new DuAn[slDa];
 
         for(int i=0; i<slDa; i++){
             System.out.printf("Nhập tên dự án thứ " + (i+1) + ": ");
@@ -50,13 +52,12 @@ public class OptionPhongBan implements ShowOption{
                 return;
             }
 
-            NhanVien dsNhanVien[] = new NhanVien[slNhanVien];
-            QuanLyNhanVien qlnv = QuanLyNhanVien.getInstance();
+            NhanVien[] dsNhanVien = new NhanVien[slNhanVien];
 
             for(int j=0; j<slNhanVien; j++){
-                System.out.printf("%d","Nhập id nhân viên thứ " + (j + 1) + " muốn thêm vào dự án:");
+                System.out.print("Nhập ID nhân viên thứ " + (j + 1) + " muốn thêm vào dự án:");
                 String idNhanVien = sc.nextLine();
-                NhanVien nv = qlnv.getNhanVienById(idNhanVien);
+                NhanVien nv = qlns.getNhanVienById(idNhanVien);
                 if(nv != null){
                     dsNhanVien[j] = nv;
                     System.out.println("Thêm thành công");
@@ -66,7 +67,7 @@ public class OptionPhongBan implements ShowOption{
                     j--;
                 }
             }
-            dsDuAn[i] = new DuAn(nameDuAn, idDuAn, false);
+            dsDuAn[i] = new DuAn(nameDuAn, idDuAn);
             dsDuAn[i].setDsNhanVien(dsNhanVien);
             
             QuanLyDuAn qlda = QuanLyDuAn.getInstance();
@@ -78,7 +79,7 @@ public class OptionPhongBan implements ShowOption{
 
     public void xoaDuAn(PhongBan currentPhongBan){
         Scanner sc = new Scanner(System.in);
-        System.out.printf("Nhập số lượng dự án muốn xóa khỏi phòng ban này: ");
+        System.out.print("Nhập số lượng dự án muốn xóa khỏi phòng ban này: ");
         int slDuAn;
         try {
             slDuAn = Integer.parseInt(sc.nextLine());
@@ -93,25 +94,18 @@ public class OptionPhongBan implements ShowOption{
         for(int i=0; i<slDuAn; i++){
             System.out.println("Nhập id dự án thứ " + (i+1) + " muốn xóa khỏi phòng ban này");
             String idDuAn = sc.nextLine();
-            boolean checkDeleteStatus;
-            for(DuAn duan : currentPhongBan.getDsDuAn()){
-                checkDeleteStatus = false;
-                if(duan.getIdDuAn().equals(idDuAn)){
-                    duan.setIsDelete(true);
-                    System.out.println("Xóa thành công!");
-                    checkDeleteStatus = true;
-                    break;
-                }
-                if(!checkDeleteStatus){
-                    System.out.println("Id dự án không tồn tại!");
-                }   
+            if(currentPhongBan.getDuAnById(idDuAn) == null || currentPhongBan.getDuAnById(idDuAn).getIsDelete()) {
+                System.out.print("Du an khong ton tai");
+            }
+            else{
+                currentPhongBan.removeDuAn(idDuAn);
             }
         }
     }
 
     public void themNhanVien(PhongBan currentPhongBan){
         Scanner sc = new Scanner(System.in);
-        System.out.printf("Nhập số lượng nhân viên muốn thêm vào phòng ban này: ");
+        System.out.print("Nhập số lượng nhân viên muốn thêm vào phòng ban này: ");
         int slNhanVien; 
         try {
            slNhanVien = Integer.parseInt(sc.nextLine());
@@ -124,11 +118,9 @@ public class OptionPhongBan implements ShowOption{
         }
 
         for(int i=0; i<slNhanVien; i++){
+            System.out.print("Nhap ID nhan vien: ");
             String idNhanVien = sc.nextLine();
-            QuanLyPhongBan qlpb = QuanLyPhongBan.getInstance();
-            QuanLyNhanVien qlnv = QuanLyNhanVien.getInstance();
-
-            if(qlnv.getNhanVienById(idNhanVien) == null){
+            if(qlns.getNhanVienById(idNhanVien) == null){
                 System.out.println("Id nhân viên không tồn tại. Quay lại menu trước");
                 return;
             }
@@ -145,64 +137,101 @@ public class OptionPhongBan implements ShowOption{
                 if(checkTonTaiOPhongBanKhac){
                     phongbanTmp = pb;
                     break;
-                };
+                }
             }
             if(checkTonTaiOPhongBanKhac){
                 System.out.println("Nhân viên có id " + idNhanVien + " đang tồn tại ở phòng ban khác");
-                System.out.println("Chọn lựa chọn:");
                 System.out.println("1: Tiếp tục đổi nhân viên từ phòng ban cũ sang phòng ban này");
-                System.out.println("2: Hủy. Quay lại menu trước");
-                int choiceNext = Integer.parseInt(sc.nextLine());
+                System.out.println("2: Hủy");
+                System.out.print("Chọn lựa chọn: ");
+                int choiceNext;
+                while(true){
+                    try {
+                        choiceNext = Integer.parseInt(sc.nextLine());
+                        if(choiceNext > 2 || choiceNext < 1){
+                            System.out.println("Can chon lua chon hop ly");
+                        }
+                        else break;
+                    } catch (NumberFormatException e) {
+                        System.out.println("Can chon lua chon hop ly");
+                    }
+                }
                 switch (choiceNext) {
                     case 1:
                         phongbanTmp.removeNhanVien(idNhanVien);
                         break;
                     case 2:
-                        System.out.println("Quay lại menu trước");
-                        return;
-                    default:
-                        System.out.println("Nhập sai lựa chọn. Quay lại menu trước");
                         return;
                 }
             }
-            currentPhongBan.addNhanVien(qlnv.getNhanVienById(idNhanVien));
+            currentPhongBan.addNhanVien(qlns.getNhanVienById(idNhanVien));
         }
     }
 
     public void xoaNhanVien(PhongBan currentPhongBan){
-        Scanner sc = new Scanner(System.in);
-        System.out.printf("Nhập số lượng nhân viên muốn xóa khỏi phòng ban này: ");
+        System.out.print("Nhập số lượng nhân viên muốn xóa khỏi phòng ban này: ");
         int slNhanVien; 
         try {
            slNhanVien = Integer.parseInt(sc.nextLine());
         } catch (NumberFormatException e) {
-            System.out.println("Lỗi! Cần nhập số. Quay lại menu trước");
+            System.out.println("Can nhap so nguyen duong");
             return;
         }
         if(slNhanVien<0){
-            System.out.println("Nhập lỗi. Quay lại menu trước");
+            System.out.println("Can nhap so nguyen duong");
         }
-       
+
+
         for(int i=0; i<slNhanVien; i++){
             String idNhanVien = sc.nextLine();
              //kiểm tra id nhân viên có tồn tại trong công ty hay không
-            QuanLyNhanVien qlnv = QuanLyNhanVien.getInstance();
-            if(qlnv.getNhanVienById(idNhanVien) != null){
+            if(qlns.getNhanVienById(idNhanVien) == null || qlns.getNhanVienById(idNhanVien).getIsDelete()){
+                System.out.println("Id nhân viên không tồn tại. Bo qua");
+            }
+            else{
                 if(currentPhongBan.getNhanVienById(idNhanVien) != null){
                     currentPhongBan.removeNhanVien(idNhanVien);
                 }
                 else System.out.println("ID nhân viên không tồn tại trong phòng ban này");
-            }
-            else{
-                System.out.println("Id nhân viên không tồn tại. Quay lại menu trước");
-                return;
             }
         }
     }
 
     @Override
     public void show(){
-        OptionQuanLyDuAn optionQuanLyDuAn = new OptionQuanLyDuAn();
         optionQuanLyDuAn.show();
+    }
+
+    public void thayDoiTruongPhong(PhongBan currentPhongBan){
+        TruongPhong oldTruongPhong = null;
+        for(NhanSu ns : qlns.getDsNhanSu()){
+            if(ns instanceof TruongPhong){
+                if(((TruongPhong) ns).getPhongBan().getIdPhongBan().equals(currentPhongBan.getIdPhongBan())){
+                    oldTruongPhong = (TruongPhong) ns;
+                }
+            }
+        }
+        if(oldTruongPhong != null){
+            currentPhongBan.printDsNhanVienPhongBan();
+
+            System.out.print("Nhap ID nhan vien thay the: ");
+            String id = sc.nextLine();
+            if(currentPhongBan.getNhanVienById(id) != null && !currentPhongBan.getNhanVienById(id).getIsDelete()){
+                NhanVien tmpNhanVien = currentPhongBan.getNhanVienById(id);
+                //xoa nhan vien va truong phong ra khoi qlns để dễ hiểu
+                qlns.removeNhanSu(oldTruongPhong.getId());
+                qlns.removeNhanSu(tmpNhanVien.getId());
+                currentPhongBan.removeNhanVien(tmpNhanVien.getId());
+
+                //chuyen truong phong thanh nhan vien
+                NhanVien newNv = new NhanVien(oldTruongPhong.getId(), oldTruongPhong.getName(), oldTruongPhong.getPhone(), oldTruongPhong.getDiaChi(), oldTruongPhong.getNamVaoLam(), oldTruongPhong.getKinhNghiem());
+                qlns.addNhanSu(newNv);
+                currentPhongBan.addNhanVien(newNv);
+
+                //chuyen nhan vien thanh truong phong
+                TruongPhong newTp = new TruongPhong(tmpNhanVien.getId(), tmpNhanVien.getName(), tmpNhanVien.getPhone(), tmpNhanVien.getDiaChi(), tmpNhanVien.getNamVaoLam(), tmpNhanVien.getKinhNghiem(), currentPhongBan);
+                qlns.addNhanSu(newTp);
+            }
+        }
     }
 }
