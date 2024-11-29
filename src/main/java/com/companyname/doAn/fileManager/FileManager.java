@@ -9,10 +9,11 @@ import com.companyname.doAn.type.PhongBan;
 public class FileManager {
     private static FileManager instance = null;
 
-    QuanLyNhanSu qlns;
     NhanVienReaderWriter nhanVienReader;
     GiamDocReaderWriter giamDocReader;
     TruongPhongReaderWriter truongPhongReader;
+
+    PhongBanReaderWriter phongBanReader;
 
     // TODO: Implement FileManager
     private static final String FOLDER_PATH = "./save/";
@@ -22,13 +23,16 @@ public class FileManager {
     }
 
     public FileManager() {
-        qlns = QuanLyNhanSu.getInstance();
         nhanVienReader = new NhanVienReaderWriter(FOLDER_PATH);
         giamDocReader = new GiamDocReaderWriter(FOLDER_PATH);
         truongPhongReader = new TruongPhongReaderWriter(FOLDER_PATH);
+        phongBanReader = new PhongBanReaderWriter(FOLDER_PATH);
+
     }
 
     public void loadQuanLyNhanSu() {
+        QuanLyNhanSu qlns = QuanLyNhanSu.getInstance();
+
         try {
             qlns.setNhanViens(nhanVienReader.read());
             qlns.setGiamDocs(giamDocReader.read());
@@ -41,7 +45,7 @@ public class FileManager {
     }
 
     public void loadQuanLyDuAn() {
-        QuanLyDuAn qla = new QuanLyDuAn();
+        QuanLyDuAn qla = QuanLyDuAn.getInstance();
 
         DuAnReaderWriter duAnReader = new DuAnReaderWriter(FOLDER_PATH);
 
@@ -57,8 +61,7 @@ public class FileManager {
     }
     
     public void loadQuanLyPhongBan() {
-        PhongBanReaderWriter phongBanReader = new PhongBanReaderWriter(FOLDER_PATH);
-        QuanLyPhongBan qlpb = new QuanLyPhongBan();
+        QuanLyPhongBan qlpb = QuanLyPhongBan.getInstance();
         try {
             PhongBan[] dPhongBans = phongBanReader.read();
             qlpb.setDsPhongBan(dPhongBans);
