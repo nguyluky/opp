@@ -66,7 +66,7 @@ public class QuanLyNhanSu {
     public GiamDoc[] getGiamDocs() {
         GiamDoc[] giamDocs = new GiamDoc[0];
         for (NhanSu nhanSu : this.dsNhanSu) {
-            if (nhanSu instanceof GiamDoc && !nhanSu.isDelete()) {
+            if (nhanSu instanceof GiamDoc && !nhanSu.getIsDelete()) {
                 giamDocs = Arrays.copyOf(giamDocs, giamDocs.length + 1);
                 giamDocs[giamDocs.length - 1] = (GiamDoc) nhanSu;
             }
@@ -77,7 +77,7 @@ public class QuanLyNhanSu {
     public TruongPhong[] getTruongPhongs() {
         TruongPhong[] truongPhongs = new TruongPhong[0];
         for (NhanSu nhanSu : this.dsNhanSu ) {
-            if (nhanSu instanceof TruongPhong && !nhanSu.isDelete()) {
+            if (nhanSu instanceof TruongPhong && !nhanSu.getIsDelete()) {
                 truongPhongs = Arrays.copyOf(truongPhongs, truongPhongs.length + 1);
                 truongPhongs[truongPhongs.length - 1] = (TruongPhong) nhanSu;
             }
@@ -124,6 +124,7 @@ public class QuanLyNhanSu {
                 }
             }
         }
+        System.out.println("------------------------------------------------");
     }
 
     public void printDsNhanSuDaNghi(){

@@ -7,9 +7,14 @@ import com.companyname.doAn.type.NhanVien;
 import java.util.Scanner;
 
 public class OptionQuanLyNhanSu implements ShowOption{
-    public OptionQuanLyNhanSu() {}
     Scanner sc = StaticScanner.sc;
+    OptionMenu optionMenu = new OptionMenu();
     QuanLyNhanSu qlns = QuanLyNhanSu.getInstance();
+    OptionNhanSu optionNhanSu = new OptionNhanSu();
+
+    public OptionQuanLyNhanSu() {}
+
+
 
     public void themNhanSu(){
         System.out.println("Nhập số lượng nhân sự muốn thêm:");
@@ -79,6 +84,7 @@ public class OptionQuanLyNhanSu implements ShowOption{
 
     @Override
     public void show(){
+        qlns.printDsNhanSuDangLam();
         System.out.print("Nhập ID nhân sự: ");
         String idNhanSu = sc.nextLine();
         if(qlns.getNhanSuById(idNhanSu) == null && !qlns.getNhanSuById(idNhanSu).getIsDelete()){
@@ -90,31 +96,45 @@ public class OptionQuanLyNhanSu implements ShowOption{
         System.out.println("1: Xem thông tin cơ bản");
         System.out.println("2: Xem tình trạng kỷ luật");
         System.out.println("3: Xem tình trạng khen thưởng");
+        System.out.println("4: Khen thuong");
+        System.out.println("4: Ky luat");
         System.out.println("0: Quay lại menu trước");
         int choiceNhanSu;
         while(true) {
             try {
                 choiceNhanSu = Integer.parseInt(sc.nextLine());
                 if (choiceNhanSu < 0) {
-                    System.out.println("Vui lòng nhập số dương");
+                    System.out.println("Can nhap so nguyen duong");
                 } else {
                     break;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Vui lòng nhập số");
+                System.out.println("Can nhap so nguyen duong");
             }
         }
         switch (choiceNhanSu){
             case 1:
                 currentNhanSu.printThongTinCoBan();
+                optionMenu.chucNangQuanLyNhanSu();
                 break;
             case 2:
-                currentNhanSu.printTinhTrangKyLuat();
+                optionNhanSu.printTinhTrangKyLuat(currentNhanSu);
+                optionMenu.chucNangQuanLyNhanSu();
                 break;
             case 3:
-                currentNhanSu.printTinhTrangKhenThuong();
+                optionNhanSu.printTinhTrangKhenThuong(currentNhanSu);
+                optionMenu.chucNangQuanLyNhanSu();
+                break;
+            case 4:
+                optionNhanSu.khenThuong(currentNhanSu);
+                optionMenu.chucNangQuanLyNhanSu();
+                break;
+            case 5:
+                optionNhanSu.kyLuat(currentNhanSu);
+                optionMenu.chucNangQuanLyNhanSu();
                 break;
             case 0:
+                optionMenu.chucNangQuanLyNhanSu();
                 break;
         }
     }

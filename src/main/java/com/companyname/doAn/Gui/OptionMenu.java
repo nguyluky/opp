@@ -137,7 +137,7 @@ public class OptionMenu implements ShowOption{
         System.out.println("2: Xem danh sách nhân sự đã nghỉ");
         System.out.println("3: Thêm nhân sự");
         System.out.println("4: Xóa nhân sự");
-        System.out.println("5: Xem thông tin nhân sự bằng ID");
+        System.out.println("5: Chuc nang doi voi nhan su cu the");
         System.out.println("0: Quay lại menu trước");
         int choice;
         while(true){

@@ -1,9 +1,5 @@
 package com.companyname.doAn.type;
 
-
-import com.companyname.doAn.ql.QuanLyDuAn;
-import com.companyname.doAn.ql.QuanLyPhongBan;
-
 public abstract class NhanSu  {
     private String id;
     private String name;
@@ -126,22 +122,6 @@ public abstract class NhanSu  {
 //    ---------------------------------
     public String toString() {
         return "NhanVien[" + "id=" + id + ", name=" + name + ", phone=" + phone + ", daiChi=" + diaChi + ", namVaoLam=" + namVaoLam + "]";
-    }
-
-    public void printTinhTrangKyLuat(){
-        System.out.println("Số lần kỷ luật: " + this.dsKyLuat.length);
-        int i=1;
-        for(KyLuat kl : this.dsKyLuat){
-            System.out.println("Lần " + i + ": " + kl.getLyDo() + ". Nội dung: " + kl.getTienPhat());
-        }
-    }
-
-    public void printTinhTrangKhenThuong(){
-        System.out.println("Số lần khen thưởng: " + this.dsKhenThuong.length);
-        int i=1;
-        for(KhenThuong kt : this.dsKhenThuong){
-            System.out.println("Lần " + i + ": " + kt.getLyDo() + ". Nội dung: " + kt.getTienThuong());
-        }
     }
 
 }

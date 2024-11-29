@@ -107,10 +107,15 @@ public class PhongBan {
     }
 
     public void printDsDuAn(){
-        for(int i=0; i<this.dsDuAn.length; i++){
-            System.out.println("Dự án thứ " + i + " :");
-            System.out.println(this.dsDuAn[i].getNameDuAn() + ";" + this.dsDuAn[i].getIdDuAn());
+        int i=0;
+        for(DuAn da : this.dsDuAn) {
+            if (!da.getIsDelete()) {
+                System.out.println("Dự án thứ " + i+1 + " :");
+                System.out.println(da.getNameDuAn() + ". ID: " + da.getIdDuAn());
+                i++;
+            }
         }
+        if(i==0) System.out.println("Khong co du an");
     }
 
     public void addDuAn(DuAn da){
