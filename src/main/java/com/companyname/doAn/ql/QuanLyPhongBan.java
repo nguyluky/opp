@@ -34,24 +34,26 @@ public class QuanLyPhongBan {
         System.out.println("-----------------------------------");
         boolean check = false;
         int i=1;
+        System.out.println("Danh sách phòng ban đã dừng hoạt động:");
+        boolean checkOff = false;
         for(PhongBan pb : this.dsPhongBan) {
-            if (!pb.getIsDelete()) {
-                check = true;
+            if(pb.getIsDelete()) {
+                System.out.println("Phòng ban thứ " + i + ": " + pb.getNamePhongBan() + ". ID: " + pb.getIdPhongBan());
+                checkOff = true;
+                i++;
             }
         }
-        if(!check){
-            System.out.println("Danh sách phòng ban: Không có");
-        }
-        else{
-            System.out.println("Danh sách phòng ban:");
-            for(PhongBan pb : this.dsPhongBan) {
-                if(!pb.getIsDelete()) {
-                    System.out.println("Phòng ban thứ " + i + ": " + pb.getNamePhongBan());
-                    i++;
-                }
+        if(!checkOff)  System.out.println("Không có");
+        System.out.println("Danh sách phòng ban đang hoạt động:");
+        boolean checkOff2 = false;
+        for(PhongBan pb : this.dsPhongBan) {
+            if(!pb.getIsDelete()) {
+                System.out.println("Phòng ban thứ " + i + ": " + pb.getNamePhongBan() + ". ID: " + pb.getIdPhongBan());
+                checkOff2 = true;
+                i++;
             }
         }
-
+        if(!checkOff2)  System.out.println("Không có");
     }
 
     public void addPhongBan(PhongBan phongBan){
@@ -87,13 +89,13 @@ public class QuanLyPhongBan {
         return null;
     }
 
-//    public PhongBan getPhongBanByName(String name){
-//        for(PhongBan pb : this.getDsPhongBan()){
-//            if(pb.getNamePhongBan().equals(name)){
-//                return pb;
-//            }
-//        }
-//        return null;
-//    }
+    public PhongBan getPhongBanByName(String name){
+        for(PhongBan pb : this.getDsPhongBan()){
+            if(pb.getNamePhongBan().equals(name.trim())){
+                return pb;
+            }
+        }
+        return null;
+    }
 }
 

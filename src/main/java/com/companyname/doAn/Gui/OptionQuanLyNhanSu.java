@@ -26,6 +26,7 @@ public class OptionQuanLyNhanSu implements ShowOption{
             }
         }
         for(int i=0; i<slNhanVien;i++){
+            System.out.println("---------------------------------------");
             System.out.println("Nhân viên thứ " + (i+1) + ":");
             System.out.print("Nhập ID: ");
             String id = sc.nextLine();
@@ -78,7 +79,6 @@ public class OptionQuanLyNhanSu implements ShowOption{
     @Override
     public void show(){
         System.out.println("---------------------------------------");
-        qlns.printDsNhanSuDangLam();
         System.out.print("Nhập ID nhân sự: ");
         String idNhanSu = sc.nextLine();
         if(qlns.getNhanSuById(idNhanSu) == null || qlns.getNhanSuById(idNhanSu).getIsDelete()){
