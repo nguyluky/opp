@@ -19,7 +19,7 @@ public class DuAnReaderWriter implements BaseReader<DuAn>, BaseWriter<DuAn> {
     File file;
     Scanner sc;
 
-    DuAnReaderWriter(String folder) {
+    public DuAnReaderWriter(String folder) {
         this.filePath = folder + FILE_NAME;
         file = new File(this.filePath);
         if (!file.exists()) {
@@ -71,15 +71,21 @@ public class DuAnReaderWriter implements BaseReader<DuAn>, BaseWriter<DuAn> {
 
         for (DuAn duAn : data) {
             NhanSu[] nhanViens = duAn.getDsNhanSu();
-            String []listIdNhanVien = new String[nhanViens.length];
+
+
+            String []listIdNhanVien = new String[0];
 
             for (int i = 0; i < nhanViens.length; i++) {
+                if (nhanViens[i] == null) {
+                    continue;
+                }
+                listIdNhanVien = Arrays.copyOf(listIdNhanVien, listIdNhanVien.length + 1);
                 listIdNhanVien[i] = nhanViens[i].getId();
             }
 
             String[] dataSave = {
-                duAn.getIdDuAn(),
                 duAn.getNameDuAn(),
+                duAn.getIdDuAn(),
                 duAn.getIsDelete() + "",
                 String.join(",", listIdNhanVien)
             };

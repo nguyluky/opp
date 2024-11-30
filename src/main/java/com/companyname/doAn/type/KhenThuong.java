@@ -23,4 +23,9 @@ public class KhenThuong {
     public void setTienThuong(int tienThuong){
         this.tienThuong = tienThuong;
     }
+
+    // Không đồng vào nha
+    public String toString(){
+        return this.lyDo + "-" + this.tienThuong;
+    }
 }

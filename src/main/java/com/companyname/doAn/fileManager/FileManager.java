@@ -1,6 +1,7 @@
 package com.companyname.doAn.fileManager;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import com.companyname.doAn.ql.QuanLyDuAn;
 import com.companyname.doAn.ql.QuanLyNhanSu;
@@ -24,7 +25,7 @@ public class FileManager {
         return instance;
     }
 
-    private FileManager() {
+    public FileManager() {
         
     }
 
@@ -65,5 +66,17 @@ public class FileManager {
         this.loadDuAn();
         this.loadPhongBan();
 
+    }
+
+    public void write() throws FileNotFoundException, IOException {
+
+        QuanLyNhanSu quanLyNhanSu = QuanLyNhanSu.getInstance();
+        QuanLyDuAn quanLyDuAn = QuanLyDuAn.getInstance();
+        QuanLyPhongBan quanLyPhongBan = QuanLyPhongBan.getInstance();
+
+        nhanVienReaderWriter.save(quanLyNhanSu.getNhanViens());
+        truongPhongReaderWriter.save(quanLyNhanSu.getTruongPhongs());
+        duAnReaderWriter.save(quanLyDuAn.getDsDuAn());
+        phongBanReaderWriter.save(quanLyPhongBan.getDsPhongBan());
     }
 }

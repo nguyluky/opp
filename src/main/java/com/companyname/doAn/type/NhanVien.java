@@ -28,17 +28,14 @@ public class NhanVien extends NhanSu {
         int kinhNghiem,
         int luongCoBan,
         KyLuat[] dsKyLuat,
+        KhenThuong[] dsKhenThuong,
         boolean isDelete
     )
     {
         super(id, name, phone, diaChi, namVaoLam, soNgayNghi, kinhNghiem, isDelete);
         this.luongCoBan = luongCoBan;
         this.setDsKyLuat(dsKyLuat);
-    }
-
-
-    public String toString(){
-        return super.getName() + ";" + super.getId() + ";" + super.getPhone();
+        this.setDsKhenThuong(dsKhenThuong);
     }
 
     @Override
