@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import com.companyname.doAn.type.KyLuat;
 import com.companyname.doAn.type.NhanVien;
 
 public class NhanVienReaderWriter implements BaseReader<NhanVien>, BaseWriter<NhanVien> {
@@ -33,6 +34,30 @@ public class NhanVienReaderWriter implements BaseReader<NhanVien>, BaseWriter<Nh
         }
     }
 
+    String klToString(KyLuat[] kl) {
+
+        String[] klStr = new String[kl.length];
+
+        int i = 0;
+        for (KyLuat k: kl) {
+            klStr[i] = k.toString();
+            i++;
+        }
+        return String.join("|", klStr);
+    }
+
+    KyLuat[] StringToKls(String klStr) {
+        String[] klStrs = klStr.split("\\|");
+        KyLuat[] kls = new KyLuat[klStrs.length];
+
+        for (int i = 0; i < klStrs.length; i++) {
+            String[] kl = klStrs[i].split("-");
+            kls[i] = new KyLuat(kl[0], Integer.parseInt(kl[1]));
+        }
+
+        return kls;
+    }
+
     public NhanVien[] read() throws FileNotFoundException {
         sc = new Scanner(file);
 
@@ -53,7 +78,8 @@ public class NhanVienReaderWriter implements BaseReader<NhanVien>, BaseWriter<Nh
                     Integer.parseInt(arr[5]),
                     Integer.parseInt(arr[6]),
                     Integer.parseInt(arr[7]),
-                    Boolean.parseBoolean(arr[8]));
+                    StringToKls(arr[8]),
+                    Boolean.parseBoolean(arr[9]));
 
             nhanVienS[nhanVienS.length - 1] = newNhanVien;
         }
@@ -74,6 +100,7 @@ public class NhanVienReaderWriter implements BaseReader<NhanVien>, BaseWriter<Nh
                 nv.getSoNgayNghi() + "",
                 nv.getKinhNghiem() + "",
                 nv.getLuongCoBan() + "",
+                klToString(nv.getDsKyLuat()),
                 nv.getIsDelete() + ""
             };
 

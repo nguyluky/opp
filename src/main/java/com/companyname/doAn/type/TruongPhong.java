@@ -24,11 +24,10 @@ public class TruongPhong extends NhanSu {
         int soNgayNghi,
         int kinhNghiem,
         int luongCoBan,
-        PhongBan phongBan,
         boolean isDelete
     ) {
         super(id, name, phone, diaChi, namVaoLam, soNgayNghi, kinhNghiem, isDelete);
-        this.phongBan = phongBan;
+        this.luongCoBan = luongCoBan;
     }
 
     @Override

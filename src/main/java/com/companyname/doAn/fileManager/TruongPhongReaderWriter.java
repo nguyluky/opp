@@ -3,6 +3,7 @@ package com.companyname.doAn.fileManager;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -45,8 +46,7 @@ public class TruongPhongReaderWriter implements BaseReader<TruongPhong>, BaseWri
                 Integer.parseInt(arr[5]),
                 Integer.parseInt(arr[6]),
                 Integer.parseInt(arr[7]),
-                new PhongBan(arr[8], arr[9]),
-                Boolean.parseBoolean(arr[10])
+                Boolean.parseBoolean(arr[8])
             );
         }
 
@@ -67,8 +67,6 @@ public class TruongPhongReaderWriter implements BaseReader<TruongPhong>, BaseWri
                 truongPhong.getSoNgayNghi() + "",
                 truongPhong.getKinhNghiem() + "",
                 truongPhong.getLuongCoBan() + "",
-                truongPhong.getPhongBan().getIdPhongBan(),
-                truongPhong.getPhongBan().getNamePhongBan(),
                 truongPhong.getIsDelete() + ""
             };
 
