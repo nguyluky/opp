@@ -47,7 +47,6 @@ public class OptionQuanLyPhongBan implements ShowOption{
 
             System.out.println("1: Thêm dự án");
             System.out.println("2: Thêm nhân viên");
-            System.out.println("3: Thêm trưởng phòng");
             System.out.println("0: Khong lam gi het");
             System.out.print("Chon chuc nang: ");
 
