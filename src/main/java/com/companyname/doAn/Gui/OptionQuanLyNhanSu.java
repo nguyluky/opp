@@ -28,12 +28,44 @@ public class OptionQuanLyNhanSu implements ShowOption{
         for(int i=0; i<slNhanVien;i++){
             System.out.println("---------------------------------------");
             System.out.println("Nhân viên thứ " + (i+1) + ":");
-            System.out.print("Nhập ID: ");
-            String id = sc.nextLine();
+            String id;
+            while(true) {
+                System.out.print("Nhập ID: ");
+                id = sc.nextLine();
+                if (qlns.getNhanSuById(id) != null) {
+                    System.out.println("ID nhân sự đã tồn tại");
+                }
+                else break;
+            }
             System.out.print("Nhập tên: ");
             String name = sc.nextLine();
-            System.out.print("Nhập số điện thoại: ");
-            String phone = sc.nextLine();
+            String phone;
+            while(true) {
+                System.out.print("Nhập số điện thoại: ");
+                phone = sc.nextLine();
+                boolean check = true;
+                for (int k = 0; k < phone.length(); k++) {
+                    if (!Character.isDigit(phone.charAt(k))) {
+                        check = false;
+                    }
+                }
+                if (phone.length() != 10 || !check) {
+                    System.out.println("Cần nhập đúng định dạng số điện thoại");
+                    continue;
+                }
+                boolean checkExist = false;
+                for(NhanSu ns : qlns.getDsNhanSu()){
+                    if(ns.getPhone().equals(phone)){
+                        checkExist = true;
+                        break;
+                    }
+                }
+                if(checkExist){
+                    System.out.println("Số điện thoại đã tồn tại");
+                    continue;
+                }
+                break;
+            }
             System.out.print("Nhập địa chỉ: ");
             String address = sc.nextLine();
             System.out.print("Nhập năm vào làm: ");

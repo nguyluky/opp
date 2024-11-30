@@ -96,7 +96,7 @@ public class OptionQuanLyPhongBan implements ShowOption{
 
     public void moveNhanVien(){
         //in danh sách nhân viên đang làm
-        qlns.printDsNhanVienDangLam();
+        qlns.printDsNhanSu();
         System.out.print("Nhập ID nhân viên muốn di chuyển phòng ban: ");
         String idNhanVien = sc.nextLine();
         //kiểm tra xem ID nhân viên có tồn tại trong công ty không

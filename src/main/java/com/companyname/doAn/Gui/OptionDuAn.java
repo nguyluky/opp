@@ -24,7 +24,7 @@ public class OptionDuAn {
         }
         //in ra id nhân viên để người dùng biết id nào để mà thêm vào dự án
         //một nhân viên có thể tham gia nhiều dự án nên không cần kiểm tra lỗi
-        qlns.printDsNhanSuDangLam();
+        qlns.printDsNhanSu();
         System.out.println("---------------------------------------");
         for(int i=0; i<slNhanSu; i++){
             System.out.printf("Nhập ID nhân viên " + (i+1) + " muốn thêm vào dự án: ");

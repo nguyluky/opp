@@ -27,51 +27,60 @@ public class OptionQuanLyDuAn implements ShowOption{
 
         for(int i=0; i<slDa; i++){
             System.out.println("---------------------------------------");
-            System.out.print("Nhập tên dự án thứ " + (i+1) + ": ");
-            String nameDuAn = sc.nextLine();
-            System.out.print("Nhập ID dự án thứ " + (i+1) + ": ");
-            String idDuAn = sc.nextLine();
-            if(qlda.getDuAnById(idDuAn) != null){
-                System.out.println("ID dự án đã tồn tại. Bỏ qua, tiếp tục tạo nếu có");
+            String nameDuAn;
+            while(true) {
+                System.out.print("Nhập tên dự án thứ " + (i + 1) + ": ");
+                nameDuAn = sc.nextLine();
+                if (qlda.getDuAnByName(nameDuAn) != null) {
+                    System.out.println("Tên dự án đã tồn tại");
+                }
+                else break;
             }
-            else {
-                //tạo đối tượng dự án
-                DuAn currentDuAn = new DuAn(nameDuAn, idDuAn);
+            String idDuAn;
+            while(true) {
+                System.out.print("Nhập ID dự án thứ " + (i + 1) + ": ");
+                idDuAn = sc.nextLine();
+                if (qlda.getDuAnById(idDuAn) != null) {
+                    System.out.println("ID dự án đã tồn tại");
+                }
+                else break;
+            }
+            //tạo đối tượng dự án
+            DuAn currentDuAn = new DuAn(nameDuAn, idDuAn);
 
-                System.out.println("---------------------------------------");
-                System.out.println("1: Thêm nhân sự");
-                System.out.println("2: Xóa nhân sự");
-                System.out.println("3: Không làm gì hết. Tiếp tục tạo dự mới nếu có");
-                System.out.println("0: Thoát. Dừng việc tạo. Quay lại menu trước");
-                System.out.print("Chọn chức năng: ");
-                int choice;
-                while (true) {
-                    try {
-                        choice = Integer.parseInt(sc.nextLine());
-                        if (choice > 3 || choice < 0) {
-                            System.out.println("Chọn lựa chọn chưa hợp lý");
-                        } else {
-                            break;
-                        }
-                    } catch (NumberFormatException e) {
+            System.out.println("---------------------------------------");
+            System.out.println("1: Thêm nhân sự");
+            System.out.println("2: Xóa nhân sự");
+            System.out.println("3: Không làm gì hết. Tiếp tục tạo dự mới nếu có");
+            System.out.println("0: Thoát. Dừng việc tạo. Quay lại menu trước");
+            System.out.print("Chọn chức năng: ");
+            int choice;
+            while (true) {
+                try {
+                    choice = Integer.parseInt(sc.nextLine());
+                    if (choice > 3 || choice < 0) {
                         System.out.println("Chọn lựa chọn chưa hợp lý");
+                    } else {
+                        break;
                     }
+                } catch (NumberFormatException e) {
+                    System.out.println("Chọn lựa chọn chưa hợp lý");
                 }
-                switch (choice) {
-                    case 1:
-                        optionDuAn.themNhanSu(currentDuAn);
-                        break;
-                    case 2:
-                        optionDuAn.xoaNhanSu(currentDuAn);
-                        break;
-                    case 3:
-                        break;
-                    case 0:
-                        optionMenu.chucNangQuanLyDuAn();
-                        return;
-                }
-                qlda.addDuAn(currentDuAn);
             }
+            switch (choice) {
+                case 1:
+                    optionDuAn.themNhanSu(currentDuAn);
+                    break;
+                case 2:
+                    optionDuAn.xoaNhanSu(currentDuAn);
+                    break;
+                case 3:
+                    break;
+                case 0:
+                    optionMenu.chucNangQuanLyDuAn();
+                    return;
+            }
+            qlda.addDuAn(currentDuAn);
         }
     }
 
@@ -150,7 +159,7 @@ public class OptionQuanLyDuAn implements ShowOption{
                 optionMenu.chucNangQuanLyDuAn();
                 break;
             case 3:
-                currentDuAn.printDsNhanSuDuAn();
+                currentDuAn.printDsNhanSu();
                 optionMenu.chucNangQuanLyDuAn();
                 break;
             case 4:

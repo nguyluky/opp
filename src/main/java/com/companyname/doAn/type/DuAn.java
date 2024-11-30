@@ -75,17 +75,13 @@ public class DuAn {
         this.dsNhanSu = newNv;
     }
 
-     public void printDsNhanSuDuAn(){
+     public void printDsNhanSu(){
         System.out.println("---------------------------------------");
-        if(this.dsNhanSu.length == 0){
-            System.out.println("Không có nhân viên nào!");
-            return;
-        }
-        System.out.println("Danh sách nhân viên của dự án " + this.nameDuAn + ":");
+        System.out.println("Danh sách nhân sự của dự án: " + this.dsNhanSu.length);
         int i=1;
-        for(NhanSu nv : this.dsNhanSu) {
-            if (!nv.getIsDelete()) {
-                System.out.println("Tên nhân viên " + i + ": " + nv.getName() + ". ID: " + nv.getId());
+        for(NhanSu ns : this.dsNhanSu) {
+            if (!ns.getIsDelete()) {
+                System.out.println("Nhân sự thứ " + i + ": " + ns.getName() + ". ID: " + ns.getId());
             }
         }
     }

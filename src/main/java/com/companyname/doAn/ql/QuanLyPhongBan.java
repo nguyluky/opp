@@ -32,28 +32,25 @@ public class QuanLyPhongBan {
 
     public void printDsPhongBan(){
         System.out.println("-----------------------------------");
-        boolean check = false;
-        int i=1;
         System.out.println("Danh sách phòng ban đã dừng hoạt động:");
-        boolean checkOff = false;
+        int i=1;
         for(PhongBan pb : this.dsPhongBan) {
             if(pb.getIsDelete()) {
                 System.out.println("Phòng ban thứ " + i + ": " + pb.getNamePhongBan() + ". ID: " + pb.getIdPhongBan());
-                checkOff = true;
                 i++;
             }
         }
-        if(!checkOff)  System.out.println("Không có");
+        if(i==1)  System.out.println("Không có");
+
         System.out.println("Danh sách phòng ban đang hoạt động:");
-        boolean checkOff2 = false;
+        int j=1;
         for(PhongBan pb : this.dsPhongBan) {
             if(!pb.getIsDelete()) {
-                System.out.println("Phòng ban thứ " + i + ": " + pb.getNamePhongBan() + ". ID: " + pb.getIdPhongBan());
-                checkOff2 = true;
-                i++;
+                System.out.println("Phòng ban thứ " + j + ": " + pb.getNamePhongBan() + ". ID: " + pb.getIdPhongBan());
+                j++;
             }
         }
-        if(!checkOff2)  System.out.println("Không có");
+        if(j==1)  System.out.println("Không có");
     }
 
     public void addPhongBan(PhongBan phongBan){
