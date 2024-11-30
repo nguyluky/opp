@@ -1,13 +1,15 @@
 package com.companyname.doAn.Gui;
 
 import com.companyname.doAn.type.DuAn;
+import com.companyname.doAn.type.NhanSu;
+
 import static com.companyname.doAn.Gui.ShareIntance.*;
 
 public class OptionDuAn {
     public OptionDuAn(){}
 
-    public void themNhanSu(DuAn currentDuAn){ //thêm nhân viên vào dự án
-        System.out.print("Nhập số lượng nhân viên muốn thêm vào dự án: ");
+    public void themNhanSu(DuAn currentDuAn){ //thêm nhân sự vào dự án
+        System.out.print("Nhập số lượng nhân sự muốn thêm vào dự án: ");
         int slNhanSu;
         while(true){
             try {
@@ -27,13 +29,26 @@ public class OptionDuAn {
         qlns.printDsNhanSu();
         System.out.println("---------------------------------------");
         for(int i=0; i<slNhanSu; i++){
-            System.out.printf("Nhập ID nhân viên " + (i+1) + " muốn thêm vào dự án: ");
+            System.out.printf("Nhập ID nhân sự " + (i+1) + " muốn thêm vào dự án: ");
             String idNhanSu = sc.nextLine();
-            if(qlns.getNhanSuById(idNhanSu) != null){
+            if(qlns.getNhanSuById(idNhanSu) != null && !qlns.getNhanSuById(idNhanSu).getIsDelete()){
+                boolean check = false;
+                //nếu đã tồn tại nhân sự  thi bao loi
+                for(NhanSu ns : currentDuAn.getDsNhanSu()){
+                    if(ns.equals(qlns.getNhanSuById(idNhanSu))){
+                        System.out.println("---------------------------------------");
+                        System.out.println("Nhân sự này đã tồn tại trong dự án");
+                        check = true;
+                    }
+                }
+                if(check) continue;
                 currentDuAn.addNhanSu(qlns.getNhanSuById(idNhanSu));
+                System.out.println("---------------------------------------");
+                System.out.println("Thêm nhân sự thành công");
             }
             else{
                 //nếu ID không tồn tại, bỏ qua nhập ID tiếp theo
+                System.out.println("---------------------------------------");
                 System.out.println("ID không tồn tại trong công ty");
             }
         }

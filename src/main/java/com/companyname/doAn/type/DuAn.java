@@ -96,13 +96,14 @@ public class DuAn {
     }
     
     public void printThongTinCoBan(){
+        System.out.println("---------------------------------------");
         System.out.println("Tên: " + this.nameDuAn);
         System.out.println("ID: " + this.idDuAn);
         if(this.dsNhanSu.length == 0) {
-            System.out.println("Danh sách nhân sự đang làm: Không có nhân viên nào");
+            System.out.println("Danh sách nhân sự đang tham gia: Không có nhân sự nào");
         }
         else{
-            System.out.println("Danh sách nhân sự đang làm: ");
+            System.out.println("Danh sách nhân sự đang tham gia: ");
             int i=1;
             for(NhanSu ns : this.dsNhanSu){
                 if(!ns.getIsDelete()){

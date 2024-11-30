@@ -89,11 +89,20 @@ public class PhongBan {
     public void printThongTinPhongBan(){
         System.out.println("Tên: " + this.namePhongBan);
         System.out.println("ID: " + this.idPhongBan);
-        System.out.println("Số lượng nhân viên: " + this.dsNhanVien.length);
+        System.out.print("Trưởng phòng: ");
+        if(this.truongPhong != null){
+            System.out.println(this.truongPhong.getName() + ". ID: " + this.truongPhong.getId());
+        }
+        else{
+            System.out.println("Chưa có");
+        }
+        System.out.println("Số lượng nhân viên đang làm: " + this.dsNhanVien.length);
         int i=1;
         for(NhanVien nv : this.dsNhanVien){
-            System.out.println("Nhân viên thứ " + i + ": " + nv.getName() + ". ID: " + nv.getId());
-            i++;
+            if(!nv.getIsDelete()) {
+                System.out.println("Nhân viên thứ " + i + ": " + nv.getName() + ". ID: " + nv.getId());
+                i++;
+            }
         }
         System.out.println("Số lượng dự án: " + this.dsDuAn.length);
         if(this.dsDuAn.length > 0) {
@@ -102,7 +111,7 @@ public class PhongBan {
             int j=1;
             for (DuAn da : this.dsDuAn) {
                 if (da.getIsDelete()) {
-                    System.out.print("Dự án thứ " + j + ": " + da.getNameDuAn() + ". ID: " + da.getIdDuAn());
+                    System.out.println("Dự án thứ " + j + ": " + da.getNameDuAn() + ". ID: " + da.getIdDuAn());
                     j++;
                     checkOff = true;
                 }
