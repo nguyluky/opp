@@ -24,20 +24,34 @@ public class QuanLyPhongBan {
     public PhongBan[] getDsPhongBan(){
         return this.dsPhongBan;
     }
-    //------------------------------------------------
+
     //------------SET---------------------------------
     public void setDsPhongBan(PhongBan[] dsPhongBan){
         this.dsPhongBan = dsPhongBan;
     }
-    //------------------------------------------------
 
     public void printDsPhongBan(){
-        for(int i=0; i<this.dsPhongBan.length; i++){
-            if(!this.dsPhongBan[i].getIsDelete()){
-                System.out.println("Phòng ban: " + this.dsPhongBan[i].getNamePhongBan() + ". ID: " + this.dsPhongBan[i].getIdPhongBan());
+        System.out.println("-----------------------------------");
+        boolean check = false;
+        int i=1;
+        for(PhongBan pb : this.dsPhongBan) {
+            if (!pb.getIsDelete()) {
+                check = true;
             }
         }
-        System.out.println("-----------------------------------");
+        if(!check){
+            System.out.println("Danh sách phòng ban: Không có");
+        }
+        else{
+            System.out.println("Danh sách phòng ban:");
+            for(PhongBan pb : this.dsPhongBan) {
+                if(!pb.getIsDelete()) {
+                    System.out.println("Phòng ban thứ " + i + ": " + pb.getNamePhongBan());
+                    i++;
+                }
+            }
+        }
+
     }
 
     public void addPhongBan(PhongBan phongBan){

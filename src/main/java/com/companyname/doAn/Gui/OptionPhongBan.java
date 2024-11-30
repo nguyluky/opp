@@ -1,20 +1,11 @@
 package com.companyname.doAn.Gui;
 
-import java.util.Scanner;
-import com.companyname.doAn.ql.QuanLyDuAn;
-import com.companyname.doAn.ql.QuanLyNhanSu;
-import com.companyname.doAn.ql.QuanLyPhongBan;
 import com.companyname.doAn.type.*;
+import static com.companyname.doAn.Gui.ShareIntance.*;
+import java.util.Scanner;
 
 public class OptionPhongBan implements ShowOption{
-    QuanLyPhongBan qlpb = QuanLyPhongBan.getInstance();
-    QuanLyNhanSu qlns = QuanLyNhanSu.getInstance();
-    OptionQuanLyDuAn optionQuanLyDuAn = new OptionQuanLyDuAn();
-    QuanLyDuAn qlda = QuanLyDuAn.getInstance();
-    Scanner sc = StaticScanner.sc;
-
     public OptionPhongBan(){}
-
 
     public void themDuAn(PhongBan currentPhongBan){
         System.out.println("Nhập số dự án muốn thêm");
@@ -70,7 +61,7 @@ public class OptionPhongBan implements ShowOption{
                 }
             }
             dsDuAn[i] = new DuAn(nameDuAn, idDuAn);
-            dsDuAn[i].setDsNhanVien(dsNhanVien);
+            dsDuAn[i].setDsNhanSu(dsNhanVien);
 
             qlda.addDuAn(dsDuAn[i]);
             currentPhongBan.addDuAn(dsDuAn[i]);
@@ -109,7 +100,7 @@ public class OptionPhongBan implements ShowOption{
     public void themNhanVien(PhongBan currentPhongBan){
         Scanner sc = new Scanner(System.in);
         System.out.print("Nhập số lượng nhân viên muốn thêm vào phòng ban này: ");
-        int slNhanVien; 
+        int slNhanVien;
         try {
            slNhanVien = Integer.parseInt(sc.nextLine());
         } catch (NumberFormatException e) {
@@ -135,7 +126,7 @@ public class OptionPhongBan implements ShowOption{
                     if(nv.getId().equals(idNhanVien)){
                         checkTonTaiOPhongBanKhac = true;
                         break;
-                    } 
+                    }
                 }
                 if(checkTonTaiOPhongBanKhac){
                     phongbanTmp = pb;
@@ -173,7 +164,7 @@ public class OptionPhongBan implements ShowOption{
 
     public void xoaNhanVien(PhongBan currentPhongBan){
         System.out.print("Nhập số lượng nhân viên muốn xóa khỏi phòng ban này: ");
-        int slNhanVien; 
+        int slNhanVien;
         try {
            slNhanVien = Integer.parseInt(sc.nextLine());
         } catch (NumberFormatException e) {

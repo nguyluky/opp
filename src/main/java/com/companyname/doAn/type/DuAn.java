@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class DuAn {
     private String nameDuAn;
     private String idDuAn;
-    private NhanVien[] dsNhanVien;
+    private NhanSu[] dsNhanSu;
     private boolean isDelete;
 
     public DuAn(){}
@@ -13,7 +13,7 @@ public class DuAn {
     public DuAn(String nameDuAn, String idDuAn){
         this.nameDuAn = nameDuAn;
         this.idDuAn = idDuAn;
-        this.dsNhanVien = new NhanVien[0];
+        this.dsNhanSu = new NhanSu[0];
         this.isDelete = false;
     }
     
@@ -26,14 +26,13 @@ public class DuAn {
         return this.idDuAn;
     }
 
-    public NhanVien[] getDsNhanVienDuAn(){
-        return this.dsNhanVien;
+    public NhanSu[] getDsNhanSu(){
+        return this.dsNhanSu;
     }
 
     public boolean getIsDelete(){
         return this.isDelete;
     }
-    //--------------------------------------------------------
 
     //----------------------SET-----------------------------
     public void setNameDuAn(String nameDuAn){
@@ -44,8 +43,8 @@ public class DuAn {
         this.idDuAn = idDuAn;
     }
 
-    public void setDsNhanVien (NhanVien[] array){
-        this.dsNhanVien = array;
+    public void setDsNhanSu(NhanSu[] array){
+        this.dsNhanSu = array;
     }
 
     public void setIsDelete(boolean tmp){
@@ -53,113 +52,68 @@ public class DuAn {
     }
 
     // ========================================================
-    public String toString(){
-        return this.nameDuAn + ";" + this.idDuAn + ";" + this.dsNhanVien.length;
-    }
     
-    public void addNhanVien(NhanVien nv){
-        this.dsNhanVien = Arrays.copyOf(this.dsNhanVien, this.dsNhanVien.length + 1);
-        this.dsNhanVien[this.dsNhanVien.length - 1] = nv;
+    public void addNhanSu(NhanSu ns){
+        this.dsNhanSu = Arrays.copyOf(this.dsNhanSu, this.dsNhanSu.length + 1);
+        this.dsNhanSu[this.dsNhanSu.length - 1] = ns;
     }
 
-    public void removeNhanVien(String id){
-        NhanVien[] newNv = new NhanVien[this.dsNhanVien.length - 1];
+    public void removeNhanSu(String id){
+        NhanSu[] newNv = new NhanSu[this.dsNhanSu.length - 1];
         int k=0;
-        for(NhanVien nv : this.dsNhanVien){
+        for(NhanSu nv : this.dsNhanSu){
             if(!nv.getId().equals(id)){
                 newNv[k] = nv;
                 k++;
             }
         }
-        this.dsNhanVien = newNv;
+        this.dsNhanSu = newNv;
     }
 
-     public void printDsNhanVienDuAn(){
-        if(this.dsNhanVien.length == 0){
+     public void printDsNhanSuDuAn(){
+        System.out.println("---------------------------------------");
+        if(this.dsNhanSu.length == 0){
             System.out.println("Không có nhân viên nào!");
             return;
         }
         System.out.println("Danh sách nhân viên của dự án " + this.nameDuAn + ":");
-        for(int i=0; i<this.dsNhanVien.length; i++){
-            System.out.println("Tên nhân viên " + (i+1) + ": " + this.dsNhanVien[i].getName());
-            System.out.println("ID của nhân viên" + (i+1) + ": " + this.dsNhanVien[i].getId());
+        int i=1;
+        for(NhanSu nv : this.dsNhanSu) {
+            if (!nv.getIsDelete()) {
+                System.out.println("Tên nhân viên " + i + ": " + nv.getName() + ". ID: " + nv.getId());
+            }
         }
     }
 
-    public NhanVien getNhanVienByID(String id){
-        for(NhanVien nv : this.getDsNhanVienDuAn()){
+    public NhanSu getNhanSuByID(String id){
+        for(NhanSu nv : this.getDsNhanSu()){
             if(nv.getId().equals(id)){
                 return nv;
             }
         }
         return null;
     }
-
-    // //--------------------------------------------------------------------
-
-    // public void printDanhSachNhanVienDuAn(){
-    //     if(dsNhanVien.length == 0){
-    //         System.out.println("Không có nhân viên nào!");
-    //         return;
-    //     }
-    //     System.out.println("Danh sách nhân viên của dự án " + this.nameDuAn + ":");
-    //     for(int i=0; i<this.dsNhanVien.length; i++){
-    //         System.out.println("Nhân viên " + (i+1) + ":");
-    //         System.out.println(this.dsNhanVien[i].getName());
-    //     }
-    // }
-
-    // public void addNhanVien(int sl){
-    //     Scanner sc = new Scanner(System.in);
-    //     QuanLyNhanVien qlnv = QuanLyNhanVien.getInstance();
-    //     if(sl>qlnv.getSoLuongNhanVien()){
-    //         System.out.println("Số lượng nhân viên muốn thêm vào dự án không hợp lý");
-    //     }
-    //     else{
-    //         for(int i=0; i<sl; i++){
-    //             this.dsNhanVien = Arrays.copyOf(this.dsNhanVien, this.dsNhanVien.length + 1);
-    //             this.dsNhanVien[this.dsNhanVien.length - 1] = new NhanVien();
-    //             System.out.println("Nhập id nhân viên thứ " + i + " muốn thêm:");
-    //             String id = sc.nextLine();
-    //             NhanVien nv = qlnv.getNhanVienById(id);
-    //             if(nv == null){
-    //                 System.out.println("Id nhân viên không tồn tại! Nhập lại");
-    //                 i--;
-    //             }
-    //             else this.dsNhanVien[this.dsNhanVien.length - 1] = nv;
-    //         }
-    //     }
-    // }
-
-    // public void deleteNhanVien(){
-    //     Scanner sc = new Scanner(System.in);
-    //     System.out.println("Nhập số lượng nhân viên muốn đuổi:");
-    //     int sl = Integer.parseInt(sc.nextLine());
-    //     printDanhSachNhanVienDuAn();
-    //     int j=0;
-    //     while(j<sl){
-    //         NhanVien newNv[] = new NhanVien[this.dsNhanVien.length - 1];
-    //         boolean check = true;
-    //         String id="";
-    //         while(check){
-    //             System.out.println("Nhập id nhân viên muốn đuổi:");
-    //             id = sc.nextLine();
-    //             for(NhanVien nv : this.dsNhanVien){
-    //                 if(nv.getId() == id){
-    //                     check = false;
-    //                 }
-    //             }
-    //             if(check) System.out.println("Id nhân viên không tồn tại! Nhập lại:");
-    //         }
-    //         int k=0;
-    //         for(NhanVien nv : this.dsNhanVien){
-    //             if(nv.getId() != id){
-    //                 newNv[k] = nv;
-    //                 k++;
-    //             }
-    //         }
-    //         this.dsNhanVien = newNv;
-    //         j++;
-    //     }
-    // }
+    
+    public void printThongTinCoBan(){
+        System.out.println("Tên: " + this.nameDuAn);
+        System.out.println("ID: " + this.idDuAn);
+        if(this.dsNhanSu.length == 0) {
+            System.out.println("Danh sách nhân sự đang làm: Không có nhân viên nào");
+        }
+        else{
+            System.out.println("Danh sách nhân sự đang làm: ");
+            int i=1;
+            for(NhanSu ns : this.dsNhanSu){
+                if(!ns.getIsDelete()){
+                    if(ns instanceof NhanVien) {
+                        System.out.println("Nhân sự thứ " + i + ": " + ns.getName() + ". ID: " + ns.getId() + ". Loại: Nhân viên");
+                    }
+                    else{
+                        System.out.println("Nhân sự thứ " + i + ": " + ns.getName() + ". ID: " + ns.getId() + ". Loại: Trưởng phòng");
+                    }
+                    i++;
+                }
+            }
+        }
+    }
 }

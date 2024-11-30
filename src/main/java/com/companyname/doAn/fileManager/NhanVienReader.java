@@ -32,20 +32,21 @@ public class NhanVienReader implements BaseReader<NhanVien> {
     }
 
     public NhanVien[] read() throws FileNotFoundException {
-        sc = new Scanner(file);
-
-        NhanVien[] nhanVienS = new NhanVien[0];
-
-        while (sc.hasNextLine()) {
-            String data = sc.nextLine();
-            String[] arr = data.split(" ");
-            nhanVienS = Arrays.copyOf(nhanVienS, nhanVienS.length + 1);
-            nhanVienS[nhanVienS.length] = new NhanVien(arr[0], arr[1], arr[2], arr[3],
-                    Double.parseDouble(arr[4]), arr[5], Integer.parseInt(arr[6]), Double.parseDouble(arr[7]),
-                    Integer.parseInt(arr[8]));
-        }
-
-        return nhanVienS;
+//        sc = new Scanner(file);
+//
+//        NhanVien[] nhanVienS = new NhanVien[0];
+//
+//        while (sc.hasNextLine()) {
+//            String data = sc.nextLine();
+//            String[] arr = data.split(" ");
+//            nhanVienS = Arrays.copyOf(nhanVienS, nhanVienS.length + 1);
+//            nhanVienS[nhanVienS.length] = new NhanVien(arr[0], arr[1], arr[2], arr[3],
+//                    Double.parseDouble(arr[4]), arr[5], Integer.parseInt(arr[6]), Double.parseDouble(arr[7]),
+//                    Integer.parseInt(arr[8]));
+//        }
+//
+//        return nhanVienS;
+        return new NhanVien[0]; //hieu them de chạy main, co the xoa
     }
     
 }

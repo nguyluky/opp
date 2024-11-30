@@ -1,16 +1,10 @@
 package com.companyname.doAn.Gui;
 
-import com.companyname.doAn.ql.QuanLyDuAn;
 import com.companyname.doAn.type.DuAn;
-import java.util.Scanner;
+import static com.companyname.doAn.Gui.ShareIntance.*;
+
 
 public class OptionQuanLyDuAn implements ShowOption{
-    Scanner sc = StaticScanner.sc;
-    OptionMenu optionMenu = new OptionMenu();
-    QuanLyDuAn qlda = QuanLyDuAn.getInstance();
-    OptionDuAn optionDuAn = new OptionDuAn();
-    OptionQuanLyPhongBan optionQuanLyPhongBan = new OptionQuanLyPhongBan();
-
     public OptionQuanLyDuAn(){}
 
 
@@ -32,47 +26,52 @@ public class OptionQuanLyDuAn implements ShowOption{
         }
 
         for(int i=0; i<slDa; i++){
-            System.out.print("Nhập tên dự án: ");
+            System.out.println("---------------------------------------");
+            System.out.print("Nhập tên dự án thứ " + (i+1) + ": ");
             String nameDuAn = sc.nextLine();
-            System.out.print("Nhập id dự án: ");
+            System.out.print("Nhập ID dự án thứ " + (i+1) + ": ");
             String idDuAn = sc.nextLine();
-            //tạo đối tượng dự án
-            DuAn currentDuAn = new DuAn(nameDuAn, idDuAn);
+            if(qlda.getDuAnById(idDuAn) != null){
+                System.out.println("ID dự án đã tồn tại. Bỏ qua, tiếp tục tạo nếu có");
+            }
+            else {
+                //tạo đối tượng dự án
+                DuAn currentDuAn = new DuAn(nameDuAn, idDuAn);
 
-            System.out.println("1: Thêm nhân viên");
-            System.out.println("2: Xóa nhân viên");
-            System.out.println("3: Đổi tên dự án");
-            System.out.println("0: Quay lại menu trước");
-            System.out.print("Chọn chức năng tiếp theo đối với dự án vừa tạo: ");
-            int choice;
-            while (true){
-                try {
-                    choice = Integer.parseInt(sc.nextLine());
-                    if(choice > 4 || choice < 0){
+                System.out.println("---------------------------------------");
+                System.out.println("1: Thêm nhân sự");
+                System.out.println("2: Xóa nhân sự");
+                System.out.println("3: Không làm gì hết. Tiếp tục tạo dự mới nếu có");
+                System.out.println("0: Thoát. Dừng việc tạo. Quay lại menu trước");
+                System.out.print("Chọn chức năng: ");
+                int choice;
+                while (true) {
+                    try {
+                        choice = Integer.parseInt(sc.nextLine());
+                        if (choice > 3 || choice < 0) {
+                            System.out.println("Chọn lựa chọn chưa hợp lý");
+                        } else {
+                            break;
+                        }
+                    } catch (NumberFormatException e) {
                         System.out.println("Chọn lựa chọn chưa hợp lý");
                     }
-                    else{
-                        break;
-                    }
-                } catch (NumberFormatException e) {
-                    System.out.println("Chọn lựa chọn chưa hợp lý");
                 }
+                switch (choice) {
+                    case 1:
+                        optionDuAn.themNhanSu(currentDuAn);
+                        break;
+                    case 2:
+                        optionDuAn.xoaNhanSu(currentDuAn);
+                        break;
+                    case 3:
+                        break;
+                    case 0:
+                        optionMenu.chucNangQuanLyDuAn();
+                        return;
+                }
+                qlda.addDuAn(currentDuAn);
             }
-            switch(choice){
-                case 1:
-                    optionDuAn.themNhanVien(currentDuAn);
-                    break;
-                case 2:
-                    optionDuAn.xoaNhanVien(currentDuAn);   
-                    break;
-                case 3: 
-                    optionDuAn.doiTenDuAn(currentDuAn);
-                    break;
-                case 0:
-                    optionMenu.chucNangQuanLyDuAn();
-                    break;
-            }
-            qlda.addDuAn(currentDuAn);
         }
     }
 
@@ -96,50 +95,44 @@ public class OptionQuanLyDuAn implements ShowOption{
         }
 
         for(int i=0; i<slDa; i++){
-            System.out.print("Nhap ID du an thu: " + i+1 + " muon xoa: ");
+            System.out.print("Nhap ID du an thu " + (i+1) + " muon xoa: ");
             String idDuAn = sc.nextLine();
             DuAn da = qlda.getDuAnById(idDuAn);
-            if(da!=null){
+            if(da!=null && !da.getIsDelete()){
                 da.setIsDelete(true);
+                System.out.println("---------------------------------------");
+                System.out.println("Xóa dự án thành công");
             }
             else{
-                System.out.println("Id dự án không tồn tại");
+                System.out.println("ID dự án không tồn tại");
             }
-        }
-    }
-
-    public void getThongTinDuAnById(){
-        System.out.print("Nhập ID dự án muốn lấy thông tin:");
-        String idDuAn = sc.nextLine();
-        DuAn da = qlda.getDuAnById(idDuAn);
-        if(da!=null){
-            System.out.println(da); //toString nếu sai thì sửa giùm
-        }
-        else{
-            System.out.println("Id dự án không tồn tại");
         }
     }
 
     @Override
     public void show(){
-        System.out.print("Nhập ID dự án cụ thể: ");
+        System.out.println("---------------------------------------");
+        qlda.printDsDuAn();
+        System.out.print("Nhập ID dự án: ");
         String idDuAn = sc.nextLine();
         if(qlda.getDuAnById(idDuAn) == null){
+            System.out.println("---------------------------------------");
             System.out.println("ID dự án không tồn tại");
             return;
         }
         DuAn currentDuAn = qlda.getDuAnById(idDuAn);
 
-        System.out.println("1: Thêm nhân viên");
-        System.out.println("2: Xóa nhân viên");
-        System.out.println("3: Đổi tên dự án");
+        System.out.println("1: Thêm nhân sự");
+        System.out.println("2: Xóa nhân sự");
+        System.out.println("3: Danh sách nhân sự đang làm");
+        System.out.println("4: Thông tin cơ bản");
         System.out.println("0: Quay lại menu trước");
         System.out.print("Chon chuc nang: ");
         int choice;
         while(true){
             try {
                 choice = Integer.parseInt(sc.nextLine());
-                if(choice > 3 || choice < 0){
+                if(choice > 4 || choice < 0){
                     System.out.println("Can chon chuc nang hop le");
                 }
                 else break;
@@ -149,19 +142,23 @@ public class OptionQuanLyDuAn implements ShowOption{
         }
         switch (choice) {
             case 1:
-                optionDuAn.themNhanVien(currentDuAn);
-                show();
+                optionDuAn.themNhanSu(currentDuAn);
+                optionMenu.chucNangQuanLyDuAn();
                 break;
             case 2:
-                optionDuAn.xoaNhanVien(currentDuAn);
-                show();
+                optionDuAn.xoaNhanSu(currentDuAn);
+                optionMenu.chucNangQuanLyDuAn();
                 break;
             case 3:
-                optionDuAn.doiTenDuAn(currentDuAn);
-                show();
+                currentDuAn.printDsNhanSuDuAn();
+                optionMenu.chucNangQuanLyDuAn();
+                break;
+            case 4:
+                currentDuAn.printThongTinCoBan();
+                optionMenu.chucNangQuanLyDuAn();
                 break;
             case 0:
-                optionQuanLyPhongBan.show();
+                optionMenu.chucNangQuanLyDuAn();
                 break;
         }
     }

@@ -23,15 +23,12 @@ public class QuanLyDuAn {
     public DuAn[] getDsDuAn(){
         return this.dsDuAn;
     }
-    // ---------------------------------------------
+
     //---------------SET--------------------------
     
     public void setDsDuAn(DuAn[] dsDuAn){
         this.dsDuAn = dsDuAn;
     }
-
-    //----------------------------------------------
-
 
     public void addDuAn(DuAn duAn){
         this.dsDuAn = Arrays.copyOf(this.dsDuAn, this.dsDuAn.length + 1);
@@ -58,9 +55,23 @@ public class QuanLyDuAn {
     }
 
     public void printDsDuAn(){
-        for(int i=0; i<this.dsDuAn.length; i++) {
-            if (!this.dsDuAn[i].getIsDelete()) {
-                System.out.println("Dự án thứ " + (i + 1) + ": " + this.dsDuAn[i].getNameDuAn() + "ID: " + this.dsDuAn[i].getNameDuAn());
+        System.out.println("---------------------------------------");
+        boolean check = false;
+        for(DuAn da : this.dsDuAn) {
+            if(!da.getIsDelete()){
+                check = true;
+            }
+        }
+        if(!check){
+            System.out.println("Danh sách dự án đang hoạt đông: Không có");
+        }
+        else {
+            System.out.println("Danh sách dự án đang hoạt đông:");
+            int i = 0;
+            for (DuAn da : this.dsDuAn) {
+                if (!da.getIsDelete()) {
+                    System.out.println("Dự án thứ " + (i + 1) + ": " + da.getNameDuAn() + ". ID: " + da.getIdDuAn());
+                }
             }
         }
     }
@@ -73,6 +84,5 @@ public class QuanLyDuAn {
         }
         return null;
     }
-    // // ---------------------------------------------
 
 }

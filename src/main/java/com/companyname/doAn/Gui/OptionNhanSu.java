@@ -6,7 +6,7 @@ import com.companyname.doAn.type.NhanSu;
 
 import java.util.Arrays;
 
-import static com.companyname.doAn.Gui.StaticScanner.sc;
+import static com.companyname.doAn.Gui.ShareIntance.*;
 
 public class OptionNhanSu {
     public OptionNhanSu(){}

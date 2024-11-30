@@ -1,21 +1,18 @@
 package com.companyname.doAn.Gui;
 
-import java.util.Scanner;
-import com.companyname.doAn.ql.QuanLyNhanSu;
 import com.companyname.doAn.type.DuAn;
+import static com.companyname.doAn.Gui.ShareIntance.*;
 
 public class OptionDuAn {
     public OptionDuAn(){}
-    Scanner sc = StaticScanner.sc;
-    QuanLyNhanSu qlns = QuanLyNhanSu.getInstance();
 
-    public void themNhanVien(DuAn currentDuAn){ //thêm nhân viên vào dự án
+    public void themNhanSu(DuAn currentDuAn){ //thêm nhân viên vào dự án
         System.out.print("Nhập số lượng nhân viên muốn thêm vào dự án: ");
-        int slNhanVien;
+        int slNhanSu;
         while(true){
             try {
-                slNhanVien = Integer.parseInt(sc.nextLine());
-                if(slNhanVien>=0){
+                slNhanSu = Integer.parseInt(sc.nextLine());
+                if(slNhanSu>=0){
                     break;
                 }
                 else{
@@ -27,13 +24,13 @@ public class OptionDuAn {
         }
         //in ra id nhân viên để người dùng biết id nào để mà thêm vào dự án
         //một nhân viên có thể tham gia nhiều dự án nên không cần kiểm tra lỗi
-        currentDuAn.printDsNhanVienDuAn();
-
-        for(int i=0; i<slNhanVien; i++){
-            System.out.printf("Nhập ID nhân viên " + (i+1) + "muốn thêm vào dự án: ");
-            String idNhanVien = sc.nextLine();
-            if(qlns.getNhanVienById(idNhanVien) != null){
-                currentDuAn.addNhanVien(qlns.getNhanVienById(idNhanVien));
+        qlns.printDsNhanSuDangLam();
+        System.out.println("---------------------------------------");
+        for(int i=0; i<slNhanSu; i++){
+            System.out.printf("Nhập ID nhân viên " + (i+1) + " muốn thêm vào dự án: ");
+            String idNhanSu = sc.nextLine();
+            if(qlns.getNhanSuById(idNhanSu) != null){
+                currentDuAn.addNhanSu(qlns.getNhanSuById(idNhanSu));
             }
             else{
                 //nếu ID không tồn tại, bỏ qua nhập ID tiếp theo
@@ -44,14 +41,14 @@ public class OptionDuAn {
 
     }
 
-    public void xoaNhanVien(DuAn currentDuAn){ // xóa nhân viên khỏi dự án
+    public void xoaNhanSu(DuAn currentDuAn){ // xóa nhân viên khỏi dự án
         System.out.print("Nhập số lượng nhân viên muốn xóa khỏi dự án: ");
-        int slNhanVien;
+        int slNhanSu;
         //kiểm tra nhập đúng số >0 thì dừng
         while(true){
             try {
-                slNhanVien = Integer.parseInt(sc.nextLine());
-                if(slNhanVien>0){
+                slNhanSu = Integer.parseInt(sc.nextLine());
+                if(slNhanSu>0){
                     break;
                 }
                 else{
@@ -62,23 +59,16 @@ public class OptionDuAn {
             }
         }
 
-        for(int i=0; i<slNhanVien; i++){
+        for(int i=0; i<slNhanSu; i++){
             System.out.printf("Nhập ID nhân viên thứ: " + (i+1) + " muốn xóa khỏi dự án: ");
-            String idNhanVien = sc.nextLine();
+            String idNhanSu = sc.nextLine();
             //nếu ID không tồn tại, bỏ qua
-            if(currentDuAn.getNhanVienByID(idNhanVien) == null || currentDuAn.getNhanVienByID(idNhanVien).getIsDelete()){
+            if(currentDuAn.getNhanSuByID(idNhanSu) == null || currentDuAn.getNhanSuByID(idNhanSu).getIsDelete()){
                 System.out.println("ID nhân viên không tồn tại trong dự án");
             }
             else{
-                currentDuAn.removeNhanVien(idNhanVien);
+                currentDuAn.removeNhanSu(idNhanSu);
             }
         }
-    }
-
-    public void doiTenDuAn(DuAn currentDuAn){
-        System.out.print("Nhập tên mới cho dự án: ");
-        String newName = sc.nextLine();
-        currentDuAn.setNameDuAn(newName);
-        System.out.print("Thêm thành công");
     }
 }

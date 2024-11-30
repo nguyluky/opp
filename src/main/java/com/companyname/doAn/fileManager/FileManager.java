@@ -17,20 +17,20 @@ public class FileManager {
     }
 
     public void loadQuanLyNhanSu() {
-        QuanLyNhanSu qlns = QuanLyNhanSu.getInstance();
-
-        NhanVienReader nhanVienReader = new NhanVienReader(FOLDER_PATH);
-        GiamDocReader giamDocReader = new GiamDocReader(FOLDER_PATH);
-        TruongPhongReader truongPhongReader = new TruongPhongReader(FOLDER_PATH);
-
-        try {
-            qlns.setNhanViens(nhanVienReader.read());
-            qlns.setGiamDocs(giamDocReader.read());
-            qlns.setTruongPhongs(truongPhongReader.read());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        
+//        QuanLyNhanSu qlns = QuanLyNhanSu.getInstance();
+//
+//        NhanVienReader nhanVienReader = new NhanVienReader(FOLDER_PATH);
+//        GiamDocReader giamDocReader = new GiamDocReader(FOLDER_PATH);
+//        TruongPhongReader truongPhongReader = new TruongPhongReader(FOLDER_PATH);
+//
+//        try {
+//            qlns.setNhanViens(nhanVienReader.read());
+//            qlns.setGiamDocs(giamDocReader.read());
+//            qlns.setTruongPhongs(truongPhongReader.read());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
     }
 
     public void read() {

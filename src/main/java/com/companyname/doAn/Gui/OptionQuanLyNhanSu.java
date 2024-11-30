@@ -1,23 +1,16 @@
 package com.companyname.doAn.Gui;
 
-import com.companyname.doAn.ql.QuanLyNhanSu;
 import com.companyname.doAn.type.NhanSu;
 import com.companyname.doAn.type.NhanVien;
 
-import java.util.Scanner;
+import static com.companyname.doAn.Gui.ShareIntance.*;
 
 public class OptionQuanLyNhanSu implements ShowOption{
-    Scanner sc = StaticScanner.sc;
-    OptionMenu optionMenu = new OptionMenu();
-    QuanLyNhanSu qlns = QuanLyNhanSu.getInstance();
-    OptionNhanSu optionNhanSu = new OptionNhanSu();
-
     public OptionQuanLyNhanSu() {}
 
-
-
     public void themNhanSu(){
-        System.out.println("Nhập số lượng nhân sự muốn thêm:");
+        System.out.println("---------------------------------------");
+        System.out.print("Nhập số lượng nhân sự muốn thêm: ");
         int slNhanVien;
         while(true){
             try {
@@ -33,9 +26,9 @@ public class OptionQuanLyNhanSu implements ShowOption{
             }
         }
         for(int i=0; i<slNhanVien;i++){
-            System.out.println("Nhân viên thứ " + i+1 + ":");
+            System.out.println("Nhân viên thứ " + (i+1) + ":");
             System.out.print("Nhập ID: ");
-            String id = sc.next();
+            String id = sc.nextLine();
             System.out.print("Nhập tên: ");
             String name = sc.nextLine();
             System.out.print("Nhập số điện thoại: ");
@@ -43,15 +36,15 @@ public class OptionQuanLyNhanSu implements ShowOption{
             System.out.print("Nhập địa chỉ: ");
             String address = sc.nextLine();
             System.out.print("Nhập năm vào làm: ");
-            int year = Integer.parseInt(sc.next());
+            int year = Integer.parseInt(sc.nextLine());
             System.out.print("Nhập số năm kinh nghiệm đã tích lũy trước đó: ");
-            int kinhnghiem = Integer.parseInt(sc.next());
+            int kinhnghiem = Integer.parseInt(sc.nextLine());
 
             NhanVien newNhanVien = new NhanVien(id, name, phone, address, year, kinhnghiem);
             qlns.addNhanSu(newNhanVien);
-            System.out.println("Thêm nhân sự thành công. Quay lại menu trước\n");
+            System.out.println("---------------------------------------");
+            System.out.println("Thêm nhân sự thành công.");
         }
-
     }
 
     public void xoaNhanSu(){
@@ -84,21 +77,23 @@ public class OptionQuanLyNhanSu implements ShowOption{
 
     @Override
     public void show(){
+        System.out.println("---------------------------------------");
         qlns.printDsNhanSuDangLam();
         System.out.print("Nhập ID nhân sự: ");
         String idNhanSu = sc.nextLine();
-        if(qlns.getNhanSuById(idNhanSu) == null && !qlns.getNhanSuById(idNhanSu).getIsDelete()){
+        if(qlns.getNhanSuById(idNhanSu) == null || qlns.getNhanSuById(idNhanSu).getIsDelete()){
             System.out.println("ID nhân sự không tồn tại");
             return;
         }
         NhanSu currentNhanSu = qlns.getNhanSuById(idNhanSu);
-        System.out.println("Chọn chức năng tiếp theo đối với sự: ");
+
         System.out.println("1: Xem thông tin cơ bản");
         System.out.println("2: Xem tình trạng kỷ luật");
         System.out.println("3: Xem tình trạng khen thưởng");
         System.out.println("4: Khen thuong");
         System.out.println("4: Ky luat");
         System.out.println("0: Quay lại menu trước");
+        System.out.print("Chọn chức năng: ");
         int choiceNhanSu;
         while(true) {
             try {

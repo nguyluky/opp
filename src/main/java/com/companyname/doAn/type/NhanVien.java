@@ -3,6 +3,7 @@ package com.companyname.doAn.type;
 
 import com.companyname.doAn.ql.QuanLyDuAn;
 import com.companyname.doAn.ql.QuanLyPhongBan;
+import com.companyname.doAn.type.DuAn;
 
 public class NhanVien extends NhanSu {
     private final String chucVu = "Nhan Vien";
@@ -74,6 +75,7 @@ public class NhanVien extends NhanSu {
     }
 
     public void printThongTinCoBan(){
+        System.out.println("---------------------------------------");
         System.out.println("Tên: " + super.getName());
         System.out.println("ID: " + super.getId());
         System.out.println("Số điện thoại: " + super.getPhone());
@@ -81,30 +83,33 @@ public class NhanVien extends NhanSu {
         System.out.println("Năm vào làm: " + super.getNamVaoLam());
         System.out.println("Kinh nghiệm: " + super.getKinhNghiem());
         System.out.println("Lương tháng: " + this.tinhLuong());
-        System.out.printf("Phòng ban: ");
         QuanLyPhongBan qlpb = QuanLyPhongBan.getInstance();
-        boolean checkFind = false;
+        boolean checkFindPhongBan = false;
         for(PhongBan pb : qlpb.getDsPhongBan()){
             for(NhanSu ns : pb.getDsNhanVien()){
                 if(ns.getId().equals(super.getId())){
                     System.out.println("Phòng ban: " + pb.getNamePhongBan());
-                    checkFind = true;
+                    checkFindPhongBan = true;
                     break;
                 }
             }
-            if(checkFind) break;
+            if(checkFindPhongBan) break;
         }
-        System.out.println("Dự án đang tham gia: ");
+        if(!checkFindPhongBan) System.out.println("Phòng ban: Chưa có");
+
+        boolean checkFindDuAn = false;
         QuanLyDuAn qlda = QuanLyDuAn.getInstance();
         int i=1;
         for(DuAn da : qlda.getDsDuAn()){
-            for(NhanSu ns : da.getDsNhanVienDuAn()){
+            for(NhanSu ns : da.getDsNhanSu()){
                 if(ns.getId().equals(super.getId())){
                     System.out.println("Dự án thứ " + i +": " + da.getNameDuAn());
                     i++;
+                    checkFindDuAn = true;
                     break;
                 }
             }
         }
+        if(!checkFindDuAn)  System.out.println("Dự án: Chưa có");
     }
 }

@@ -1,18 +1,10 @@
 package com.companyname.doAn.Gui;
 
-import java.util.Scanner;
-
-import com.companyname.doAn.ql.QuanLyNhanSu;
-import com.companyname.doAn.ql.QuanLyPhongBan;
-import com.companyname.doAn.type.NhanVien;
-import com.companyname.doAn.type.PhongBan;
+import static com.companyname.doAn.Gui.ShareIntance.*;
+import com.companyname.doAn.type.*;
 
 public class OptionQuanLyPhongBan implements ShowOption{
     public OptionQuanLyPhongBan(){}
-    Scanner sc = StaticScanner.sc;
-    QuanLyPhongBan qlpb = QuanLyPhongBan.getInstance();
-    OptionPhongBan optionPhongBan = new OptionPhongBan();
-    OptionMenu optionMenu = new OptionMenu();
 
     public void themPhongBan() {
         System.out.print("Nhap so phong ban muon them: ");
@@ -30,7 +22,6 @@ public class OptionQuanLyPhongBan implements ShowOption{
             }
         }
         for (int i = 0; i < slPb; i++) {
-            Scanner sc = new Scanner(System.in);
             System.out.print("Nhập tên phòng ban thu: " + i+1 + " :");
             String namePhongBan = sc.nextLine();
             System.out.print("Nhập id phòng ban: " + i+1 + " :");
@@ -80,10 +71,8 @@ public class OptionQuanLyPhongBan implements ShowOption{
     }
 
     public void xoaPhongBan(){
-        Scanner sc = new Scanner(System.in);
         System.out.print("Nhập ID phòng ban muốn xóa: ");
         String id = sc.nextLine();
-        QuanLyPhongBan qlpb = QuanLyPhongBan.getInstance();
         if(qlpb.getPhongBanByID(id) == null || qlpb.getPhongBanByID(id).getIsDelete()){
             System.out.println("ID phòng ban không tồn tại");
         }
@@ -93,11 +82,9 @@ public class OptionQuanLyPhongBan implements ShowOption{
     }
 
     public void moveNhanVien(){
-        Scanner sc = new Scanner(System.in);
         System.out.print("Nhập ID nhân viên muốn di chuyển phòng ban: ");
         String idNhanVien = sc.nextLine();
         //kiểm tra xem ID nhân viên có tồn tại trong công ty không
-        QuanLyNhanSu qlns = QuanLyNhanSu.getInstance();
         if(qlns.getNhanVienById(idNhanVien) == null || qlns.getNhanVienById(idNhanVien).getIsDelete()){
             System.out.println("ID nhân viên không tồn tại");
         }
@@ -193,7 +180,7 @@ public class OptionQuanLyPhongBan implements ShowOption{
                 optionPhongBan.xoaDuAn(currentPhongBan);
                 optionMenu.chucNangQuanLyPhongBan();
                 break;
-            case 5: 
+            case 5:
                 optionPhongBan.show();
                 optionMenu.chucNangQuanLyPhongBan();
                 break;

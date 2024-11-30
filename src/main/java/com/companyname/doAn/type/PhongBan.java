@@ -12,12 +12,12 @@ public class PhongBan {
     private DuAn dsDuAn[];
     private boolean isDelete;
 
-    public PhongBan(String name, String id, NhanVien dsNhanVien[], DuAn dsDuAn[]){
+    public PhongBan(String name, String id, NhanVien[] dsNhanVien, DuAn[] dsDuAn, boolean isDelete) {
         this.namePhongBan = name;
         this.idPhongBan = id;
         this.dsNhanVien = dsNhanVien;
         this.dsDuAn = dsDuAn;
-        this.isDelete = false;
+        this.isDelete = isDelete;
     }
 
     public PhongBan(String name, String id){
@@ -48,7 +48,6 @@ public class PhongBan {
     public boolean getIsDelete(){
        return this.isDelete;
     }
-    //--------------------------
 
     //----------------SET------------
     public void setNamePhongBan(String name){
@@ -70,7 +69,7 @@ public class PhongBan {
     public void setIsDelete(boolean status){
         this.isDelete = status;
     }
-    //--------------------------
+
 
     public void printThongTinPhongBan(){
         System.out.println("Tên: " + this.namePhongBan);
