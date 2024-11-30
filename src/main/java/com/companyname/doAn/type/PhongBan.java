@@ -57,7 +57,7 @@ public class PhongBan {
     }
 
     //----------------SET------------
-    public void getTruongPhong(TruongPhong tp){
+    public void setTruongPhong(TruongPhong tp){
         this.truongPhong = tp;
     }
 
@@ -122,16 +122,18 @@ public class PhongBan {
         }
     }
 
-    public void printDsNhanVienPhongBan(){
-        int i=0;
+    public void printDsNhanSu(){
+        if(this.truongPhong == null) System.out.println("Truong phong: chua co");
+        else System.out.println("Truong phong: " + this.truongPhong.getName() + ". ID: " + truongPhong.getId());
+        System.out.println("Danh sach nhan vien: " + this.dsNhanVien.length);
+        int i=1;
         for(NhanVien nv : this.dsNhanVien){
             if(!nv.getIsDelete()){
-                System.out.println("Nhân viên thứ " + i+1 + " :");
+                System.out.println("Nhân viên thứ " + i + " :");
                 System.out.println(nv.getName() + ". ID: " + nv.getId());
                 i++;
             }
         }
-        if(i==0) System.out.println("Khong co nhan vien");
     }
 
     public void addNhanVien(NhanVien nv){
@@ -191,31 +193,5 @@ public class PhongBan {
             }
         }
         return null;
-    }
-
-    public void printDsNhanSu(){
-        TruongPhong tmpTruongPhong = null;
-        QuanLyNhanSu qlns = new QuanLyNhanSu();
-        for(NhanSu ns : qlns.getDsNhanSu()){
-            if(ns instanceof TruongPhong){
-                if(((TruongPhong) ns).getPhongBan().getIdPhongBan().equals(this.idPhongBan)){
-                    tmpTruongPhong = (TruongPhong) ns;
-                }
-            }
-        }
-        if(tmpTruongPhong != null && !tmpTruongPhong.getIsDelete()){
-            System.out.println("Truong phong: " + tmpTruongPhong.getName() + ". ID: " + tmpTruongPhong.getId());
-        }
-        else  System.out.println("Truong phong: chua co");
-        int i=0;
-        for(NhanVien nv : this.getDsNhanVien()){
-            if(!nv.getIsDelete()){
-                System.out.println("Nhân viên thứ " + i+1 + " :");
-                System.out.println(nv.getName() + ". ID: " + nv.getId());
-                i++;
-            }
-        }
-        if(i==0) System.out.println("Khong co nhan vien");
-        System.out.println("---------------------------------------------");
     }
 }

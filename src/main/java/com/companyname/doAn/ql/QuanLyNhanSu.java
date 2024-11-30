@@ -96,70 +96,93 @@ public class QuanLyNhanSu {
         return null;
     }
 
-    public void printDsNhanSuDangLam(){
+//    public void printDsNhanSuDangLam(){
+//        System.out.println("---------------------------------------");
+//        boolean check = false;
+//        for(NhanSu ns : this.dsNhanSu){
+//            if(!ns.getIsDelete()) check = true;
+//        }
+//        if(!check){
+//            System.out.println("Không có nhân viên nào");
+//            return;
+//        }
+//        System.out.println("Danh sách nhân sự đang làm việc:");
+//        int i = 1;
+//        for(NhanSu nhanSu : this.dsNhanSu){
+//            if(!nhanSu.getIsDelete()){
+//                if(nhanSu instanceof NhanVien){
+//                    System.out.println("Nhân sự thứ " + i + ": " + nhanSu.getName() + ". ID: " + nhanSu.getId() + ". Chức vụ: Nhân viên");
+//                }
+//                else{
+//                    System.out.println("Nhân sự thứ " + i + ": " + nhanSu.getName() +  ". ID: " + nhanSu.getId() + ". Chức vụ: Trưởng phòng");
+//                }
+//            }
+//        }
+//    }
+//
+//    public void printDsNhanSuDaNghi(){
+//        System.out.println("---------------------------------------");
+//        boolean check = false;
+//        for(NhanSu ns : this.dsNhanSu){
+//            if(ns.getIsDelete()) check = true;
+//        }
+//        if(!check){
+//            System.out.println("Không có nhân viên nào");
+//            return;
+//        }
+//        int i = 1;
+//        for(NhanSu nhanSu : this.dsNhanSu){
+//            if(nhanSu.getIsDelete()){
+//                if(nhanSu instanceof NhanVien){
+//                    System.out.println("Nhân sự thứ " + i + ": " + nhanSu.getName() + nhanSu.getId() + "Chức vụ: Nhân viên");
+//                }
+//                else{
+//                    System.out.println("Nhân sự thứ " + i + ": " + nhanSu.getName() + nhanSu.getId() + "Chức vụ: Trưởng phòng");
+//                }
+//            }
+//        }
+//
+//    }
+//
+//    public void printDsNhanVienDangLam(){
+//        System.out.println("---------------------------------------");
+//        boolean check = false;
+//        for(NhanVien nv : this.getNhanViens()){
+//            if(!nv.getIsDelete()) check = true;
+//        }
+//        if(!check){
+//            System.out.println("Không có nhân viên nào");
+//            return;
+//        }
+//        System.out.println("Danh sách nhân viên đang làm việc:");
+//        int i = 1;
+//        for(NhanVien nv : this.getNhanViens()){
+//            if(!nv.getIsDelete()){
+//                System.out.println("Nhân sự thứ " + i + ": " + nv.getName() + ". ID: " + nv.getId());
+//            }
+//        }
+//    }
+
+    public void printDsNhanSu(){
         System.out.println("---------------------------------------");
-        boolean check = false;
+        System.out.println("Danh sách nhan su da nghi lam:");
+        int i=1;
         for(NhanSu ns : this.dsNhanSu){
-            if(!ns.getIsDelete()) check = true;
-        }
-        if(!check){
-            System.out.println("Không có nhân viên nào");
-            return;
-        }
-        System.out.println("Danh sách nhân sự đang làm việc:");
-        int i = 1;
-        for(NhanSu nhanSu : this.dsNhanSu){
-            if(!nhanSu.getIsDelete()){
-                if(nhanSu instanceof NhanVien){
-                    System.out.println("Nhân sự thứ " + i + ": " + nhanSu.getName() + ". ID: " + nhanSu.getId() + ". Chức vụ: Nhân viên");
-                }
-                else{
-                    System.out.println("Nhân sự thứ " + i + ": " + nhanSu.getName() +  ". ID: " + nhanSu.getId() + ". Chức vụ: Trưởng phòng");
-                }
+            if(ns.getIsDelete()){
+                System.out.println("Nhân sự thứ " + i + ": " + ns.getName() + ". ID: " + ns.getId());
+                i++;
             }
         }
-    }
+        if(i==1) System.out.println("Không có nhân sự nào");
 
-    public void printDsNhanSuDaNghi(){
-        System.out.println("---------------------------------------");
-        boolean check = false;
+        System.out.println("Danh sách nhan su đang làm việc:");
+        int j=1;
         for(NhanSu ns : this.dsNhanSu){
-            if(ns.getIsDelete()) check = true;
-        }
-        if(!check){
-            System.out.println("Không có nhân viên nào");
-            return;
-        }
-        int i = 1;
-        for(NhanSu nhanSu : this.dsNhanSu){
-            if(nhanSu.getIsDelete()){
-                if(nhanSu instanceof NhanVien){
-                    System.out.println("Nhân sự thứ " + i + ": " + nhanSu.getName() + nhanSu.getId() + "Chức vụ: Nhân viên");
-                }
-                else{
-                    System.out.println("Nhân sự thứ " + i + ": " + nhanSu.getName() + nhanSu.getId() + "Chức vụ: Trưởng phòng");
-                }
+            if(!ns.getIsDelete()){
+                System.out.println("Nhân sự thứ " + j + ": " + ns.getName() + ". ID: " + ns.getId());
+                j++;
             }
         }
-
-    }
-
-    public void printDsNhanVienDangLam(){
-        System.out.println("---------------------------------------");
-        boolean check = false;
-        for(NhanVien nv : this.getNhanViens()){
-            if(!nv.getIsDelete()) check = true;
-        }
-        if(!check){
-            System.out.println("Không có nhân viên nào");
-            return;
-        }
-        System.out.println("Danh sách nhân viên đang làm việc:");
-        int i = 1;
-        for(NhanVien nv : this.getNhanViens()){
-            if(!nv.getIsDelete()){
-                System.out.println("Nhân sự thứ " + i + ": " + nv.getName() + ". ID: " + nv.getId());
-            }
-        }
+        if(j==1) System.out.println("Không có nhân sự nào");
     }
 }

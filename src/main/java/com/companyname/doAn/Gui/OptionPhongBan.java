@@ -250,27 +250,32 @@ public class OptionPhongBan implements ShowOption{
 //                }
 //            }
 //        }
-        System.out.println("ID truong phong hien tai: " + currentPhongBan.getTruongPhong().getId());
-        currentPhongBan.printDsNhanVienPhongBan();
-        TruongPhong oldTruongPhong = null;
-        for (NhanSu ns : qlns.getDsNhanSu()) {
-            if (ns instanceof TruongPhong) {
-                if (((TruongPhong) ns).getPhongBan().getIdPhongBan().equals(currentPhongBan.getIdPhongBan())) {
-                    oldTruongPhong = (TruongPhong) ns;
-                }
-            }
+        System.out.print("Nhap ID nhan vien se lam truong phong: ");
+        String id = sc.nextLine();
+        NhanVien oldNv = qlns.getNhanVienById(id);
+        if(oldNv == null || oldNv.getIsDelete()){
+            System.out.println("ID nhan vien khong ton tai trong phong ban nay");
+            return;
         }
+        TruongPhong newTruongPhong = new TruongPhong(oldNv.getId(), oldNv.getName(), oldNv.getPhone(), oldNv.getDiaChi(), oldNv.getNamVaoLam(), oldNv.getKinhNghiem());
+        TruongPhong oldTruongPhong = currentPhongBan.getTruongPhong();
+
         if(oldTruongPhong == null){
-            System.out.println("Phong ban chua co truong phong");
-            System.out.print("Nhap ID nhan vien se lam truong phong: ");
-            String id = sc.nextLine();
-            NhanVien oldNv = qlns.getNhanVienById(id);
-            if(oldNv == null || oldNv.getIsDelete()){
-                System.out.println("ID nhan vien khong ton tai trong phong ban nay");
-                return;
-            }
+            System.out.println("Phong ban chua co truong phong. ID nhan vien vua nhap se lam truong phong");
             qlns.removeNhanSu(id);
-            TruongPhong newTruongPhong = new TruongPhong();
+            currentPhongBan.setTruongPhong(newTruongPhong);
+            currentPhongBan.removeNhanVien(id);
+            qlns.addNhanSu(newTruongPhong);
+        }
+        else{
+            System.out.println("ID truong phong hien tai: " + currentPhongBan.getTruongPhong().getId());
+            NhanVien newNv = new NhanVien(oldTruongPhong.getId(),oldTruongPhong.getName(),oldTruongPhong.getPhone(),oldTruongPhong.getDiaChi(),oldTruongPhong.getNamVaoLam(),oldTruongPhong.getKinhNghiem());
+            qlns.removeNhanSu(oldTruongPhong.getId());
+            qlns.removeNhanSu(id);
+            qlns.addNhanSu(newNv);
+            qlns.addNhanSu(newTruongPhong);
+            currentPhongBan.setTruongPhong(newTruongPhong);
+            System.out.println("ID truong phong moi: " + currentPhongBan.getTruongPhong().getId());
         }
     }
 }
