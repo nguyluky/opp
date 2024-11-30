@@ -1,11 +1,8 @@
 package com.companyname.doAn.type;
 
-import com.companyname.doAn.ql.QuanLyDuAn;
-import com.companyname.doAn.ql.QuanLyPhongBan;
-
 public class TruongPhong extends NhanSu {
     private  final String chucVu = "Truong Phong";
-    private final int luongCoBan = 4000000;
+    private int luongCoBan = 4000000;
     private final int soNgayNghiToiDa = 3;
     PhongBan phongBan;
 
@@ -19,6 +16,22 @@ public class TruongPhong extends NhanSu {
     public TruongPhong(String id, String name, String phone, String diaChi, int namVaolam, int kinhNghiem, PhongBan pb) {
         super(id, name, phone, diaChi, namVaolam, kinhNghiem);
         this.phongBan = pb;
+    }
+
+    public TruongPhong(
+        String id,
+        String name,
+        String phone,
+        String diaChi,
+        int namVaoLam,
+        int soNgayNghi,
+        int kinhNghiem,
+        int luongCoBan,
+        PhongBan phongBan,
+        boolean isDelete
+    ) {
+        super(id, name, phone, diaChi, namVaoLam, soNgayNghi, kinhNghiem, isDelete);
+        this.phongBan = phongBan;
     }
 
     @Override

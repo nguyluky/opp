@@ -1,6 +1,13 @@
 package com.companyname.doAn.fileManager;
 
-public interface BaseWriter {
-    abstract void addField(String name,  String value);
-    abstract void render();
+import java.io.IOException;
+
+public interface BaseWriter<T> {
+    abstract void save(T[] data) throws IOException;
+    public static String escape(String text) {
+        if (text == "\"") {
+            return "\"\"";
+        }
+        return "\"" + text.replace("\"", "\"\"") + "\"";
+    }
 }

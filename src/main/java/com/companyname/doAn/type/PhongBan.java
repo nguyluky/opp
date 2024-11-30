@@ -21,11 +21,15 @@ public class PhongBan {
     }
 
     public PhongBan(String name, String id){
+        this(name, id, false);
+    }
+
+    public PhongBan(String name, String id, boolean isDelete){
         this.namePhongBan = name;
         this.idPhongBan = id;
         this.dsNhanVien = new NhanVien[0];
         this.dsDuAn = new DuAn[0];
-        this.isDelete = false;
+        this.isDelete = isDelete;
     }
 
     //----------GET--------------
