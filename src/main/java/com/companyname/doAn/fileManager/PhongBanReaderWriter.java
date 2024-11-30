@@ -19,7 +19,7 @@ public class PhongBanReaderWriter implements BaseReader<PhongBan>, BaseWriter<Ph
     File file;
     Scanner sc;
 
-    PhongBanReaderWriter(String folder) {
+    public PhongBanReaderWriter(String folder) {
         this.filePath = folder + FILE_NAME;
         file = new File(this.filePath);
         if (!file.exists()) {
