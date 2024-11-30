@@ -23,27 +23,31 @@ public class OptionQuanLyPhongBan implements ShowOption{
             }
         }
         for (int i = 0; i < slPb; i++) {
-            System.out.print("Nhập tên phòng ban thứ " + (i + 1) + ": ");
-            String namePhongBan = sc.nextLine();
-            if(qlpb.getPhongBanByName(namePhongBan) != null){
-                System.out.println("Tên đã tồn tại");
-                continue;
+            String namePhongBan;
+            while(true){
+                System.out.print("Nhập tên phòng ban thứ " + (i + 1) + ": ");
+                namePhongBan = sc.nextLine();
+                if(qlpb.getPhongBanByName(namePhongBan) != null){
+                    System.out.println("Tên đã tồn tại");
+                }
+                else break;
             }
-
-            System.out.print("Nhập ID phòng ban thứ " + (i + 1) + ": ");
-            String idPhongBan = sc.nextLine();
-            if (qlpb.getPhongBanByID(idPhongBan) != null) {
-                System.out.println("ID đã tồn tại");
-                continue;
+            String idPhongBan;
+            while(true){
+                System.out.print("Nhập ID phòng ban thứ " + (i + 1) + ": ");
+                idPhongBan = sc.nextLine();
+                if (qlpb.getPhongBanByID(idPhongBan) != null) {
+                    System.out.println("ID đã tồn tại");
+                }
+                else break;
             }
 
             PhongBan currentPhongBan = new PhongBan(namePhongBan, idPhongBan);
             qlpb.addPhongBan(currentPhongBan);
 
             System.out.println("1: Thêm dự án");
-            System.out.println("2: Xóa dự án");
-            System.out.println("3: Thêm nhân viên");
-            System.out.println("4: Xóa nhân viên");
+            System.out.println("2: Thêm nhân viên");
+            System.out.println("3: Thêm trưởng phòng");
             System.out.println("0: Khong lam gi het");
             System.out.print("Chon chuc nang: ");
 
@@ -51,7 +55,7 @@ public class OptionQuanLyPhongBan implements ShowOption{
             while (true) {
                 try {
                     choice = Integer.parseInt(sc.nextLine());
-                    if (choice > 4 || choice < 0) {
+                    if (choice > 2 || choice < 0) {
                         System.out.println("Can nhap so nguyen duong");
                     } else {
                         break;
@@ -66,13 +70,7 @@ public class OptionQuanLyPhongBan implements ShowOption{
                     optionPhongBan.themDuAn(currentPhongBan);
                     break;
                 case 2:
-                    optionPhongBan.xoaDuAn(currentPhongBan);
-                    break;
-                case 3:
                     optionPhongBan.themNhanVien(currentPhongBan);
-                    break;
-                case 4:
-                    optionPhongBan.xoaNhanVien(currentPhongBan);
                     break;
                 case 0:
                     break;
@@ -167,11 +165,9 @@ public class OptionQuanLyPhongBan implements ShowOption{
             System.out.println("1: Thêm nhân viên");
             System.out.println("2: Xóa nhân viên");
             System.out.println("3: Thêm dự án");
-            System.out.println("2: Xóa dự án");
-            System.out.println("5: Chức năng đối với dự án cụ thể");
-            System.out.println("6: Thay doi truong phong");
-            System.out.println("7: In danh sach nhan su");
-            System.out.println("8: Xem thong tin phong ban");
+            System.out.println("4: Xóa dự án");
+            System.out.println("5: Thay doi truong phong");
+            System.out.println("6: Xem thong tin phong ban");
             System.out.println("0: Quay lại menu trước");
             System.out.print("Chon chuc nang: ");
 
@@ -179,7 +175,7 @@ public class OptionQuanLyPhongBan implements ShowOption{
             while (true) {
                 try {
                     choice = Integer.parseInt(sc.nextLine());
-                    if (choice > 8 || choice < 0) {
+                    if (choice > 6 || choice < 0) {
                         System.out.println("Can chon chuc nang hop ly");
                     } else break;
                 } catch (NumberFormatException e) {
@@ -204,18 +200,10 @@ public class OptionQuanLyPhongBan implements ShowOption{
                     optionMenu.chucNangQuanLyPhongBan();
                     break;
                 case 5:
-                    optionPhongBan.show();
-                    optionMenu.chucNangQuanLyPhongBan();
-                    break;
-                case 6:
                     optionPhongBan.thayDoiTruongPhong(currentPhongBan);
                     optionMenu.chucNangQuanLyPhongBan();
                     break;
-                case 7:
-                    currentPhongBan.printDsNhanSu();
-                    optionMenu.chucNangQuanLyPhongBan();
-                    break;
-                case 8:
+                case 6:
                     currentPhongBan.printThongTinPhongBan();
                     optionMenu.chucNangQuanLyPhongBan();
                     break;

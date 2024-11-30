@@ -27,7 +27,7 @@ public class OptionQuanLyNhanSu implements ShowOption{
         }
         for(int i=0; i<slNhanVien;i++){
             System.out.println("---------------------------------------");
-            System.out.println("Nhân viên thứ " + (i+1) + ":");
+            System.out.println("Nhân sự thứ " + (i+1) + ":");
             String id;
             while(true) {
                 System.out.print("Nhập ID: ");
