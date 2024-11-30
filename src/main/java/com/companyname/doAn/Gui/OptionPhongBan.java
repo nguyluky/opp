@@ -264,11 +264,13 @@ public class OptionPhongBan implements ShowOption{
             System.out.println("Phong ban chua co truong phong");
             System.out.print("Nhap ID nhan vien se lam truong phong: ");
             String id = sc.nextLine();
-            if(currentPhongBan.getNhanVienById(id) == null || currentPhongBan.getNhanVienById(id).getIsDelete()){
+            NhanVien oldNv = qlns.getNhanVienById(id);
+            if(oldNv == null || oldNv.getIsDelete()){
                 System.out.println("ID nhan vien khong ton tai trong phong ban nay");
                 return;
             }
-
+            qlns.removeNhanSu(id);
+            TruongPhong newTruongPhong = new TruongPhong();
         }
     }
 }
