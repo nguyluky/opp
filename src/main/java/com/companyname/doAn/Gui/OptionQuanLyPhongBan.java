@@ -7,6 +7,7 @@ public class OptionQuanLyPhongBan implements ShowOption{
     public OptionQuanLyPhongBan(){}
 
     public void themPhongBan() {
+        System.out.println("---------------------------------------");
         System.out.print("Nhap so phong ban muon them: ");
         int slPb;
         while (true) {
@@ -22,10 +23,19 @@ public class OptionQuanLyPhongBan implements ShowOption{
             }
         }
         for (int i = 0; i < slPb; i++) {
-            System.out.print("Nhập tên phòng ban thu: " + i+1 + " :");
+            System.out.print("Nhập tên phòng ban thứ " + (i + 1) + ": ");
             String namePhongBan = sc.nextLine();
-            System.out.print("Nhập id phòng ban: " + i+1 + " :");
+            if(qlpb.getPhongBanByName(namePhongBan) != null){
+                System.out.println("Tên đã tồn tại");
+                continue;
+            }
+
+            System.out.print("Nhập ID phòng ban thứ " + (i + 1) + ": ");
             String idPhongBan = sc.nextLine();
+            if (qlpb.getPhongBanByID(idPhongBan) != null) {
+                System.out.println("ID đã tồn tại");
+                continue;
+            }
 
             PhongBan currentPhongBan = new PhongBan(namePhongBan, idPhongBan);
             qlpb.addPhongBan(currentPhongBan);
@@ -67,10 +77,12 @@ public class OptionQuanLyPhongBan implements ShowOption{
                 case 0:
                     break;
             }
+
         }
     }
 
     public void xoaPhongBan(){
+        System.out.println("---------------------------------------");
         System.out.print("Nhập ID phòng ban muốn xóa: ");
         String id = sc.nextLine();
         if(qlpb.getPhongBanByID(id) == null || qlpb.getPhongBanByID(id).getIsDelete()){
@@ -78,10 +90,13 @@ public class OptionQuanLyPhongBan implements ShowOption{
         }
         else{
             qlpb.getPhongBanByID(id).setIsDelete(true);
+            System.out.println("Xóa phòng ban thành công");
         }
     }
 
     public void moveNhanVien(){
+        //in danh sách nhân viên đang làm
+        qlns.printDsNhanVienDangLam();
         System.out.print("Nhập ID nhân viên muốn di chuyển phòng ban: ");
         String idNhanVien = sc.nextLine();
         //kiểm tra xem ID nhân viên có tồn tại trong công ty không
@@ -101,15 +116,19 @@ public class OptionQuanLyPhongBan implements ShowOption{
                     }
                 }
             }
+            //nếu đã có phòng ban
             if(checkTonTaiPhongBan){
-                System.out.println("Nhân viên đang ở phòng ban: " + phongBanHaveNhanVien.getNamePhongBan());
+                System.out.println("Nhân viên đang ở phòng ban: " + phongBanHaveNhanVien.getIdPhongBan());
                 qlpb.printDsPhongBan(); //in id danh sach phong ban
-                System.out.print("Nhập ID phòng ban nhân viên sẽ chuyển đến: ");
+                System.out.print("Nhập ID phòng ban mà nhân viên sẽ chuyển đến: ");
                 String idPhongBan = sc.nextLine();
-                if(qlpb.getPhongBanByID(idPhongBan) != null){
+                if(qlpb.getPhongBanByID(idPhongBan) != null && !qlpb.getPhongBanByID(idPhongBan).getIsDelete()){
                     qlpb.getPhongBanByID(idPhongBan).addNhanVien(qlns.getNhanVienById(idNhanVien));
                     //xóa nhân viên khỏi phòng ban cũ
                     phongBanHaveNhanVien.removeNhanVien(idNhanVien);
+                }
+                else{
+                    System.out.println("ID phòng ban không tồn tại");
                 }
             }
             else{
@@ -131,74 +150,79 @@ public class OptionQuanLyPhongBan implements ShowOption{
     @Override
     public void show(){
         qlpb.printDsPhongBan();
-
+        System.out.println("-----------------------------------");
         System.out.print("Nhập ID phòng ban cụ thể: ");
         String idPhongBan = sc.nextLine();
-        if(qlpb.getPhongBanByID(idPhongBan) == null || qlpb.getPhongBanByID(idPhongBan).getIsDelete()){
+        if(qlpb.getPhongBanByID(idPhongBan) == null){
             System.out.println("ID phòng ban không tồn tại");
             return;
         }
         PhongBan currentPhongBan = qlpb.getPhongBanByID(idPhongBan);
 
-        System.out.println("1: Thêm nhân viên");
-        System.out.println("2: Xóa nhân viên");
-        System.out.println("3: Thêm dự án");
-        System.out.println("2: Xóa dự án");
-        System.out.println("5: Chức năng đối với dự án cụ thể");
-        System.out.println("6: Thay doi truong phong");
-        System.out.println("7: In danh sach nhan su");
-        System.out.println("8: Xem thong tin phong ban");
-        System.out.println("0: Quay lại menu trước");
-        System.out.print("Chon chuc nang: ");
+        if(currentPhongBan.getIsDelete()){
+            System.out.println("Thông tin cơ bản");
+            currentPhongBan.printThongTinPhongBan();
+        }
+        else {
+            System.out.println("1: Thêm nhân viên");
+            System.out.println("2: Xóa nhân viên");
+            System.out.println("3: Thêm dự án");
+            System.out.println("2: Xóa dự án");
+            System.out.println("5: Chức năng đối với dự án cụ thể");
+            System.out.println("6: Thay doi truong phong");
+            System.out.println("7: In danh sach nhan su");
+            System.out.println("8: Xem thong tin phong ban");
+            System.out.println("0: Quay lại menu trước");
+            System.out.print("Chon chuc nang: ");
 
-        int choice;
-        while(true){
-            try {
-                choice = Integer.parseInt(sc.nextLine());
-                if(choice > 8 || choice<  0){
+            int choice;
+            while (true) {
+                try {
+                    choice = Integer.parseInt(sc.nextLine());
+                    if (choice > 8 || choice < 0) {
+                        System.out.println("Can chon chuc nang hop ly");
+                    } else break;
+                } catch (NumberFormatException e) {
                     System.out.println("Can chon chuc nang hop ly");
                 }
-                else break;
-            } catch(NumberFormatException e){
-                System.out.println("Can chon chuc nang hop ly");
             }
-        }
-        switch (choice) {
-            case 1:
-                optionPhongBan.themNhanVien(currentPhongBan);
-                optionMenu.chucNangQuanLyPhongBan();
-                break;
-            case 2:
-                optionPhongBan.xoaNhanVien(currentPhongBan);
-                optionMenu.chucNangQuanLyPhongBan();
-                break;
-            case 3:
-                optionPhongBan.themDuAn(currentPhongBan);
-                optionMenu.chucNangQuanLyPhongBan();
-                break;
-            case 4:
-                optionPhongBan.xoaDuAn(currentPhongBan);
-                optionMenu.chucNangQuanLyPhongBan();
-                break;
-            case 5:
-                optionPhongBan.show();
-                optionMenu.chucNangQuanLyPhongBan();
-                break;
-            case 6:
-                optionPhongBan.thayDoiTruongPhong(currentPhongBan);
-                optionMenu.chucNangQuanLyPhongBan();
-                break;
-            case 7:
-                currentPhongBan.printDsNhanSu();
-                optionMenu.chucNangQuanLyPhongBan();
-                break;
-            case 8:
-                currentPhongBan.printThongTinPhongBan();
-                optionMenu.chucNangQuanLyPhongBan();
-                break;
-            case 0:
-                optionMenu.chucNangQuanLyPhongBan();
-                break;
+            switch (choice) {
+                case 1:
+                    optionPhongBan.themNhanVien(currentPhongBan);
+                    optionMenu.chucNangQuanLyPhongBan();
+                    break;
+                case 2:
+                    optionPhongBan.xoaNhanVien(currentPhongBan);
+                    optionMenu.chucNangQuanLyPhongBan();
+                    break;
+                case 3:
+                    optionPhongBan.themDuAn(currentPhongBan);
+                    optionMenu.chucNangQuanLyPhongBan();
+                    break;
+                case 4:
+                    optionPhongBan.xoaDuAn(currentPhongBan);
+                    optionMenu.chucNangQuanLyPhongBan();
+                    break;
+                case 5:
+                    optionPhongBan.show();
+                    optionMenu.chucNangQuanLyPhongBan();
+                    break;
+                case 6:
+                    optionPhongBan.thayDoiTruongPhong(currentPhongBan);
+                    optionMenu.chucNangQuanLyPhongBan();
+                    break;
+                case 7:
+                    currentPhongBan.printDsNhanSu();
+                    optionMenu.chucNangQuanLyPhongBan();
+                    break;
+                case 8:
+                    currentPhongBan.printThongTinPhongBan();
+                    optionMenu.chucNangQuanLyPhongBan();
+                    break;
+                case 0:
+                    optionMenu.chucNangQuanLyPhongBan();
+                    break;
+            }
         }
     }
 }

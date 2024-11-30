@@ -8,14 +8,16 @@ import java.util.Arrays;
 public class PhongBan {
     private String namePhongBan;
     private String idPhongBan;
-    private NhanVien dsNhanVien[];
-    private DuAn dsDuAn[];
+    private NhanVien[] dsNhanVien;
+    private TruongPhong truongPhong;
+    private DuAn[] dsDuAn;
     private boolean isDelete;
 
-    public PhongBan(String name, String id, NhanVien[] dsNhanVien, DuAn[] dsDuAn, boolean isDelete) {
+    public PhongBan(String name, String id, NhanVien[] dsNhanVien, TruongPhong truongPhong, DuAn[] dsDuAn, boolean isDelete) {
         this.namePhongBan = name;
         this.idPhongBan = id;
         this.dsNhanVien = dsNhanVien;
+        this.truongPhong = truongPhong;
         this.dsDuAn = dsDuAn;
         this.isDelete = isDelete;
     }
@@ -28,11 +30,16 @@ public class PhongBan {
         this.namePhongBan = name;
         this.idPhongBan = id;
         this.dsNhanVien = new NhanVien[0];
+        this.truongPhong = null;
         this.dsDuAn = new DuAn[0];
         this.isDelete = isDelete;
     }
 
     //----------GET--------------
+    public TruongPhong getTruongPhong(){
+        return this.truongPhong;
+    }
+
     public String getNamePhongBan(){
         return this.namePhongBan;
     }
@@ -54,6 +61,10 @@ public class PhongBan {
     }
 
     //----------------SET------------
+    public void getTruongPhong(TruongPhong tp){
+        this.truongPhong = tp;
+    }
+
     public void setNamePhongBan(String name){
         this.namePhongBan = name;
     }
@@ -79,7 +90,40 @@ public class PhongBan {
         System.out.println("Tên: " + this.namePhongBan);
         System.out.println("ID: " + this.idPhongBan);
         System.out.println("Số lượng nhân viên: " + this.dsNhanVien.length);
+        int i=1;
+        for(NhanVien nv : this.dsNhanVien){
+            System.out.println("Nhân viên thứ " + i + ": " + nv.getName() + ". ID: " + nv.getId());
+            i++;
+        }
         System.out.println("Số lượng dự án: " + this.dsDuAn.length);
+        if(this.dsDuAn.length > 0) {
+            System.out.println("Danh sách dự án đã dừng hoạt động:");
+            boolean checkOff = false;
+            int j=1;
+            for (DuAn da : this.dsDuAn) {
+                if (da.getIsDelete()) {
+                    System.out.print("Dự án thứ " + j + ": " + da.getNameDuAn() + ". ID: " + da.getIdDuAn());
+                    j++;
+                    checkOff = true;
+                }
+            }
+            if(!checkOff) {
+                System.out.println("Không có");
+            }
+            System.out.println("Danh sách dự án đang hoạt động:");
+            boolean checkOn = false;
+            int k=1;
+            for (DuAn da : this.dsDuAn) {
+                if (!da.getIsDelete()) {
+                    System.out.print("Dự án thứ " + k + ": " + da.getNameDuAn() + ". ID: " + da.getIdDuAn());
+                    k++;
+                    checkOn = true;
+                }
+            }
+            if(!checkOn) {
+                System.out.println("Không có");
+            }
+        }
     }
 
     public void printDsNhanVienPhongBan(){

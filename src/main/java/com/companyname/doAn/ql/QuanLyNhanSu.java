@@ -143,4 +143,23 @@ public class QuanLyNhanSu {
         }
 
     }
+
+    public void printDsNhanVienDangLam(){
+        System.out.println("---------------------------------------");
+        boolean check = false;
+        for(NhanVien nv : this.getNhanViens()){
+            if(!nv.getIsDelete()) check = true;
+        }
+        if(!check){
+            System.out.println("Không có nhân viên nào");
+            return;
+        }
+        System.out.println("Danh sách nhân viên đang làm việc:");
+        int i = 1;
+        for(NhanVien nv : this.getNhanViens()){
+            if(!nv.getIsDelete()){
+                System.out.println("Nhân sự thứ " + i + ": " + nv.getName() + ". ID: " + nv.getId());
+            }
+        }
+    }
 }
