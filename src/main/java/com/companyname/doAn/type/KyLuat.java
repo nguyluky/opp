@@ -24,4 +24,9 @@ public class KyLuat {
     public void setTienPhat(int tienPhat){
         this.tienPhat = tienPhat;
     }
+
+    // Không đồng vào nha
+    public String toString(){
+        return this.lyDo + "-" + this.tienPhat;
+    }
 }

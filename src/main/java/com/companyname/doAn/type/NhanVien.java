@@ -3,11 +3,10 @@ package com.companyname.doAn.type;
 
 import com.companyname.doAn.ql.QuanLyDuAn;
 import com.companyname.doAn.ql.QuanLyPhongBan;
-import com.companyname.doAn.type.DuAn;
 
 public class NhanVien extends NhanSu {
     private final String chucVu = "Nhan Vien";
-    private final int luongCoBan = 3000000;
+    private int luongCoBan = 3000000;
     private final int soNgayNghiToiDa = 2;
 
 
@@ -17,6 +16,26 @@ public class NhanVien extends NhanSu {
     public NhanVien(String id, String name, String phone, String diaChi, int namVaolam, int kinhNghiem) {
         super(id, name, phone, diaChi, namVaolam, kinhNghiem);
     }
+
+    // THIS
+    public NhanVien(
+        String id,
+        String name,
+        String phone,
+        String diaChi,
+        int namVaoLam,
+        int soNgayNghi,
+        int kinhNghiem,
+        int luongCoBan,
+        KyLuat[] dsKyLuat,
+        boolean isDelete
+    )
+    {
+        super(id, name, phone, diaChi, namVaoLam, soNgayNghi, kinhNghiem, isDelete);
+        this.luongCoBan = luongCoBan;
+        this.setDsKyLuat(dsKyLuat);
+    }
+
 
     public String toString(){
         return super.getName() + ";" + super.getId() + ";" + super.getPhone();
@@ -35,6 +54,10 @@ public class NhanVien extends NhanSu {
     @Override
     public int getLuongCoBan() {
         return this.luongCoBan;
+    }
+
+    public void setLuongCoBan(int luongCoBan) {
+        this.luongCoBan = luongCoBan;
     }
 
     @Override

@@ -11,10 +11,15 @@ public class DuAn {
     public DuAn(){}
 
     public DuAn(String nameDuAn, String idDuAn){
+        this(nameDuAn, idDuAn, false);
+    }
+
+    // HÀM DÙNG ĐỂ ĐỌC FILE
+    public DuAn(String nameDuAn, String idDuAn, boolean isDelete) {
         this.nameDuAn = nameDuAn;
         this.idDuAn = idDuAn;
         this.dsNhanSu = new NhanSu[0];
-        this.isDelete = false;
+        this.isDelete = isDelete;
     }
     
     //--------------GET-------------------------------------
