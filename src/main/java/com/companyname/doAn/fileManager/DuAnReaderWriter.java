@@ -19,7 +19,7 @@ public class DuAnReaderWriter implements BaseReader<DuAn>, BaseWriter<DuAn> {
     File file;
     Scanner sc;
 
-    DuAnReaderWriter(String folder) {
+    public DuAnReaderWriter(String folder) {
         this.filePath = folder + FILE_NAME;
         file = new File(this.filePath);
         if (!file.exists()) {

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 
+import com.companyname.doAn.type.KhenThuong;
 import com.companyname.doAn.type.KyLuat;
 import com.companyname.doAn.type.NhanVien;
 
@@ -51,11 +52,40 @@ public class NhanVienReaderWriter implements BaseReader<NhanVien>, BaseWriter<Nh
         KyLuat[] kls = new KyLuat[klStrs.length];
 
         for (int i = 0; i < klStrs.length; i++) {
+            if (klStrs[i].equals("")) {
+                continue;
+            }
             String[] kl = klStrs[i].split("-");
             kls[i] = new KyLuat(kl[0], Integer.parseInt(kl[1]));
         }
 
         return kls;
+    }
+
+    String ktToString(KhenThuong[] kt) {
+        String[] ktStr = new String[kt.length];
+
+        int i = 0;
+        for (KhenThuong k: kt) {
+            ktStr[i] = k.toString();
+            i++;
+        }
+        return String.join("|", ktStr);
+    }
+
+    KhenThuong[] StringToKts(String ktStr) {
+        String[] ktStrs = ktStr.split("\\|");
+        KhenThuong[] kts = new KhenThuong[ktStrs.length];
+
+        for (int i = 0; i < ktStrs.length; i++) {
+            if (ktStrs[i].equals("")) {
+                continue;
+            }
+            String[] kt = ktStrs[i].split("-");
+            kts[i] = new KhenThuong(kt[0], Integer.parseInt(kt[1]));
+        }
+
+        return kts;
     }
 
     public NhanVien[] read() throws FileNotFoundException {
@@ -65,7 +95,15 @@ public class NhanVienReaderWriter implements BaseReader<NhanVien>, BaseWriter<Nh
 
         while (sc.hasNextLine()) {
             String data = sc.nextLine();
+            if (data.equals("")) {
+                continue;
+            }
             String[] arr = BaseReader.split(data);
+
+            if (arr.length < 11) {
+                System.err.println("File " + FILE_NAME + " is corrupted");
+                System.exit(-1);
+            }
 
             nhanVienS = Arrays.copyOf(nhanVienS, nhanVienS.length + 1);
 
@@ -79,7 +117,8 @@ public class NhanVienReaderWriter implements BaseReader<NhanVien>, BaseWriter<Nh
                     Integer.parseInt(arr[6]),
                     Integer.parseInt(arr[7]),
                     StringToKls(arr[8]),
-                    Boolean.parseBoolean(arr[9]));
+                    StringToKts(arr[9]),
+                    Boolean.parseBoolean(arr[10]));
 
             nhanVienS[nhanVienS.length - 1] = newNhanVien;
         }
@@ -101,6 +140,7 @@ public class NhanVienReaderWriter implements BaseReader<NhanVien>, BaseWriter<Nh
                 nv.getKinhNghiem() + "",
                 nv.getLuongCoBan() + "",
                 klToString(nv.getDsKyLuat()),
+                ktToString(nv.getDsKhenThuong()),
                 nv.getIsDelete() + ""
             };
 

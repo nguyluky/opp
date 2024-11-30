@@ -15,6 +15,8 @@ public class TruongPhong extends NhanSu {
         super(id, name, phone, diaChi, namVaolam, kinhNghiem);
     }
 
+
+    // Dùng cho việc đọc file
     public TruongPhong(
         String id,
         String name,
@@ -24,10 +26,14 @@ public class TruongPhong extends NhanSu {
         int soNgayNghi,
         int kinhNghiem,
         int luongCoBan,
+        KyLuat[] dsKyLuat,
+        KhenThuong[] dsKhenThuong,
         boolean isDelete
     ) {
         super(id, name, phone, diaChi, namVaoLam, soNgayNghi, kinhNghiem, isDelete);
         this.luongCoBan = luongCoBan;
+        this.setDsKyLuat(dsKyLuat);
+        this.setDsKhenThuong(dsKhenThuong);
     }
 
     @Override
