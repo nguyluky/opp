@@ -36,9 +36,13 @@ public class PhongBanReaderWriter implements BaseReader<PhongBan>, BaseWriter<Ph
     private NhanVien[] getDsNhanVien(String text) {
         QuanLyNhanSu qLyNhanSu = QuanLyNhanSu.getInstance();
         String[] listId = text.split(",");
-        NhanVien[] listNhanViens = new NhanVien[listId.length];
+        NhanVien[] listNhanViens = new NhanVien[0];
         int i = 0;
         for (String nvId : listId) {
+            if (nvId.equals("")) {
+                continue;
+            }
+            listNhanViens = Arrays.copyOf(listNhanViens, listNhanViens.length + 1);
             listNhanViens[i] = (NhanVien) qLyNhanSu.getNhanSuById(nvId);
             i++;
         }
@@ -48,9 +52,13 @@ public class PhongBanReaderWriter implements BaseReader<PhongBan>, BaseWriter<Ph
     private DuAn[] getDsDuAn(String text) {
         QuanLyDuAn qLyDuAn = QuanLyDuAn.getInstance();
         String[] listId = text.split(",");
-        DuAn[] listDuAns = new DuAn[listId.length];
+        DuAn[] listDuAns = new DuAn[0];
         int i = 0;
         for (String daId : listId) {
+            if (daId.equals("")) {
+                continue;
+            }
+            listDuAns = Arrays.copyOf(listDuAns, listDuAns.length + 1);
             listDuAns[i] = qLyDuAn.getDuAnById(daId);
             i++;
         }
