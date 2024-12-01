@@ -12,25 +12,25 @@ public class OptionQuanLyPhongBan implements ShowOption{
         System.out.println("---------------------------------------");
 //        ShowOption.clearScreen();
 
-        System.out.print("Nhap so phong ban muon them: ");
+        System.out.print("Nhập số phòng ban muốn thêm: ");
         int slPb;
         while (true) {
             try {
                 slPb = Integer.parseInt(sc.nextLine());
                 if (slPb < 0) {
-                    System.out.println("Nhap so nguyen duong");
+                    System.out.println("Nhập số nguyên dương");
                 } else {
                     break;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Nhap so nguyen duong");
+                System.out.println("Nhập số nguyên dương");
             }
         }
         for (int i = 0; i < slPb; i++) {
             String namePhongBan;
             while(true){
                 System.out.print("Nhập tên phòng ban thứ " + (i + 1) + ": ");
-                namePhongBan = sc.nextLine();
+                namePhongBan = sc.nextLine().trim();
                 if(qlpb.getPhongBanByName(namePhongBan) != null){
                     System.out.println("Tên đã tồn tại");
                 }
@@ -39,7 +39,7 @@ public class OptionQuanLyPhongBan implements ShowOption{
             String idPhongBan;
             while(true){
                 System.out.print("Nhập ID phòng ban thứ " + (i + 1) + ": ");
-                idPhongBan = sc.nextLine();
+                idPhongBan = sc.nextLine().trim();
                 if (qlpb.getPhongBanByID(idPhongBan) != null) {
                     System.out.println("ID đã tồn tại");
                 }
@@ -51,20 +51,20 @@ public class OptionQuanLyPhongBan implements ShowOption{
 
             System.out.println("1: Thêm dự án");
             System.out.println("2: Thêm nhân viên");
-            System.out.println("0: Khong lam gi het");
-            System.out.print("Chon chuc nang: ");
+            System.out.println("0: Không làm gì hết");
+            System.out.print("Chọn chức năng: ");
 
             int choice;
             while (true) {
                 try {
                     choice = Integer.parseInt(sc.nextLine());
                     if (choice > 2 || choice < 0) {
-                        System.out.println("Can nhap so nguyen duong");
+                        System.out.println("Cần nhập số nguyên dương");
                     } else {
                         break;
                     }
                 } catch (NumberFormatException e) {
-                    System.out.println("Can nhap so nguyen duong");
+                    System.out.println("Cần nhập số nguyên dương");
                 }
             }
 
@@ -101,7 +101,7 @@ public class OptionQuanLyPhongBan implements ShowOption{
         //in danh sách nhân viên đang làm
         qlns.printDsNhanSu();
         System.out.print("Nhập ID nhân viên muốn di chuyển phòng ban: ");
-        String idNhanVien = sc.nextLine();
+        String idNhanVien = sc.nextLine().trim();
         //kiểm tra xem ID nhân viên có tồn tại trong công ty không
         if(qlns.getNhanVienById(idNhanVien) == null || qlns.getNhanVienById(idNhanVien).getIsDelete()){
             System.out.println("ID nhân viên không tồn tại");
@@ -124,28 +124,32 @@ public class OptionQuanLyPhongBan implements ShowOption{
                 System.out.println("Nhân viên đang ở ID phòng ban: " + phongBanHaveNhanVien.getIdPhongBan());
                 qlpb.printDsPhongBan(); //in id danh sach phong ban
                 System.out.print("Nhập ID phòng ban mà nhân viên sẽ chuyển đến: ");
-                String idPhongBan = sc.nextLine();
+                String idPhongBan = sc.nextLine().trim();
                 if(qlpb.getPhongBanByID(idPhongBan) != null && !qlpb.getPhongBanByID(idPhongBan).getIsDelete()){
                     qlpb.getPhongBanByID(idPhongBan).addNhanVien(qlns.getNhanVienById(idNhanVien));
                     //xóa nhân viên khỏi phòng ban cũ
                     phongBanHaveNhanVien.removeNhanVien(idNhanVien);
+                    System.out.println("---------------------------------------");
+                    System.out.println("Chuyển nhân viên thành công");
                 }
                 else{
                     System.out.println("ID phòng ban không tồn tại");
                 }
             }
             else{
+                qlpb.printDsPhongBan();
                 System.out.print("Nhân viên hiện chưa thuộc phòng ban nào. Nhập ID phòng ban thêm nhân viên: ");
-                while(true){
-                    String idPhongBan = sc.nextLine();
-                    if(qlpb.getPhongBanByID(idPhongBan) != null){
-                        qlpb.getPhongBanByID(idPhongBan).addNhanVien(qlns.getNhanVienById(idNhanVien));
-                        break;
-                    }
-                    else{
-                        System.out.println("ID phòng ban không tồn tại! Vui lòng nhập lại ID phòng ban");
-                    }
+                String idPhongBan = sc.nextLine().trim();
+                if(qlpb.getPhongBanByID(idPhongBan) != null && !qlpb.getPhongBanByID(idPhongBan).getIsDelete()){
+                    qlpb.getPhongBanByID(idPhongBan).addNhanVien(qlns.getNhanVienById(idNhanVien));
+                    System.out.println("---------------------------------------");
+                    System.out.println("Chuyển nhân viên thành công");
+
                 }
+                else{
+                    System.out.println("ID phòng ban không tồn tại");
+                }
+
             }
         }
     }

@@ -1,7 +1,5 @@
 package com.companyname.doAn.type;
 
-import com.companyname.doAn.ql.QuanLyNhanSu;
-
 import java.util.Arrays;
 
 
@@ -125,7 +123,7 @@ public class PhongBan {
             int k=1;
             for (DuAn da : this.dsDuAn) {
                 if (!da.getIsDelete()) {
-                    System.out.print("Dự án thứ " + k + ": " + da.getNameDuAn() + ". ID: " + da.getIdDuAn());
+                    System.out.println("Dự án thứ " + k + ": " + da.getNameDuAn() + ". ID: " + da.getIdDuAn());
                     k++;
                     checkOn = true;
                 }
@@ -137,13 +135,14 @@ public class PhongBan {
     }
 
     public void printDsNhanSu(){
+        System.out.println("-----------------------------------");
         if(this.truongPhong == null) System.out.println("Truong phong: chua co");
         else System.out.println("Truong phong: " + this.truongPhong.getName() + ". ID: " + truongPhong.getId());
         System.out.println("Danh sach nhan vien: " + this.dsNhanVien.length);
         int i=1;
         for(NhanVien nv : this.dsNhanVien){
             if(!nv.getIsDelete()){
-                System.out.println("Nhân viên thứ " + i + " :");
+                System.out.print("Nhân viên thứ " + i + " : ");
                 System.out.println(nv.getName() + ". ID: " + nv.getId());
                 i++;
             }

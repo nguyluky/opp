@@ -98,7 +98,7 @@ public class TruongPhong extends NhanSu {
         System.out.println("Lương tháng: " + this.tinhLuong());
         PhongBan pb = null;
         for(PhongBan phongBan : qlpb.getDsPhongBan()){
-            if(!phongBan.getIsDelete()) {
+            if(!phongBan.getIsDelete() && phongBan != null) {
                 if (phongBan.getTruongPhong().getId().equals(super.getId())) {
                     pb = phongBan;
                 }
