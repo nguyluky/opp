@@ -26,7 +26,9 @@ public class OptionQuanLyDuAn implements ShowOption{
         }
 
         for(int i=0; i<slDa; i++){
-            System.out.println("---------------------------------------");
+            // System.out.println("---------------------------------------");
+        ShowOption.clearScreen();
+
             String nameDuAn;
             while(true) {
                 System.out.print("Nhập tên dự án thứ " + (i + 1) + ": ");
@@ -48,7 +50,9 @@ public class OptionQuanLyDuAn implements ShowOption{
             //tạo đối tượng dự án
             DuAn currentDuAn = new DuAn(nameDuAn, idDuAn);
 
-            System.out.println("---------------------------------------");
+            // System.out.println("---------------------------------------");
+        ShowOption.clearScreen();
+
             System.out.println("1: Thêm nhân sự");
             System.out.println("2: Không làm gì hết. Tiếp tục tạo dự án mới nếu có");
             System.out.println("0: Thoát. Dừng việc tạo. Quay lại menu trước");
@@ -105,7 +109,9 @@ public class OptionQuanLyDuAn implements ShowOption{
             DuAn da = qlda.getDuAnById(idDuAn);
             if(da!=null && !da.getIsDelete()){
                 da.setIsDelete(true);
-                System.out.println("---------------------------------------");
+                // System.out.println("---------------------------------------");
+        ShowOption.clearScreen();
+
                 System.out.println("Xóa dự án thành công");
             }
             else{
@@ -117,11 +123,15 @@ public class OptionQuanLyDuAn implements ShowOption{
     @Override
     public void show(){
         qlda.printDsDuAn();
-        System.out.println("---------------------------------------");
+        // System.out.println("---------------------------------------");
+        ShowOption.clearScreen();
+
         System.out.print("Nhập ID dự án: ");
         String idDuAn = sc.nextLine();
         if(qlda.getDuAnById(idDuAn) == null){
-            System.out.println("---------------------------------------");
+            // System.out.println("---------------------------------------");
+        ShowOption.clearScreen();
+
             System.out.println("ID dự án không tồn tại");
             return;
         }

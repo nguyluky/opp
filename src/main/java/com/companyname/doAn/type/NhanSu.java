@@ -134,7 +134,6 @@ public abstract class NhanSu  {
 
 //    ---------------------------------
     public String toString() {
-        return "NhanVien[" + "id=" + id + ", name=" + name + ", phone=" + phone + ", daiChi=" + diaChi + ", namVaoLam=" + namVaoLam + "]";
+        return this.getChucVu() + "{" + "id=" + id + ", name=" + name + ", phone=" + phone + ", daiChi=" + diaChi + ", namVaoLam=" + namVaoLam + "}";
     }
-
 }
