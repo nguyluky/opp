@@ -1,7 +1,8 @@
 package com.companyname.doAn.Gui;
 
-import static com.companyname.doAn.Gui.ShareIntance.*;
-import static com.companyname.doAn.Gui.StaticScanner.sc;
+
+
+import static com.companyname.doAn.Gui.StaticScanner.*;
 
 public class OptionMenu implements ShowOption {
     public OptionMenu() {

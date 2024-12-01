@@ -2,7 +2,7 @@ package com.companyname.doAn.type;
 
 import java.util.Arrays;
 
-import com.companyname.doAn.Gui.ShowOption;
+import static com.companyname.doAn.Gui.StaticScanner.qlpb;
 
 public class DuAn {
     private String nameDuAn;
@@ -34,6 +34,7 @@ public class DuAn {
     }
 
     public NhanSu[] getDsNhanSu(){
+//        System.out.println(this.dsNhanSu[0]);
         return this.dsNhanSu;
     }
 
@@ -105,6 +106,20 @@ public class DuAn {
 
         System.out.println("Tên: " + this.nameDuAn);
         System.out.println("ID: " + this.idDuAn);
+        PhongBan phongBan=null;
+        for(PhongBan pb : qlpb.getDsPhongBan()){
+            for(DuAn duAn : pb.getDsDuAn()){
+                if(duAn.getIdDuAn().equals(this.idDuAn)){
+                    phongBan = pb;
+                    break;
+                }
+                if(phongBan!=null) break;
+            }
+        }
+        if(phongBan!=null){
+            System.out.println("Phòng ban: " + phongBan.getNamePhongBan());
+        }
+        else System.out.println("Phòng ban: Chưa có");
         if(this.dsNhanSu.length == 0) {
             System.out.println("Danh sách nhân sự đang tham gia: Không có nhân sự nào");
         }

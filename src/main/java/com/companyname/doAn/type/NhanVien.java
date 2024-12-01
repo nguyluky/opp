@@ -1,9 +1,9 @@
 
 package com.companyname.doAn.type;
 
-import com.companyname.doAn.Gui.ShowOption;
-import com.companyname.doAn.ql.QuanLyDuAn;
 import com.companyname.doAn.ql.QuanLyPhongBan;
+
+import static com.companyname.doAn.Gui.StaticScanner.qlda;
 
 public class NhanVien extends NhanSu {
     private final String chucVu = "Nhan Vien";
@@ -106,6 +106,7 @@ public class NhanVien extends NhanSu {
         System.out.println("Năm vào làm: " + super.getNamVaoLam());
         System.out.println("Kinh nghiệm: " + super.getKinhNghiem());
         System.out.println("Lương tháng: " + this.tinhLuong());
+        System.out.println("Loại: Nhân viên");
         QuanLyPhongBan qlpb = QuanLyPhongBan.getInstance();
         boolean checkFindPhongBan = false;
         for(PhongBan pb : qlpb.getDsPhongBan()){
@@ -120,19 +121,21 @@ public class NhanVien extends NhanSu {
         }
         if(!checkFindPhongBan) System.out.println("Phòng ban: Chưa có");
 
+        System.out.println("Danh sách dự án tham gia: ");
         boolean checkFindDuAn = false;
-        QuanLyDuAn qlda = QuanLyDuAn.getInstance();
         int i=1;
         for(DuAn da : qlda.getDsDuAn()){
-            for(NhanSu ns : da.getDsNhanSu()){
-                if(ns.getId().equals(super.getId())){
-                    System.out.println("Dự án thứ " + i +": " + da.getNameDuAn());
-                    i++;
-                    checkFindDuAn = true;
-                    break;
+            if(!da.getIsDelete()) {
+                for (NhanSu ns : da.getDsNhanSu()) {
+                    if (ns.getId().equals(super.getId())) {
+                        System.out.println("Dự án thứ " + i + ": " + da.getNameDuAn() + ". ID: " + da.getIdDuAn());
+                        i++;
+                        checkFindDuAn = true;
+                        break;
+                    }
                 }
             }
         }
-        if(!checkFindDuAn)  System.out.println("Dự án: Chưa có");
+        if(!checkFindDuAn)  System.out.println("Không có");
     }
 }

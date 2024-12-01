@@ -3,7 +3,7 @@ package com.companyname.doAn.Gui;
 import com.companyname.doAn.type.DuAn;
 import com.companyname.doAn.type.NhanSu;
 
-import static com.companyname.doAn.Gui.ShareIntance.*;
+import static com.companyname.doAn.Gui.StaticScanner.*;
 
 public class OptionDuAn {
     public OptionDuAn() {

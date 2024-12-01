@@ -1,7 +1,7 @@
 package com.companyname.doAn.Gui;
 
 import com.companyname.doAn.type.DuAn;
-import static com.companyname.doAn.Gui.ShareIntance.*;
+import static com.companyname.doAn.Gui.StaticScanner.*;
 
 
 public class OptionQuanLyDuAn implements ShowOption{
