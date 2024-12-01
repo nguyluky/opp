@@ -2,6 +2,8 @@ package com.companyname.doAn.type;
 
 import java.util.Arrays;
 
+import com.companyname.doAn.Gui.ShowOption;
+
 public class DuAn {
     private String nameDuAn;
     private String idDuAn;
@@ -78,6 +80,8 @@ public class DuAn {
 
      public void printDsNhanSu(){
         System.out.println("---------------------------------------");
+//        ShowOption.clearScreen();
+
         System.out.println("Danh sách nhân sự của dự án: " + this.dsNhanSu.length);
         int i=1;
         for(NhanSu ns : this.dsNhanSu) {
@@ -98,6 +102,8 @@ public class DuAn {
     
     public void printThongTinCoBan(){
         System.out.println("---------------------------------------");
+//        ShowOption.clearScreen();
+
         System.out.println("Tên: " + this.nameDuAn);
         System.out.println("ID: " + this.idDuAn);
         if(this.dsNhanSu.length == 0) {
@@ -118,5 +124,15 @@ public class DuAn {
                 }
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Dự án{" +
+                "nameDuAn='" + nameDuAn + '\'' +
+                ", idDuAn='" + idDuAn + '\'' +
+                ", dsNhanSu=" + Arrays.toString(dsNhanSu) +
+                ", isDelete=" + isDelete +
+                '}';
     }
 }

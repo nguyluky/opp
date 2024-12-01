@@ -2,6 +2,7 @@ package com.companyname.doAn.ql;
 
 import java.util.Arrays;
 
+import com.companyname.doAn.Gui.ShowOption;
 import com.companyname.doAn.type.NhanSu;
 import com.companyname.doAn.type.NhanVien;
 import com.companyname.doAn.type.TruongPhong;
@@ -97,7 +98,9 @@ public class QuanLyNhanSu {
     }
 
 //    public void printDsNhanSuDangLam(){
-//        System.out.println("---------------------------------------");
+//        // System.out.println("---------------------------------------");
+        // ShowOption.clearScreen();
+
 //        boolean check = false;
 //        for(NhanSu ns : this.dsNhanSu){
 //            if(!ns.getIsDelete()) check = true;
@@ -121,7 +124,9 @@ public class QuanLyNhanSu {
 //    }
 //
 //    public void printDsNhanSuDaNghi(){
-//        System.out.println("---------------------------------------");
+//        // System.out.println("---------------------------------------");
+        // ShowOption.clearScreen();
+
 //        boolean check = false;
 //        for(NhanSu ns : this.dsNhanSu){
 //            if(ns.getIsDelete()) check = true;
@@ -145,7 +150,9 @@ public class QuanLyNhanSu {
 //    }
 //
 //    public void printDsNhanVienDangLam(){
-//        System.out.println("---------------------------------------");
+//        // System.out.println("---------------------------------------");
+        // ShowOption.clearScreen();
+
 //        boolean check = false;
 //        for(NhanVien nv : this.getNhanViens()){
 //            if(!nv.getIsDelete()) check = true;
@@ -165,6 +172,8 @@ public class QuanLyNhanSu {
 
     public void printDsNhanSu(){
         System.out.println("---------------------------------------");
+//        ShowOption.clearScreen();
+
         System.out.println("Danh sách nhan su da nghi lam:");
         int i=1;
         for(NhanSu ns : this.dsNhanSu){
@@ -184,5 +193,12 @@ public class QuanLyNhanSu {
             }
         }
         if(j==1) System.out.println("Không có nhân sự nào");
+    }
+
+    @Override
+    public String toString() {
+        return "QuanLyNhanSu{" +
+                "dsNhanSu=" + Arrays.toString(dsNhanSu) +
+                '}';
     }
 }

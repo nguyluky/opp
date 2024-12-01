@@ -34,11 +34,15 @@ public class DuAnReaderWriter implements BaseReader<DuAn>, BaseWriter<DuAn> {
     private NhanSu[] getDsNhanVien(String text) {
         QuanLyNhanSu qLyNhanSu = QuanLyNhanSu.getInstance();
         String []listId = text.split(",");
-        NhanSu []listNhanViens = new NhanSu[listId.length];
+        NhanSu []listNhanViens = new NhanSu[0];
         int i = 0;
         for (String nvId : listId) {
-            listNhanViens[i] = qLyNhanSu.getNhanSuById(nvId);
-            i++;
+            NhanSu ns = qLyNhanSu.getNhanSuById(nvId);
+            if (ns != null) {
+                listNhanViens = Arrays.copyOf(listNhanViens, listNhanViens.length + 1);
+                listNhanViens[i] = ns;
+                i++;
+            }
         }
         return listNhanViens;
     }

@@ -28,6 +28,8 @@ public class OptionDuAn {
         //một nhân viên có thể tham gia nhiều dự án nên không cần kiểm tra lỗi
         qlns.printDsNhanSu();
         System.out.println("---------------------------------------");
+//        ShowOption.clearScreen();
+
         for(int i=0; i<slNhanSu; i++){
             System.out.printf("Nhập ID nhân sự " + (i+1) + " muốn thêm vào dự án: ");
             String idNhanSu = sc.nextLine();
@@ -37,6 +39,8 @@ public class OptionDuAn {
                 for(NhanSu ns : currentDuAn.getDsNhanSu()){
                     if(ns.equals(qlns.getNhanSuById(idNhanSu))){
                         System.out.println("---------------------------------------");
+//        ShowOption.clearScreen();
+
                         System.out.println("Nhân sự này đã tồn tại trong dự án");
                         check = true;
                     }
@@ -44,11 +48,15 @@ public class OptionDuAn {
                 if(check) continue;
                 currentDuAn.addNhanSu(qlns.getNhanSuById(idNhanSu));
                 System.out.println("---------------------------------------");
+//        ShowOption.clearScreen();
+
                 System.out.println("Thêm nhân sự thành công");
             }
             else{
                 //nếu ID không tồn tại, bỏ qua nhập ID tiếp theo
                 System.out.println("---------------------------------------");
+//        ShowOption.clearScreen();
+
                 System.out.println("ID không tồn tại trong công ty");
             }
         }

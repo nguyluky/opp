@@ -10,6 +10,8 @@ public class OptionQuanLyNhanSu implements ShowOption{
 
     public void themNhanSu(){
         System.out.println("---------------------------------------");
+//        ShowOption.clearScreen();
+
         System.out.print("Nhập số lượng nhân sự muốn thêm: ");
         int slNhanVien;
         while(true){
@@ -27,6 +29,8 @@ public class OptionQuanLyNhanSu implements ShowOption{
         }
         for(int i=0; i<slNhanVien;i++){
             System.out.println("---------------------------------------");
+//        ShowOption.clearScreen();
+
             System.out.println("Nhân sự thứ " + (i+1) + ":");
             String id;
             while(true) {
@@ -76,6 +80,8 @@ public class OptionQuanLyNhanSu implements ShowOption{
             NhanVien newNhanVien = new NhanVien(id, name, phone, address, year, kinhnghiem);
             qlns.addNhanSu(newNhanVien);
             System.out.println("---------------------------------------");
+//        ShowOption.clearScreen();
+
             System.out.println("Thêm nhân sự thành công.");
         }
     }
@@ -111,6 +117,8 @@ public class OptionQuanLyNhanSu implements ShowOption{
     @Override
     public void show(){
         System.out.println("---------------------------------------");
+//        ShowOption.clearScreen();
+
         System.out.print("Nhập ID nhân sự: ");
         String idNhanSu = sc.nextLine();
         if(qlns.getNhanSuById(idNhanSu) == null || qlns.getNhanSuById(idNhanSu).getIsDelete()){

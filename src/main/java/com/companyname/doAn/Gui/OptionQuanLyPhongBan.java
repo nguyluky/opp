@@ -10,6 +10,8 @@ public class OptionQuanLyPhongBan implements ShowOption{
 
     public void themPhongBan() {
         System.out.println("---------------------------------------");
+//        ShowOption.clearScreen();
+
         System.out.print("Nhap so phong ban muon them: ");
         int slPb;
         while (true) {
@@ -82,6 +84,8 @@ public class OptionQuanLyPhongBan implements ShowOption{
 
     public void xoaPhongBan(){
         System.out.println("---------------------------------------");
+//        ShowOption.clearScreen();
+
         System.out.print("Nhập ID phòng ban muốn xóa: ");
         String id = sc.nextLine();
         if(qlpb.getPhongBanByID(id) == null || qlpb.getPhongBanByID(id).getIsDelete()){

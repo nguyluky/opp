@@ -1,6 +1,8 @@
 package com.companyname.doAn.ql;
 
 import java.util.Arrays;
+
+import com.companyname.doAn.Gui.ShowOption;
 import com.companyname.doAn.type.DuAn;
 
 public class QuanLyDuAn {
@@ -69,6 +71,8 @@ public class QuanLyDuAn {
 
     public void printDsDuAn(){
         System.out.println("---------------------------------------");
+//        ShowOption.clearScreen();
+
         System.out.println("Danh sách dự án đã dừng hoạt động:");
         int j=1;
         for(DuAn duAn : this.dsDuAn){
@@ -91,6 +95,14 @@ public class QuanLyDuAn {
         if(k==1){
             System.out.println("Không có dự án nào");
         }
+    }
+
+    @Override
+    public String toString() {
+        
+        return "QuanLyDuAn{" +
+                "dsDuAn=" + Arrays.toString(dsDuAn) +
+                '}';
     }
 
 }

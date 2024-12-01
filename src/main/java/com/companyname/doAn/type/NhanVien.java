@@ -1,6 +1,7 @@
 
 package com.companyname.doAn.type;
 
+import com.companyname.doAn.Gui.ShowOption;
 import com.companyname.doAn.ql.QuanLyDuAn;
 import com.companyname.doAn.ql.QuanLyPhongBan;
 
@@ -96,6 +97,8 @@ public class NhanVien extends NhanSu {
 
     public void printThongTinCoBan(){
         System.out.println("---------------------------------------");
+//        ShowOption.clearScreen();
+
         System.out.println("Tên: " + super.getName());
         System.out.println("ID: " + super.getId());
         System.out.println("Số điện thoại: " + super.getPhone());
