@@ -89,7 +89,7 @@ public class PhongBan {
         System.out.println("Tên: " + this.namePhongBan);
         System.out.println("ID: " + this.idPhongBan);
         System.out.print("Trưởng phòng: ");
-        if(this.truongPhong != null || !this.truongPhong.getIsDelete()){
+        if(this.truongPhong != null && !this.truongPhong.getIsDelete()){
             System.out.println(this.truongPhong.getName() + ". ID: " + this.truongPhong.getId());
         }
         else{

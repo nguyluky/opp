@@ -243,6 +243,9 @@ public class OptionPhongBan{
         }
         TruongPhong newTruongPhong = new TruongPhong(oldNv.getId(), oldNv.getName(), oldNv.getPhone(), oldNv.getDiaChi(), oldNv.getNamVaoLam(), oldNv.getKinhNghiem());
         TruongPhong oldTruongPhong = currentPhongBan.getTruongPhong();
+        if(oldTruongPhong.getIsDelete()){
+            oldTruongPhong=null;
+        }
 
         if(oldTruongPhong == null){
             System.out.println("Phòng ban chưa có trưởng phòng. ID nhân viên vừa nhập sẽ làm trưởng phòng");

@@ -122,8 +122,12 @@ public class OptionQuanLyNhanSu implements ShowOption {
             System.out.println("---------------------------------------");
             System.out.print("Nhập ID nhân sự: ");
             String idNhanSu = sc.nextLine();
-            if (qlns.getNhanSuById(idNhanSu) == null || qlns.getNhanSuById(idNhanSu).getIsDelete()) {
+            if (qlns.getNhanSuById(idNhanSu) == null) {
                 System.out.println("ID nhân sự không tồn tại");
+                return;
+            }
+            if(qlns.getNhanSuById(idNhanSu).getIsDelete()){
+                qlns.getNhanSuById(idNhanSu).printThongTinCoBan();
                 return;
             }
             NhanSu currentNhanSu = qlns.getNhanSuById(idNhanSu);
