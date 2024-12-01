@@ -1,8 +1,13 @@
 package com.companyname.doAn.Gui;
 
-import com.companyname.doAn.type.*;
-import static com.companyname.doAn.Gui.ShareIntance.*;
+import com.companyname.doAn.type.DuAn;
+import com.companyname.doAn.type.NhanVien;
+import com.companyname.doAn.type.PhongBan;
+import com.companyname.doAn.type.TruongPhong;
+
 import java.util.Scanner;
+
+import static com.companyname.doAn.Gui.StaticScanner.*;
 
 public class OptionPhongBan implements ShowOption{
     public OptionPhongBan(){}
@@ -27,10 +32,24 @@ public class OptionPhongBan implements ShowOption{
         DuAn[] dsDuAn = new DuAn[slDa];
 
         for(int i=0; i<slDa; i++){
-            System.out.printf("Nhập tên dự án thứ " + (i+1) + ": ");
-            String nameDuAn = sc.nextLine();
-            System.out.printf("Nhập id dự án: "  + (i+1) + ": ");
-            String idDuAn = sc.nextLine();
+            String nameDuAn;
+            while(true){
+                System.out.printf("Nhập tên dự án thứ " + (i+1) + ": ");
+                nameDuAn = sc.nextLine();
+                if(qlda.getDuAnByName(nameDuAn) != null){
+                    System.out.println("Tên dự án đã tồn tại");
+                }
+                else break;
+            }
+            String idDuAn;
+            while (true) {
+                System.out.printf("Nhập id dự án: " + (i + 1) + ": ");
+                idDuAn = sc.nextLine();
+                if(qlda.getDuAnById(idDuAn) != null){
+                    System.out.println("ID dự án đã tồn tại");
+                }
+                else break;
+            }
             System.out.printf("Nhập số lượng nhân viên dự án: "  + (i+1) + ": ");
             int slNhanVien;
             while(true) {

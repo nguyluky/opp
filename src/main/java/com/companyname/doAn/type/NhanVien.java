@@ -121,12 +121,19 @@ public class NhanVien extends NhanSu {
         QuanLyDuAn qlda = QuanLyDuAn.getInstance();
         int i=1;
         for(DuAn da : qlda.getDsDuAn()){
-            for(NhanSu ns : da.getDsNhanSu()){
-                if(ns.getId().equals(super.getId())){
-                    System.out.println("Dự án thứ " + i +": " + da.getNameDuAn());
-                    i++;
-                    checkFindDuAn = true;
-                    break;
+            System.out.println(da.getDsNhanSu());
+            if(!da.getIsDelete()) {
+                for (NhanSu ns : da.getDsNhanSu()) {
+                    if(ns == null){
+                        System.out.println("Dmm");
+                        continue;
+                    }
+                    if (ns.getId().equals(super.getId())) {
+                        System.out.println("Dự án thứ " + i + ": " + da.getNameDuAn());
+                        i++;
+                        checkFindDuAn = true;
+                        break;
+                    }
                 }
             }
         }

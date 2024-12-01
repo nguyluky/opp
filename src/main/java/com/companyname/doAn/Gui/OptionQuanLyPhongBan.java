@@ -1,7 +1,9 @@
 package com.companyname.doAn.Gui;
 
-import static com.companyname.doAn.Gui.ShareIntance.*;
-import com.companyname.doAn.type.*;
+import com.companyname.doAn.type.NhanVien;
+import com.companyname.doAn.type.PhongBan;
+
+import static com.companyname.doAn.Gui.StaticScanner.*;
 
 public class OptionQuanLyPhongBan implements ShowOption{
     public OptionQuanLyPhongBan(){}

@@ -32,6 +32,7 @@ public class DuAn {
     }
 
     public NhanSu[] getDsNhanSu(){
+        System.out.println(this.dsNhanSu[0]);
         return this.dsNhanSu;
     }
 

@@ -3,7 +3,7 @@ package com.companyname.doAn.Gui;
 import com.companyname.doAn.type.NhanSu;
 import com.companyname.doAn.type.NhanVien;
 
-import static com.companyname.doAn.Gui.ShareIntance.*;
+import static com.companyname.doAn.Gui.StaticScanner.*;
 
 public class OptionQuanLyNhanSu implements ShowOption{
     public OptionQuanLyNhanSu() {}
