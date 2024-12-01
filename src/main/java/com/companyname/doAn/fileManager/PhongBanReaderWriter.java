@@ -79,8 +79,11 @@ public class PhongBanReaderWriter implements BaseReader<PhongBan>, BaseWriter<Ph
 
             DuAn[] dsDuAn = getDsDuAn(arr[3]);
             phongBan[phongBan.length - 1].setDsDuAn(dsDuAn);
-            
-            phongBan[phongBan.length - 1].setTruongPhong((TruongPhong) (qLyNhanSu.getNhanSuById(arr[4])));
+
+            if (!arr[4].equals("")) {
+                phongBan[phongBan.length - 1].setTruongPhong((TruongPhong) (qLyNhanSu.getNhanSuById(arr[4])));
+            }
+        
 
         }
 
@@ -106,12 +109,18 @@ public class PhongBanReaderWriter implements BaseReader<PhongBan>, BaseWriter<Ph
                 listIdDuAn[i] = duAns[i].getIdDuAn();
             }
 
+            String truongPhongId = "";
+
+            if (phongBan.getTruongPhong() != null) {
+                truongPhongId = phongBan.getTruongPhong().getId();
+            }
+
             String[] dataSave = {
                 phongBan.getNamePhongBan(),
                 phongBan.getIdPhongBan(),
                 String.join(",", listIdNhanVien),
                 String.join(",", listIdDuAn),
-                phongBan.getTruongPhong().getId(),
+                truongPhongId,
                 phongBan.getIsDelete() + ""
             };
 
