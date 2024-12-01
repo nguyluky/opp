@@ -1,6 +1,8 @@
 package com.companyname.doAn.fileManager;
 
 import com.companyname.doAn.type.PhongBan;
+import com.companyname.doAn.type.TruongPhong;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -58,6 +60,7 @@ public class PhongBanReaderWriter implements BaseReader<PhongBan>, BaseWriter<Ph
     @Override
     public PhongBan[] read() throws FileNotFoundException {
         sc = new Scanner(file);
+        QuanLyNhanSu qLyNhanSu = QuanLyNhanSu.getInstance();
 
         PhongBan[] phongBan = new PhongBan[0];
 
@@ -68,7 +71,7 @@ public class PhongBanReaderWriter implements BaseReader<PhongBan>, BaseWriter<Ph
             phongBan[phongBan.length - 1] = new PhongBan(
                 arr[0],
                 arr[1],
-                Boolean.parseBoolean(arr[4])
+                Boolean.parseBoolean(arr[5])
             );
 
             NhanVien[] dsNhanVien = getDsNhanVien(arr[2]);
@@ -76,6 +79,12 @@ public class PhongBanReaderWriter implements BaseReader<PhongBan>, BaseWriter<Ph
 
             DuAn[] dsDuAn = getDsDuAn(arr[3]);
             phongBan[phongBan.length - 1].setDsDuAn(dsDuAn);
+
+            if (!arr[4].equals("")) {
+                phongBan[phongBan.length - 1].setTruongPhong((TruongPhong) (qLyNhanSu.getNhanSuById(arr[4])));
+            }
+        
+
         }
 
         return phongBan;
@@ -100,11 +109,18 @@ public class PhongBanReaderWriter implements BaseReader<PhongBan>, BaseWriter<Ph
                 listIdDuAn[i] = duAns[i].getIdDuAn();
             }
 
+            String truongPhongId = "";
+
+            if (phongBan.getTruongPhong() != null) {
+                truongPhongId = phongBan.getTruongPhong().getId();
+            }
+
             String[] dataSave = {
                 phongBan.getNamePhongBan(),
                 phongBan.getIdPhongBan(),
                 String.join(",", listIdNhanVien),
                 String.join(",", listIdDuAn),
+                truongPhongId,
                 phongBan.getIsDelete() + ""
             };
 
