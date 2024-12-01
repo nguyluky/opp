@@ -12,62 +12,49 @@ public class test {
         QuanLyDuAn quanLyDuAn = QuanLyDuAn.getInstance();
         QuanLyPhongBan quanLyPhongBan = QuanLyPhongBan.getInstance();
 
-//         NhanVien nv1 = new NhanVien("1", "Nguyen Van A", "0123456789", "Ha Noi", 2020, 0, 0, 3000000, new KyLuat[0], new KhenThuong[0], false);
-//         NhanVien nv2 = new NhanVien("2", "Nguyen Van B", "0123456789", "Ha Noi", 2020, 0, 0, 3000000, new KyLuat[0], new KhenThuong[0], false);
-//         NhanVien nv3 = new NhanVien("3", "Nguyen Van C", "0123456789", "Ha Noi", 2020, 0, 0, 3000000, new KyLuat[0], new KhenThuong[0], false);
+        for (int i = 0; i < 10; i++) {
+            NhanVien nv = new NhanVien(String.valueOf(i), "Nguyen Van " + i, "012345678" + i, "Ha Noi", 2020 + i, 0, 0, 3000000, new KyLuat[0], new KhenThuong[0], false);
+            quanLyNhanSu.addNhanSu(nv);
+        }
 
-//         TruongPhong tp1 = new TruongPhong("4", "Nguyen Van D", "0123456789", "Ha Noi", 2020, 0, 0, 3000000, new KyLuat[0], new KhenThuong[0], false);
-//         // TruongPhong tp2 = new TruongPhong("5", "Nguyen Van E", "0123456789", "Ha Noi", 2020, 0, 0, 3000000, new KyLuat[0], new KhenThuong[0], false);
-//         // TruongPhong tp3 = new TruongPhong("6", "Nguyen Van F", "0123456789", "Ha Noi", 2020, 0, 0, 3000000, new KyLuat[0], new KhenThuong[0], false);
+        for (int i = 0; i < 10; i++) {
+            DuAn da = new DuAn("Du An " + i, String.valueOf(i),  false);
 
-//         DuAn duAn1 = new DuAn("1", "Du An 1",  false);
-//         DuAn duAn2 = new DuAn("2", "Du An 2",  false);
-//         DuAn duAn3 = new DuAn("3", "Du An 2",  false);
-
-//         PhongBan phongBan1 = new PhongBan("hehe", "1", false);
-//         phongBan1.addNhanVien(nv1);
-//         phongBan1.addNhanVien(nv2);
-//         phongBan1.addDuAn(duAn2);
-//         phongBan1.addDuAn(duAn1);
-
-//         phongBan1.setTruongPhong(tp1);
-
-//         quanLyPhongBan.addPhongBan(phongBan1);
-
-// //        duAn1.addNhanSu(tp3);
-//         duAn1.addNhanSu(nv1);
-//         duAn2.addNhanSu(nv2);
-//         duAn2.addNhanSu(tp1);
+            for (int j = 0; j < 10; j++) {
+                NhanVien nv = new NhanVien("a" + String.valueOf(j) + String.valueOf(i), "Nguyen Van " + (i + j), "012345678" + (i + j), "Ha Noi", 2020 + j, 0, 0, 3000000, new KyLuat[0], new KhenThuong[0], false);
+                da.addNhanSu(nv);
+                quanLyNhanSu.addNhanSu(nv);
+            }
 
 
-//         quanLyDuAn.addDuAn(duAn1);
-//         quanLyDuAn.addDuAn(duAn2);
-//         quanLyDuAn.addDuAn(duAn3);
+            quanLyDuAn.addDuAn(da);
 
-//         quanLyNhanSu.addNhanSu(tp1);
-//         quanLyNhanSu.addNhanSu(nv1);
-//         quanLyNhanSu.addNhanSu(nv2);
-//         quanLyNhanSu.addNhanSu(nv3);
 
-// //        quanLyNhanSu.addNhanSu(tp1);
-// //        quanLyNhanSu.addNhanSu(tp2);
-// //        quanLyNhanSu.addNhanSu(tp3);
+        }
 
-//         try {
-//             FileManager fileManager = new FileManager();
-//             fileManager.write();
-//         }
-//         catch (Exception e) {
-//             e.printStackTrace();
-//         }
+        for (int i = 0; i < 10; i++) {
+            PhongBan pb = new PhongBan("Phong Ban " + i, String.valueOf(i), false);
+            TruongPhong tp = new TruongPhong( "tp" + String.valueOf(i), "Nguyen Van " + (i + "pt"), "012345678" + (i + 10), "Ha Noi", 2020 + i, 0, 0, 3000000, new KyLuat[0], new KhenThuong[0], false);
+            pb.setTruongPhong(tp);
+            quanLyNhanSu.addNhanSu(tp);
+            quanLyPhongBan.addPhongBan(pb);
+        }
 
         try {
             FileManager fileManager = new FileManager();
-            fileManager.read();
+            fileManager.write();
         }
         catch (Exception e) {
             e.printStackTrace();
         }
+
+        // try {
+        //     FileManager fileManager = new FileManager();
+        //     fileManager.read();
+        // }
+        // catch (Exception e) {
+        //     e.printStackTrace();
+        // }
 
         // try {
         //     for (NhanVien nv: nhanVienReaderWriter.read()) {
@@ -98,36 +85,36 @@ public class test {
         //     e.printStackTrace();
         // }
 
-        try {
-            System.out.println("Phong Ban");
-            for (PhongBan pb: quanLyPhongBan.getDsPhongBan()) {
-                System.out.println(pb);
-                System.out.println(pb.getTruongPhong());
-                System.out.println("Nhan Vien");
-                for (NhanSu ns: pb.getDsNhanVien()) {
-                    System.out.println(ns);
-                }
-                System.out.println("Du An");
-                for (DuAn da: pb.getDsDuAn()) {
-                    System.out.println(da);
-                }
-            }   
+        // try {
+        //     System.out.println("Phong Ban");
+        //     for (PhongBan pb: quanLyPhongBan.getDsPhongBan()) {
+        //         System.out.println(pb);
+        //         System.out.println(pb.getTruongPhong());
+        //         System.out.println("Nhan Vien");
+        //         for (NhanSu ns: pb.getDsNhanVien()) {
+        //             System.out.println(ns);
+        //         }
+        //         System.out.println("Du An");
+        //         for (DuAn da: pb.getDsDuAn()) {
+        //             System.out.println(da);
+        //         }
+        //     }   
 
-            System.out.println("Du An");
-            for (DuAn da: quanLyDuAn.getDsDuAn()) {
-                System.out.println(da);
-            }
+        //     System.out.println("Du An");
+        //     for (DuAn da: quanLyDuAn.getDsDuAn()) {
+        //         System.out.println(da);
+        //     }
 
-            System.out.println("Nhan Vien");
-            for (NhanVien nv: quanLyNhanSu.getNhanViens()) {
-                System.out.println(nv);
-            }
+        //     System.out.println("Nhan Vien");
+        //     for (NhanVien nv: quanLyNhanSu.getNhanViens()) {
+        //         System.out.println(nv);
+        //     }
 
 
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        // } catch (Exception e) {
+        //     e.printStackTrace();
+        // }
 
     }
 }
