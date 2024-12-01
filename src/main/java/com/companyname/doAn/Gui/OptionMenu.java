@@ -10,8 +10,8 @@ public class OptionMenu implements ShowOption{
 
     @Override
     public void show(){
-        // System.out.println("---------------------------------------");
-        ShowOption.clearScreen();
+        System.out.println("---------------------------------------");
+//        ShowOption.clearScreen();
 
         System.out.println("1: Quản lý dự án");
         System.out.println("2: Quản lý phòng ban");
@@ -37,8 +37,8 @@ public class OptionMenu implements ShowOption{
     }
 
     public void chucNangQuanLyDuAn(){
-        // System.out.println("---------------------------------------");
-        ShowOption.clearScreen();
+        System.out.println("---------------------------------------");
+//        ShowOption.clearScreen();
 
         System.out.println("1: Xem danh sách toàn bộ dự án");
         System.out.println("2: Thêm dự án");
@@ -86,8 +86,8 @@ public class OptionMenu implements ShowOption{
     }
 
     public void chucNangQuanLyPhongBan(){
-        // System.out.println("---------------------------------------");
-        ShowOption.clearScreen();
+        System.out.println("---------------------------------------");
+//        ShowOption.clearScreen();
 
         System.out.println("1: Xem danh sách toàn bộ phòng ban");
         System.out.println("2: Thêm phòng ban");
@@ -137,8 +137,8 @@ public class OptionMenu implements ShowOption{
     }
 
     public void chucNangQuanLyNhanSu(){
-        // System.out.println("---------------------------------------");
-        ShowOption.clearScreen();
+        System.out.println("---------------------------------------");
+//        ShowOption.clearScreen();
 
         System.out.println("1: Xem danh sách nhân sự");
         System.out.println("2: Thêm nhân sự");

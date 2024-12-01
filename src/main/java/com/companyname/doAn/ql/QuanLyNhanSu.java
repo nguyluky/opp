@@ -171,8 +171,8 @@ public class QuanLyNhanSu {
 //    }
 
     public void printDsNhanSu(){
-        // System.out.println("---------------------------------------");
-        ShowOption.clearScreen();
+        System.out.println("---------------------------------------");
+//        ShowOption.clearScreen();
 
         System.out.println("Danh sách nhan su da nghi lam:");
         int i=1;

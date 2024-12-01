@@ -96,8 +96,8 @@ public class NhanVien extends NhanSu {
     }
 
     public void printThongTinCoBan(){
-        // System.out.println("---------------------------------------");
-        ShowOption.clearScreen();
+        System.out.println("---------------------------------------");
+//        ShowOption.clearScreen();
 
         System.out.println("Tên: " + super.getName());
         System.out.println("ID: " + super.getId());

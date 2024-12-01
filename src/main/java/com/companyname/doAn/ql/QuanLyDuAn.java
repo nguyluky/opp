@@ -70,8 +70,8 @@ public class QuanLyDuAn {
     }
 
     public void printDsDuAn(){
-        // System.out.println("---------------------------------------");
-        ShowOption.clearScreen();
+        System.out.println("---------------------------------------");
+//        ShowOption.clearScreen();
 
         System.out.println("Danh sách dự án đã dừng hoạt động:");
         int j=1;

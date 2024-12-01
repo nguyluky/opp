@@ -78,8 +78,8 @@ public class DuAn {
     }
 
      public void printDsNhanSu(){
-        // System.out.println("---------------------------------------");
-        ShowOption.clearScreen();
+        System.out.println("---------------------------------------");
+//        ShowOption.clearScreen();
 
         System.out.println("Danh sách nhân sự của dự án: " + this.dsNhanSu.length);
         int i=1;
@@ -100,8 +100,8 @@ public class DuAn {
     }
     
     public void printThongTinCoBan(){
-        // System.out.println("---------------------------------------");
-        ShowOption.clearScreen();
+        System.out.println("---------------------------------------");
+//        ShowOption.clearScreen();
 
         System.out.println("Tên: " + this.nameDuAn);
         System.out.println("ID: " + this.idDuAn);

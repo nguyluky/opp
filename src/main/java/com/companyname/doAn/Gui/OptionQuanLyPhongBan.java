@@ -7,8 +7,8 @@ public class OptionQuanLyPhongBan implements ShowOption{
     public OptionQuanLyPhongBan(){}
 
     public void themPhongBan() {
-        // System.out.println("---------------------------------------");
-        ShowOption.clearScreen();
+        System.out.println("---------------------------------------");
+//        ShowOption.clearScreen();
 
         System.out.print("Nhap so phong ban muon them: ");
         int slPb;
@@ -82,8 +82,8 @@ public class OptionQuanLyPhongBan implements ShowOption{
     }
 
     public void xoaPhongBan(){
-        // System.out.println("---------------------------------------");
-        ShowOption.clearScreen();
+        System.out.println("---------------------------------------");
+//        ShowOption.clearScreen();
 
         System.out.print("Nhập ID phòng ban muốn xóa: ");
         String id = sc.nextLine();
