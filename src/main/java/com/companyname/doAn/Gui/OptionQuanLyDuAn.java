@@ -122,58 +122,58 @@ public class OptionQuanLyDuAn implements ShowOption{
 
     @Override
     public void show(){
-        qlda.printDsDuAn();
-        System.out.println("---------------------------------------");
-//        ShowOption.clearScreen();
-
-        System.out.print("Nhập ID dự án: ");
-        String idDuAn = sc.nextLine();
-        if(qlda.getDuAnById(idDuAn) == null){
+            qlda.printDsDuAn();
             System.out.println("---------------------------------------");
-//        ShowOption.clearScreen();
 
-            System.out.println("ID dự án không tồn tại");
-            return;
-        }
-        if(qlda.getDuAnById(idDuAn).getIsDelete()){
-            qlda.getDuAnById(idDuAn).printThongTinCoBan();
-            return;
-        }
-        DuAn currentDuAn = qlda.getDuAnById(idDuAn);
+            System.out.print("Nhập ID dự án: ");
+            String idDuAn = sc.nextLine();
+            if(qlda.getDuAnById(idDuAn) == null){
+                System.out.println("---------------------------------------");
 
-        System.out.println("1: Thêm nhân sự");
-        System.out.println("2: Xóa nhân sự");
-        System.out.println("3: Thông tin cơ bản");
-        System.out.println("0: Quay lại menu trước");
-        System.out.print("Chon chuc nang: ");
-        int choice;
-        while(true){
-            try {
-                choice = Integer.parseInt(sc.nextLine());
-                if(choice > 3 || choice < 0){
+                System.out.println("ID dự án không tồn tại");
+                return;
+            }
+            if(qlda.getDuAnById(idDuAn).getIsDelete()){
+                qlda.getDuAnById(idDuAn).printThongTinCoBan();
+                return;
+            }
+            DuAn currentDuAn = qlda.getDuAnById(idDuAn);
+
+            System.out.println("1: Thêm nhân sự");
+            System.out.println("2: Xóa nhân sự");
+            System.out.println("3: Thông tin cơ bản");
+            System.out.println("0: Quay lại menu trước");
+            System.out.print("Chon chuc nang: ");
+            int choice;
+            while(true){
+                try {
+                    choice = Integer.parseInt(sc.nextLine());
+                    if(choice > 3 || choice < 0){
+                        System.out.println("Can chon chuc nang hop le");
+                    }
+                    else break;
+                }catch(NumberFormatException e){
                     System.out.println("Can chon chuc nang hop le");
                 }
-                else break;
-            }catch(NumberFormatException e){
-                System.out.println("Can chon chuc nang hop le");
             }
-        }
-        switch (choice) {
-            case 1:
-                optionDuAn.themNhanSu(currentDuAn);
-                optionMenu.chucNangQuanLyDuAn();
-                break;
-            case 2:
-                optionDuAn.xoaNhanSu(currentDuAn);
-                optionMenu.chucNangQuanLyDuAn();
-                break;
-            case 3:
-                currentDuAn.printThongTinCoBan();
-                optionMenu.chucNangQuanLyDuAn();
-                break;
-            case 0:
-                optionMenu.chucNangQuanLyDuAn();
-                break;
-        }
+
+           ShowOption.clearScreen();
+
+
+            switch (choice) {
+                case 1:
+                    optionDuAn.themNhanSu(currentDuAn);
+                    break;
+                case 2:
+                    optionDuAn.xoaNhanSu(currentDuAn);
+                    break;
+                case 3:
+                    currentDuAn.printThongTinCoBan();
+                    break;
+                case 0:
+                    return;
+            }
+
+
     }
 }

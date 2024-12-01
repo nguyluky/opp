@@ -201,55 +201,6 @@ public class OptionPhongBan implements ShowOption{
             System.out.println("Phong ban chua co nhan vien. Can them nhan vien");
             return;
         }
-//        else {
-//            TruongPhong oldTruongPhong = null;
-//            for (NhanSu ns : qlns.getDsNhanSu()) {
-//                if (ns instanceof TruongPhong) {
-//                    if (((TruongPhong) ns).getPhongBan().getIdPhongBan().equals(currentPhongBan.getIdPhongBan())) {
-//                        oldTruongPhong = (TruongPhong) ns;
-//                    }
-//                }
-//            }
-//            //in ID nhan vien trong phong ban
-//            currentPhongBan.printDsNhanVienPhongBan();
-//            //neu phong ban co truong phong
-//            if (oldTruongPhong != null) {
-//                System.out.print("Nhap ID nhan vien thay the: ");
-//                String id = sc.nextLine();
-//                if (currentPhongBan.getNhanVienById(id) != null && !currentPhongBan.getNhanVienById(id).getIsDelete()) {
-//                    NhanVien tmpNhanVien = currentPhongBan.getNhanVienById(id);
-//                    //xoa nhan vien va truong phong ra khoi qlns để dễ hiểu
-//                    qlns.removeNhanSu(oldTruongPhong.getId());
-//                    qlns.removeNhanSu(tmpNhanVien.getId());
-//                    currentPhongBan.removeNhanVien(tmpNhanVien.getId());
-//
-//                    //chuyen truong phong thanh nhan vien
-//                    NhanVien newNv = new NhanVien(oldTruongPhong.getId(), oldTruongPhong.getName(), oldTruongPhong.getPhone(), oldTruongPhong.getDiaChi(), oldTruongPhong.getNamVaoLam(), oldTruongPhong.getKinhNghiem());
-//                    qlns.addNhanSu(newNv);
-//                    currentPhongBan.addNhanVien(newNv);
-//
-//                    //chuyen nhan vien thanh truong phong
-//                    TruongPhong newTp = new TruongPhong(tmpNhanVien.getId(), tmpNhanVien.getName(), tmpNhanVien.getPhone(), tmpNhanVien.getDiaChi(), tmpNhanVien.getNamVaoLam(), tmpNhanVien.getKinhNghiem(), currentPhongBan);
-//                    qlns.addNhanSu(newTp);
-//                }
-//            }
-//            //neu phong ban chua co truong phong
-//            else {
-//                System.out.print("Chua co truong phong, nhap ID nhan vien lam truong phong: ");
-//                String id = sc.nextLine();
-//                if (currentPhongBan.getNhanVienById(id) != null && !currentPhongBan.getNhanVienById(id).getIsDelete()) {
-//                    NhanVien tmpNhanVien = currentPhongBan.getNhanVienById(id);
-//                    //xoa nhan vien ra khoi qlns để dễ hiểu
-//                    qlns.removeNhanSu(tmpNhanVien.getId());
-//                    currentPhongBan.removeNhanVien(tmpNhanVien.getId());
-//                    //chuyen nhan vien thanh truong phong
-//                    TruongPhong newTp = new TruongPhong(tmpNhanVien.getId(), tmpNhanVien.getName(), tmpNhanVien.getPhone(), tmpNhanVien.getDiaChi(), tmpNhanVien.getNamVaoLam(), tmpNhanVien.getKinhNghiem(), currentPhongBan);
-//                    qlns.addNhanSu(newTp);
-//                } else {
-//                    System.out.println("ID khong ton tai");
-//                }
-//            }
-//        }
         System.out.print("Nhap ID nhan vien se lam truong phong: ");
         String id = sc.nextLine();
         NhanVien oldNv = qlns.getNhanVienById(id);

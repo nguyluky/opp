@@ -116,61 +116,63 @@ public class OptionQuanLyNhanSu implements ShowOption{
 
     @Override
     public void show(){
-        System.out.println("---------------------------------------");
-//        ShowOption.clearScreen();
+        ShowOption.clearScreen();
 
-        System.out.print("Nhập ID nhân sự: ");
-        String idNhanSu = sc.nextLine();
-        if(qlns.getNhanSuById(idNhanSu) == null || qlns.getNhanSuById(idNhanSu).getIsDelete()){
-            System.out.println("ID nhân sự không tồn tại");
-            return;
-        }
-        NhanSu currentNhanSu = qlns.getNhanSuById(idNhanSu);
 
-        System.out.println("1: Xem thông tin cơ bản");
-        System.out.println("2: Xem tình trạng kỷ luật");
-        System.out.println("3: Xem tình trạng khen thưởng");
-        System.out.println("4: Khen thuong");
-        System.out.println("4: Ky luat");
-        System.out.println("0: Quay lại menu trước");
-        System.out.print("Chọn chức năng: ");
-        int choiceNhanSu;
-        while(true) {
-            try {
-                choiceNhanSu = Integer.parseInt(sc.nextLine());
-                if (choiceNhanSu < 0) {
-                    System.out.println("Can nhap so nguyen duong");
-                } else {
-                    break;
-                }
-            } catch (NumberFormatException e) {
-                System.out.println("Can nhap so nguyen duong");
+        while (true) {
+            System.out.println("---------------------------------------");
+
+            System.out.print("Nhập ID nhân sự: ");
+            String idNhanSu = sc.nextLine();
+            if(qlns.getNhanSuById(idNhanSu) == null || qlns.getNhanSuById(idNhanSu).getIsDelete()){
+                System.out.println("ID nhân sự không tồn tại");
+                return;
             }
-        }
-        switch (choiceNhanSu){
-            case 1:
-                currentNhanSu.printThongTinCoBan();
-                optionMenu.chucNangQuanLyNhanSu();
-                break;
-            case 2:
-                optionNhanSu.printTinhTrangKyLuat(currentNhanSu);
-                optionMenu.chucNangQuanLyNhanSu();
-                break;
-            case 3:
-                optionNhanSu.printTinhTrangKhenThuong(currentNhanSu);
-                optionMenu.chucNangQuanLyNhanSu();
-                break;
-            case 4:
-                optionNhanSu.khenThuong(currentNhanSu);
-                optionMenu.chucNangQuanLyNhanSu();
-                break;
-            case 5:
-                optionNhanSu.kyLuat(currentNhanSu);
-                optionMenu.chucNangQuanLyNhanSu();
-                break;
-            case 0:
-                optionMenu.chucNangQuanLyNhanSu();
-                break;
+            NhanSu currentNhanSu = qlns.getNhanSuById(idNhanSu);
+
+            System.out.println("1: Xem thông tin cơ bản");
+            System.out.println("2: Xem tình trạng kỷ luật");
+            System.out.println("3: Xem tình trạng khen thưởng");
+            System.out.println("4: Khen thuong");
+            System.out.println("4: Ky luat");
+            System.out.println("0: Quay lại menu trước");
+            System.out.print("Chọn chức năng: ");
+            int choiceNhanSu;
+            while(true) {
+                try {
+                    choiceNhanSu = Integer.parseInt(sc.nextLine());
+                    if (choiceNhanSu < 0) {
+                        System.out.println("Can nhap so nguyen duong");
+                    } else {
+                        break;
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Can nhap so nguyen duong");
+                }
+            }
+
+            ShowOption.clearScreen();
+            
+
+            switch (choiceNhanSu){
+                case 1:
+                    currentNhanSu.printThongTinCoBan();
+                    break;
+                case 2:
+                    optionNhanSu.printTinhTrangKyLuat(currentNhanSu);
+                    break;
+                case 3:
+                    optionNhanSu.printTinhTrangKhenThuong(currentNhanSu);
+                    break;
+                case 4:
+                    optionNhanSu.khenThuong(currentNhanSu);
+                    break;
+                case 5:
+                    optionNhanSu.kyLuat(currentNhanSu);
+                    break;
+                case 0:
+                    return;
+            }
         }
     }
 }

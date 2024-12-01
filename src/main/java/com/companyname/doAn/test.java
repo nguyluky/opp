@@ -63,17 +63,6 @@ public class test {
         quanLyNhanSu.addNhanSu(tp2);
         quanLyNhanSu.addNhanSu(tp3);
 
-
-
-        // try {
-        //     nhanVienReaderWriter.save(quanLyNhanSu.getNhanViens());
-        //     truongPhongReaderWriter.save(quanLyNhanSu.getTruongPhongs());
-        //     duAnReaderWriter.save(quanLyDuAn.getDsDuAn());
-        //     phongBanReaderWriter.save(quanLyPhongBan.getDsPhongBan());
-        // } catch (Exception e) {
-        //     e.printStackTrace();
-        // }
-
         try {
             FileManager fileManager = new FileManager();
             fileManager.write();
