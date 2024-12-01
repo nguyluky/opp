@@ -121,7 +121,7 @@ public class OptionQuanLyPhongBan implements ShowOption{
             }
             //nếu đã có phòng ban
             if(checkTonTaiPhongBan){
-                System.out.println("Nhân viên đang ở phòng ban: " + phongBanHaveNhanVien.getIdPhongBan());
+                System.out.println("Nhân viên đang ở ID phòng ban: " + phongBanHaveNhanVien.getIdPhongBan());
                 qlpb.printDsPhongBan(); //in id danh sach phong ban
                 System.out.print("Nhập ID phòng ban mà nhân viên sẽ chuyển đến: ");
                 String idPhongBan = sc.nextLine();

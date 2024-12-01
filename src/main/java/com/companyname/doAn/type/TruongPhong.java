@@ -1,5 +1,8 @@
 package com.companyname.doAn.type;
 
+import static com.companyname.doAn.Gui.StaticScanner.qlda;
+import static com.companyname.doAn.Gui.StaticScanner.qlpb;
+
 public class TruongPhong extends NhanSu {
     private  final String chucVu = "Truong Phong";
     private int luongCoBan = 4000000;
@@ -93,5 +96,31 @@ public class TruongPhong extends NhanSu {
         System.out.println("Năm vào làm: " + super.getNamVaoLam());
         System.out.println("Kinh nghiệm: " + super.getKinhNghiem());
         System.out.println("Lương tháng: " + this.tinhLuong());
+        PhongBan pb = null;
+        for(PhongBan phongBan : qlpb.getDsPhongBan()){
+            if(!phongBan.getIsDelete()) {
+                if (phongBan.getTruongPhong().getId().equals(super.getId())) {
+                    pb = phongBan;
+                }
+            }
+        }
+        System.out.println("Phòng ban: " + pb.getNamePhongBan());
+
+        System.out.println("Danh sách dự án tham gia: ");
+        boolean checkFindDuAn = false;
+        int i=1;
+        for(DuAn da : qlda.getDsDuAn()){
+            if(!da.getIsDelete()) {
+                for (NhanSu ns : da.getDsNhanSu()) {
+                    if (ns.getId().equals(super.getId())) {
+                        System.out.println("Dự án thứ " + i + ": " + da.getNameDuAn() + ". ID: " + da.getIdDuAn());
+                        i++;
+                        checkFindDuAn = true;
+                        break;
+                    }
+                }
+            }
+        }
+        if(!checkFindDuAn)  System.out.println("Không có");
     }
 }

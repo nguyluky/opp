@@ -1,11 +1,10 @@
 package com.companyname.doAn.ql;
 
-import java.util.Arrays;
-
-import com.companyname.doAn.Gui.ShowOption;
 import com.companyname.doAn.type.NhanSu;
 import com.companyname.doAn.type.NhanVien;
 import com.companyname.doAn.type.TruongPhong;
+
+import java.util.Arrays;
 
 public class QuanLyNhanSu {
     private NhanSu dsNhanSu[];
@@ -178,17 +177,23 @@ public class QuanLyNhanSu {
         int i=1;
         for(NhanSu ns : this.dsNhanSu){
             if(ns.getIsDelete()){
-                System.out.println("Nhân sự thứ " + i + ": " + ns.getName() + ". ID: " + ns.getId());
+                if(ns instanceof NhanVien) {
+                    System.out.println("Nhân sự thứ " + i + ": " + ns.getName() + ". ID: " + ns.getId() + " Loại: Nhân viên");
+                }
+                else System.out.println("Nhân sự thứ " + i + ": " + ns.getName() + ". ID: " + ns.getId() + " Loại: Trưởng phòng");
                 i++;
             }
         }
         if(i==1) System.out.println("Không có nhân sự nào");
 
-        System.out.println("Danh sách nhan su đang làm việc:");
+        System.out.println("Danh sách nhân sự đang làm việc:");
         int j=1;
         for(NhanSu ns : this.dsNhanSu){
             if(!ns.getIsDelete()){
-                System.out.println("Nhân sự thứ " + j + ": " + ns.getName() + ". ID: " + ns.getId());
+                if(ns instanceof NhanVien) {
+                    System.out.println("Nhân sự thứ " + j + ": " + ns.getName() + ". ID: " + ns.getId() + " Loại: Nhân viên");
+                }
+                else System.out.println("Nhân sự thứ " + j + ": " + ns.getName() + ". ID: " + ns.getId() + " Loại: Trưởng phòng");
                 j++;
             }
         }

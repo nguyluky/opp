@@ -117,7 +117,6 @@ public class OptionPhongBan implements ShowOption{
     }
 
     public void themNhanVien(PhongBan currentPhongBan){
-        Scanner sc = new Scanner(System.in);
         System.out.print("Nhập số lượng nhân viên muốn thêm vào phòng ban này: ");
         int slNhanVien;
         try {
@@ -130,10 +129,12 @@ public class OptionPhongBan implements ShowOption{
             System.out.println("Nhập lỗi. Thoát");
         }
 
+        qlns.printDsNhanSu();
         for(int i=0; i<slNhanVien; i++){
+            System.out.println("---------------------------------------");
             System.out.print("Nhap ID nhan vien: ");
             String idNhanVien = sc.nextLine();
-            if(qlns.getNhanVienById(idNhanVien) == null){
+            if(qlns.getNhanVienById(idNhanVien) == null || qlns.getNhanVienById(idNhanVien).getIsDelete()){
                 System.out.println("Id nhân viên không tồn tại. Quay lại menu trước");
                 return;
             }
@@ -172,12 +173,12 @@ public class OptionPhongBan implements ShowOption{
                 switch (choiceNext) {
                     case 1:
                         phongbanTmp.removeNhanVien(idNhanVien);
+                        currentPhongBan.addNhanVien(qlns.getNhanVienById(idNhanVien));
                         break;
                     case 2:
                         return;
                 }
             }
-            currentPhongBan.addNhanVien(qlns.getNhanVienById(idNhanVien));
         }
     }
 
@@ -269,6 +270,7 @@ public class OptionPhongBan implements ShowOption{
 //                }
 //            }
 //        }
+        currentPhongBan.printDsNhanSu();
         System.out.print("Nhap ID nhan vien se lam truong phong: ");
         String id = sc.nextLine();
         NhanVien oldNv = qlns.getNhanVienById(id);

@@ -64,6 +64,7 @@ public class OptionNhanSu {
     }
 
     public void printTinhTrangKhenThuong(NhanSu currentNhanSu){
+        System.out.println("---------------------------------------");
         int i=0;
         System.out.println("So lan khen thuong: " + currentNhanSu.getDsKhenThuong().length);
         for(KhenThuong kt : currentNhanSu.getDsKhenThuong()){
@@ -73,6 +74,7 @@ public class OptionNhanSu {
     }
 
     public void printTinhTrangKyLuat(NhanSu currentNhanSu){
+        System.out.println("---------------------------------------");
         int i=0;
         System.out.println("So lan ky luat: " + currentNhanSu.getDsKyLuat().length);
         for(KyLuat kl : currentNhanSu.getDsKyLuat()){

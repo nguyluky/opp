@@ -116,9 +116,9 @@ public class OptionQuanLyNhanSu implements ShowOption{
 
     @Override
     public void show(){
-        System.out.println("---------------------------------------");
 //        ShowOption.clearScreen();
-
+        qlns.printDsNhanSu();
+        System.out.println("---------------------------------------");
         System.out.print("Nhập ID nhân sự: ");
         String idNhanSu = sc.nextLine();
         if(qlns.getNhanSuById(idNhanSu) == null || qlns.getNhanSuById(idNhanSu).getIsDelete()){
@@ -126,7 +126,6 @@ public class OptionQuanLyNhanSu implements ShowOption{
             return;
         }
         NhanSu currentNhanSu = qlns.getNhanSuById(idNhanSu);
-
         System.out.println("1: Xem thông tin cơ bản");
         System.out.println("2: Xem tình trạng kỷ luật");
         System.out.println("3: Xem tình trạng khen thưởng");
