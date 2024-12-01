@@ -46,7 +46,7 @@ public class OptionQuanLyNhanSu implements ShowOption{
             String phone;
             while(true) {
                 System.out.print("Nhập số điện thoại: ");
-                phone = sc.nextLine();
+                phone = sc.nextLine().trim();
                 boolean check = true;
                 for (int k = 0; k < phone.length(); k++) {
                     if (!Character.isDigit(phone.charAt(k))) {
@@ -88,11 +88,11 @@ public class OptionQuanLyNhanSu implements ShowOption{
 
     public void xoaNhanSu(){
         System.out.print("Nhập số lượng nhân sự muốn xóa: ");
-        int slNhanVien;
+        int slNhanSu;
         while(true){
             try {
-                slNhanVien = Integer.parseInt(sc.nextLine());
-                if(slNhanVien<0){
+                slNhanSu = Integer.parseInt(sc.nextLine());
+                if(slNhanSu<0 || slNhanSu > qlns.getDsNhanSu().length){
                     System.out.println("Vui lòng nhập số nguyên dương");
                 }
                 else{
@@ -102,14 +102,16 @@ public class OptionQuanLyNhanSu implements ShowOption{
                 System.out.println("Vui lòng nhập số nguyên dương");
             }
         }
-        for(int i=0; i<slNhanVien;i++){
-            System.out.print("Nhập ID nhân viên thứ " + (i+1) + " muốn xóa: ");
+        if(slNhanSu==0) return;
+
+        for(int i=0; i<slNhanSu;i++){
+            System.out.print("Nhập ID nhân sự thứ " + (i+1) + " muốn xóa: ");
             String idNhanVien = sc.nextLine();
             if(qlns.getNhanSuById(idNhanVien) != null && !qlns.getNhanSuById(idNhanVien).getIsDelete()){
                 qlns.getNhanSuById(idNhanVien).setDelete(true);
             }
             else{
-                System.out.println("ID nhân viên không tồn tại. Bỏ qua");
+                System.out.println("ID nhân viên không tồn tại");
             }
         }
     }

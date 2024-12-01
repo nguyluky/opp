@@ -96,6 +96,7 @@ public class TruongPhong extends NhanSu {
         System.out.println("Năm vào làm: " + super.getNamVaoLam());
         System.out.println("Kinh nghiệm: " + super.getKinhNghiem());
         System.out.println("Lương tháng: " + this.tinhLuong());
+        System.out.println("Loại: Trưởng phòng");
         PhongBan pb = null;
         for(PhongBan phongBan : qlpb.getDsPhongBan()){
             if(!phongBan.getIsDelete() && phongBan != null) {

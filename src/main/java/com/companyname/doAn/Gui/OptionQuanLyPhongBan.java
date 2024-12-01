@@ -121,11 +121,17 @@ public class OptionQuanLyPhongBan implements ShowOption{
             }
             //nếu đã có phòng ban
             if(checkTonTaiPhongBan){
+                System.out.println("---------------------------------------");
                 System.out.println("Nhân viên đang ở ID phòng ban: " + phongBanHaveNhanVien.getIdPhongBan());
                 qlpb.printDsPhongBan(); //in id danh sach phong ban
                 System.out.print("Nhập ID phòng ban mà nhân viên sẽ chuyển đến: ");
                 String idPhongBan = sc.nextLine().trim();
                 if(qlpb.getPhongBanByID(idPhongBan) != null && !qlpb.getPhongBanByID(idPhongBan).getIsDelete()){
+                    if(qlpb.getPhongBanByID(idPhongBan).equals(phongBanHaveNhanVien)){
+                        System.out.println("---------------------------------------");
+                        System.out.println("ID nhân viên đã ở phòng ban này. Không cần chuyển");
+                        return;
+                    }
                     qlpb.getPhongBanByID(idPhongBan).addNhanVien(qlns.getNhanVienById(idNhanVien));
                     //xóa nhân viên khỏi phòng ban cũ
                     phongBanHaveNhanVien.removeNhanVien(idNhanVien);
