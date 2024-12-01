@@ -162,13 +162,7 @@ public class OptionQuanLyPhongBan implements ShowOption{
 
     @Override
     public void show(){
-        ShowOption.clearScreen();
-        while (true) {
 
-            System.out.println("---------------------------------------");
-            System.out.println("             QUẢN LÝ PHÒNG BAN         ");
-            System.out.println("---------------------------------------");
-            
             qlpb.printDsPhongBan();
             System.out.println("-----------------------------------");
             System.out.print("Nhập ID phòng ban cụ thể: ");
@@ -232,6 +226,4 @@ public class OptionQuanLyPhongBan implements ShowOption{
                 }
             }
         }
-
-    }
 }
