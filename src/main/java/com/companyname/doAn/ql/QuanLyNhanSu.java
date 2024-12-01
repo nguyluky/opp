@@ -65,7 +65,7 @@ public class QuanLyNhanSu {
     public TruongPhong[] getTruongPhongs() {
         TruongPhong[] truongPhongs = new TruongPhong[0];
         for (NhanSu nhanSu : this.dsNhanSu ) {
-            if (nhanSu instanceof TruongPhong && !nhanSu.getIsDelete()) {
+            if (nhanSu instanceof TruongPhong) {
                 truongPhongs = Arrays.copyOf(truongPhongs, truongPhongs.length + 1);
                 truongPhongs[truongPhongs.length - 1] = (TruongPhong) nhanSu;
             }

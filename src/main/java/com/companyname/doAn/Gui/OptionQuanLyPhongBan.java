@@ -164,6 +164,10 @@ public class OptionQuanLyPhongBan implements ShowOption{
     public void show(){
         ShowOption.clearScreen();
         while (true) {
+
+            System.out.println("---------------------------------------");
+            System.out.println("             QUẢN LÝ PHÒNG BAN         ");
+            System.out.println("---------------------------------------");
             
             qlpb.printDsPhongBan();
             System.out.println("-----------------------------------");

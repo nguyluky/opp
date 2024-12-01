@@ -81,6 +81,7 @@ public class PhongBanReaderWriter implements BaseReader<PhongBan>, BaseWriter<Ph
             phongBan[phongBan.length - 1].setDsDuAn(dsDuAn);
 
             if (!arr[4].equals("")) {
+                // System.out.println(arr[4]);
                 phongBan[phongBan.length - 1].setTruongPhong((TruongPhong) (qLyNhanSu.getNhanSuById(arr[4])));
             }
         

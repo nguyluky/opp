@@ -122,7 +122,14 @@ public class OptionQuanLyDuAn implements ShowOption{
 
     @Override
     public void show(){
+        while (true) {
+            
+            System.out.println("---------------------------------------");
+            System.out.println("             QUẢN LÝ DỰ ÁN             ");
+            System.out.println("---------------------------------------");
+
             qlda.printDsDuAn();
+
             System.out.println("---------------------------------------");
 
             System.out.print("Nhập ID dự án: ");
@@ -173,6 +180,7 @@ public class OptionQuanLyDuAn implements ShowOption{
                 case 0:
                     return;
             }
+        }
 
 
     }
