@@ -13,12 +13,12 @@ public class StaticScanner{
     public static QuanLyNhanSu qlns = QuanLyNhanSu.getInstance();
     public static QuanLyPhongBan qlpb = QuanLyPhongBan.getInstance();
 
-    public static OptionQuanLyPhongBan optionQuanLyPhongBan = new OptionQuanLyPhongBan();
-    public static OptionQuanLyDuAn optionQuanLyDuAn = new OptionQuanLyDuAn();
-    public static OptionQuanLyNhanSu optionQuanLyNhanSu = new OptionQuanLyNhanSu();
+    // public static OptionQuanLyPhongBan optionQuanLyPhongBan = new OptionQuanLyPhongBan();
+    // public static OptionQuanLyDuAn optionQuanLyDuAn = new OptionQuanLyDuAn();
+    // public static OptionQuanLyNhanSu optionQuanLyNhanSu = new OptionQuanLyNhanSu();
 
-    public static OptionMenu optionMenu = new OptionMenu();
-    public static OptionDuAn optionDuAn = new OptionDuAn();
-    public static OptionNhanSu optionNhanSu = new OptionNhanSu();
-    public static OptionPhongBan optionPhongBan = new OptionPhongBan();
+    // public static OptionMenu optionMenu = new OptionMenu();
+    // public static OptionDuAn optionDuAn = new OptionDuAn();
+    // public static OptionNhanSu optionNhanSu = new OptionNhanSu();
+    // public static OptionPhongBan optionPhongBan = new OptionPhongBan();
 }

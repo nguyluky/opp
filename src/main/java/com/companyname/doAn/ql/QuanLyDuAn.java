@@ -2,7 +2,7 @@ package com.companyname.doAn.ql;
 
 import java.util.Arrays;
 
-import com.companyname.doAn.Gui.ShowOption;
+import com.companyname.doAn.Gui.Screen.Screen;
 import com.companyname.doAn.type.DuAn;
 
 public class QuanLyDuAn {

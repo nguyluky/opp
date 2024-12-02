@@ -2,6 +2,9 @@
 package com.companyname.doAn;
 
 
+import java.util.stream.Stream;
+
+import com.companyname.doAn.Gui.Display;
 import com.companyname.doAn.Gui.OptionMenu;
 import com.companyname.doAn.fileManager.FileManager;
 import com.companyname.doAn.ql.QuanLyDuAn;
@@ -12,27 +15,16 @@ public class Main {
 
         try {
 
-            FileManager fileManager = new FileManager();
-            fileManager.read();
+            // FileManager fileManager = new FileManager();
+            // fileManager.read();
 
-            // QuanLyDuAn ql = QuanLyDuAn.getInstance();
-            // QuanLyNhanSu qlNhanSu = QuanLyNhanSu.getInstance();
+            Display display = Display.getInstance();
+            display.setOptionMenu(new OptionMenu());
+            display.show();
+            // OptionMenu menu = new OptionMenu();
+            // menu.show();
 
-            // for (int i = 0; i < ql.getDsDuAn().length; i++) {
-            //     // ql.addDuAn(ql.getDsDuAn()[i]);
-            //     System.out.println(ql.getDsDuAn()[i]);
-            // }
-            // System.out.println(ql);
-
-            // for (int i = 0; i < qlNhanSu.getDsNhanSu().length; i++) {
-            //     System.out.println(qlNhanSu.getDsNhanSu()[i]);
-            // }
-            // System.out.println(qlNhanSu);
-            
-            OptionMenu menu = new OptionMenu();
-            menu.show();
-
-            fileManager.write();
+            // fileManager.write();
         }
         catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
