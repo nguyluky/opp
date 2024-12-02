@@ -15,8 +15,8 @@ public class Main {
 
         try {
 
-            // FileManager fileManager = new FileManager();
-            // fileManager.read();
+            FileManager fileManager = new FileManager();
+            fileManager.read();
 
             Display display = Display.getInstance();
             display.setOptionMenu(new OptionMenu());
@@ -24,7 +24,7 @@ public class Main {
             // OptionMenu menu = new OptionMenu();
             // menu.show();
 
-            // fileManager.write();
+            fileManager.write();
         }
         catch (Exception e) {
             System.out.println("Error: " + e.getMessage());

@@ -1,8 +1,15 @@
 package com.companyname.doAn.Gui;
 
 import com.companyname.doAn.Gui.Screen.ScreenOption;
+import com.companyname.doAn.Gui.Screen.ScreenOptionTable;
+import com.companyname.doAn.Gui.Screen.ScreenTable;
+import com.companyname.doAn.ql.QuanLyDuAn;
+import com.companyname.doAn.type.DuAn;
 
 public class OptionQuanLyDuAn extends ScreenOption {
+
+
+
     public OptionQuanLyDuAn() {
         super("QUẢN LÝ DỰ ÁN", new String[] {
             "1: Xem danh sách toàn bộ dự án",
@@ -16,29 +23,79 @@ public class OptionQuanLyDuAn extends ScreenOption {
     @Override
     public void processOption(Display display, int choice) {
         switch (choice) {
-            // case 1:
-            //     display.setScreen(new OptionQuanLyDuAnThemDuAn());
-            //     break;
-            // case 2:
-            //     display.setScreen(new OptionQuanLyDuAnXoaDuAn());
-            //     break;
-            // case 3:
-            //     display.setScreen(new OptionQuanLyDuAnThongTinDuAn());
-            //     break;
             case 0:
                 display.back();
                 break;
+
+            case 1:
+                display.setOptionMenu(new TableQuanLyDuAn());
+                break;
+            
+            case 4:
+                display.setOptionMenu(new OptionTableQuanLyDuAn());
+                break;
+        }
+    }
+    
+
+    public class TableQuanLyDuAn extends ScreenTable {
+        public TableQuanLyDuAn() {
+            super(new String[] {
+                "ID",
+                "Tên dự án",
+                "Sl nhân sự",
+                "is Delete",
+            });
+        }
+
+        @Override
+        public String[][] getDataStrings() {
+
+            QuanLyDuAn qlda = QuanLyDuAn.getInstance();
+            DuAn[] dsDuAn = qlda.getDsDuAn();
+
+            String[][] data = new String[dsDuAn.length][this.title.length];
+
+            for (int i = 0; i < dsDuAn.length; i++) {
+                data[i][0] = dsDuAn[i].getIdDuAn();
+                data[i][1] = dsDuAn[i].getNameDuAn();
+                data[i][2] = Integer.toString(dsDuAn[i].getDsNhanSu().length);
+                data[i][3] = dsDuAn[i].getIsDelete() ? "X" : "";
+            }
+
+            return data;
+        }    
+    }
+
+    
+    public class OptionTableQuanLyDuAn extends ScreenOptionTable {
+        
+        public OptionTableQuanLyDuAn() {
+            super(new String[] {
+                "1: Xem chi tiết dự án",
+                "2: Thêm nhân sự",
+                "3: Xóa nhân sự",
+                "4: Xóa dự án",
+                "0: Quay lại",
+            }, new TableQuanLyDuAn());
+        }
+        
+        @Override
+        public void processOption(Display display, int choice) {
+            switch (choice) {
+                case 0:
+                    display.back();
+                    break;
+            
+                default:
+                    break;
+            }
+
         }
     }
 
-    @Override
-    public void show(Display display) {
-        this.printOption();
-
-        int choice = this.getChoice(display.sc);
-        this.processOption(display, choice);
-    }
     
+
 }
 
 // import com.companyname.doAn.type.DuAn;

@@ -7,7 +7,7 @@ import com.companyname.doAn.Gui.Screen.Screen;
 
 public class Display {
     private static Display instance = null;
-    Scanner sc;
+    public Scanner sc;
 
     public static Display getInstance() {
         if (instance == null) {
