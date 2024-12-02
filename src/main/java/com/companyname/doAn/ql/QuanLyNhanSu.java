@@ -33,7 +33,6 @@ public class QuanLyNhanSu {
                 break;
             }
         }
-
         this.dsNhanSu[this.dsNhanSu.length - 1].setDelete(true);
     }
 
@@ -61,7 +60,6 @@ public class QuanLyNhanSu {
         return null;
     }
 
-
     public TruongPhong[] getTruongPhongs() {
         TruongPhong[] truongPhongs = new TruongPhong[0];
         for (NhanSu nhanSu : this.dsNhanSu ) {
@@ -78,8 +76,6 @@ public class QuanLyNhanSu {
             this.addNhanSu(nhanVien);
         }
     }
-
-
 
     public void setTruongPhongs(TruongPhong[] truongPhongs) {
         for (TruongPhong truongPhong : truongPhongs) {

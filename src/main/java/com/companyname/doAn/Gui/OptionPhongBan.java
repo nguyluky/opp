@@ -235,8 +235,8 @@ public class OptionPhongBan{
 
         currentPhongBan.printDsNhanSu();
         System.out.print("Nhap ID nhan vien se lam truong phong: ");
-        String id = sc.nextLine();
-        NhanVien oldNv = qlns.getNhanVienById(id);
+        String id = sc.nextLine().trim();
+        NhanVien oldNv = currentPhongBan.getNhanVienById(id);
         if(oldNv == null || oldNv.getIsDelete()){
             System.out.println("ID nhan vien khong ton tai trong phong ban nay");
             return;
@@ -244,6 +244,9 @@ public class OptionPhongBan{
         TruongPhong newTruongPhong = new TruongPhong(oldNv.getId(), oldNv.getName(), oldNv.getPhone(), oldNv.getDiaChi(), oldNv.getNamVaoLam(), oldNv.getKinhNghiem());
         TruongPhong oldTruongPhong = currentPhongBan.getTruongPhong();
         if(oldTruongPhong.getIsDelete()){
+
+
+
             oldTruongPhong=null;
         }
 

@@ -11,8 +11,6 @@ public class OptionQuanLyNhanSu implements ShowOption {
 
     public void themNhanSu() {
         System.out.println("---------------------------------------");
-        // ShowOption.clearScreen();
-
         System.out.print("Nhập số lượng nhân sự muốn thêm: ");
         int slNhanVien;
         while (true) {
@@ -29,8 +27,6 @@ public class OptionQuanLyNhanSu implements ShowOption {
         }
         for (int i = 0; i < slNhanVien; i++) {
             System.out.println("---------------------------------------");
-            // ShowOption.clearScreen();
-
             System.out.println("Nhân sự thứ " + (i + 1) + ":");
             String id;
             while (true) {
@@ -80,13 +76,12 @@ public class OptionQuanLyNhanSu implements ShowOption {
             NhanVien newNhanVien = new NhanVien(id, name, phone, address, year, kinhnghiem);
             qlns.addNhanSu(newNhanVien);
             System.out.println("---------------------------------------");
-            // ShowOption.clearScreen();
-
             System.out.println("Thêm nhân sự thành công.");
         }
     }
 
     public void xoaNhanSu() {
+        qlns.printDsNhanSu();
         System.out.print("Nhập số lượng nhân sự muốn xóa: ");
         int slNhanSu;
         while (true) {
@@ -108,7 +103,11 @@ public class OptionQuanLyNhanSu implements ShowOption {
             System.out.print("Nhập ID nhân sự thứ " + (i + 1) + " muốn xóa: ");
             String idNhanVien = sc.nextLine();
             if (qlns.getNhanSuById(idNhanVien) != null && !qlns.getNhanSuById(idNhanVien).getIsDelete()) {
+//                NhanVien newNv = new NhanVien
                 qlns.getNhanSuById(idNhanVien).setDelete(true);
+
+                System.out.println("---------------------------------------");
+                System.out.println("Xoa Thanh cong !!!!!");
             } else {
                 System.out.println("ID nhân viên không tồn tại");
             }

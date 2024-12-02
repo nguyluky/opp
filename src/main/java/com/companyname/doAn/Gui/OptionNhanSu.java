@@ -27,12 +27,12 @@ public class OptionNhanSu {
         }
         KyLuat[] dsKyLuat = currentNhanSu.getDsKyLuat();
         for(int i=0; i<sl; i++){
-            dsKyLuat = Arrays.copyOf(currentNhanSu.getDsKyLuat(), currentNhanSu.getDsKyLuat().length+1);
+            dsKyLuat = Arrays.copyOf(dsKyLuat, currentNhanSu.getDsKyLuat().length+1);
             System.out.print("Nhap ly do: ");
             String lyDo = sc.nextLine();
             System.out.print("Nhap tien phat: ");
             int tienPhat = Integer.parseInt(sc.nextLine());
-            dsKyLuat[dsKyLuat.length-1] = new KyLuat(lyDo, tienPhat);
+            dsKyLuat[dsKyLuat.length-1] = new KyLuat(lyDo.trim(), tienPhat);
         }
         currentNhanSu.setDsKyLuat(dsKyLuat);
     }
@@ -53,12 +53,12 @@ public class OptionNhanSu {
         }
         KhenThuong[] dsKhenThuong = currentNhanSu.getDsKhenThuong();
         for(int i=0; i<sl; i++){
-            dsKhenThuong = Arrays.copyOf(currentNhanSu.getDsKhenThuong(), currentNhanSu.getDsKhenThuong().length+1);
+            dsKhenThuong = Arrays.copyOf(dsKhenThuong, currentNhanSu.getDsKhenThuong().length+1);
             System.out.print("Nhap ly do: ");
             String lyDo = sc.nextLine();
             System.out.print("Nhap tien thuong: ");
             int tienThuong = Integer.parseInt(sc.nextLine());
-            dsKhenThuong[dsKhenThuong.length-1] = new KhenThuong(lyDo, tienThuong);
+            dsKhenThuong[dsKhenThuong.length-1] = new KhenThuong(lyDo.trim(), tienThuong);
         }
         currentNhanSu.setDsKhenThuong(dsKhenThuong);
     }
@@ -68,7 +68,7 @@ public class OptionNhanSu {
         int i=0;
         System.out.println("So lan khen thuong: " + currentNhanSu.getDsKhenThuong().length);
         for(KhenThuong kt : currentNhanSu.getDsKhenThuong()){
-            System.out.println("Lan " + i+1 + ": " + kt.getLyDo() + ". Tien thuong: " + kt.getTienThuong());
+            System.out.println("Lan " + (i+1) + ": " + kt.getLyDo() + ". Tien thuong: " + kt.getTienThuong());
             i++;
         }
     }
@@ -78,7 +78,7 @@ public class OptionNhanSu {
         int i=0;
         System.out.println("So lan ky luat: " + currentNhanSu.getDsKyLuat().length);
         for(KyLuat kl : currentNhanSu.getDsKyLuat()){
-            System.out.println("Lan " + i+1 + ": " + kl.getLyDo() + ". Tien thuong: " + kl.getTienPhat());
+            System.out.println("Lan " + (i+1) + ": " + kl.getLyDo() + ". Tien thuong: " + kl.getTienPhat());
             i++;
         }
     }

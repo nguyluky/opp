@@ -1,5 +1,7 @@
 package com.companyname.doAn.type;
 
+import java.time.LocalDate;
+
 public abstract class NhanSu  {
     private String id;
     private String name;
@@ -86,7 +88,7 @@ public abstract class NhanSu  {
         this.namVaoLam = namVaoLam;
     }
     public int getKinhNghiem() {
-        return kinhNghiem;
+        return kinhNghiem + (LocalDate.now().getYear() - getNamVaoLam());
     }
     public void setKinhNghiem(int kinhNghiem) {
         this.kinhNghiem = kinhNghiem;

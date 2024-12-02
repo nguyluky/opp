@@ -1,7 +1,6 @@
 package com.companyname.doAn.type;
 
-import static com.companyname.doAn.Gui.StaticScanner.qlda;
-import static com.companyname.doAn.Gui.StaticScanner.qlpb;
+import static com.companyname.doAn.Gui.StaticScanner.*;
 
 public class TruongPhong extends NhanSu {
     private  final String chucVu = "Truong Phong";
@@ -104,6 +103,12 @@ public class TruongPhong extends NhanSu {
                     pb = phongBan;
                 }
             }
+        }
+
+
+        if (this.getIsDelete() || pb.getNamePhongBan() == null) {
+            System.out.println("Truong Phong chua co phong ban");
+            return;
         }
         System.out.println("Phòng ban: " + pb.getNamePhongBan());
 
