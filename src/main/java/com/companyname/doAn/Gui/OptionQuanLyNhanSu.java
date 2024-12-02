@@ -2,6 +2,8 @@ package com.companyname.doAn.Gui;
 
 import com.companyname.doAn.type.NhanSu;
 import com.companyname.doAn.type.NhanVien;
+import com.companyname.doAn.type.PhongBan;
+import com.companyname.doAn.type.TruongPhong;
 
 import static com.companyname.doAn.Gui.StaticScanner.*;
 
@@ -98,12 +100,27 @@ public class OptionQuanLyNhanSu implements ShowOption {
         }
         if (slNhanSu == 0)
             return;
-
         for (int i = 0; i < slNhanSu; i++) {
             System.out.print("Nhập ID nhân sự thứ " + (i + 1) + " muốn xóa: ");
-            String idNhanVien = sc.nextLine();
+            String idNhanVien = sc.nextLine().trim();
             if (qlns.getNhanSuById(idNhanVien) != null && !qlns.getNhanSuById(idNhanVien).getIsDelete()) {
-//                NhanVien newNv = new NhanVien
+                if(qlns.getNhanSuById(idNhanVien) instanceof TruongPhong) {
+                    int index = 0;
+                    for(int k=0; k< qlns.getDsNhanSu().length; k++){
+                        if(qlns.getDsNhanSu()[k].getId().equals(idNhanVien)){
+                            index = k;
+                            break;
+                        }
+                    }
+                    NhanVien newNv = new NhanVien(qlns.getNhanSuById(idNhanVien).getId(), qlns.getNhanSuById(idNhanVien).getName(), qlns.getNhanSuById(idNhanVien).getPhone(), qlns.getNhanSuById(idNhanVien).getDiaChi(), qlns.getNhanSuById(idNhanVien).getNamVaoLam(), qlns.getNhanSuById(idNhanVien).getSoNgayNghi(), qlns.getNhanSuById(idNhanVien).getKinhNghiem(), qlns.getNhanSuById(idNhanVien).getLuongCoBan(), qlns.getNhanSuById(idNhanVien).getDsKyLuat(), qlns.getNhanSuById(idNhanVien).getDsKhenThuong(), true);
+                    qlns.getDsNhanSu()[index] = newNv;
+                    for(PhongBan pb : qlpb.getDsPhongBan()){
+                        if(pb.getTruongPhong().getId().equals(idNhanVien)){
+                            pb.setTruongPhong(null);
+                            pb.addNhanVien(newNv);
+                        }
+                    }
+                }
                 qlns.getNhanSuById(idNhanVien).setDelete(true);
 
                 System.out.println("---------------------------------------");

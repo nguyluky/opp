@@ -17,7 +17,6 @@ public class TruongPhong extends NhanSu {
         super(id, name, phone, diaChi, namVaolam, kinhNghiem);
     }
 
-
     // Dùng cho việc đọc file
     public TruongPhong(
         String id,
@@ -54,6 +53,7 @@ public class TruongPhong extends NhanSu {
     public int getLuongCoBan() {
         return this.luongCoBan;
     }
+    public void setLuongCoBan(int luongCoBan) {}
 
     @Override
     public int getTienKyLuat(){
@@ -104,9 +104,7 @@ public class TruongPhong extends NhanSu {
                 }
             }
         }
-
-
-        if (this.getIsDelete() || pb.getNamePhongBan() == null) {
+        if (this.getIsDelete() || pb == null) {
             System.out.println("Truong Phong chua co phong ban");
             return;
         }

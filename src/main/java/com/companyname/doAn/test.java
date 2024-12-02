@@ -26,9 +26,7 @@ public class test {
                 quanLyNhanSu.addNhanSu(nv);
             }
 
-
             quanLyDuAn.addDuAn(da);
-
 
         }
 
