@@ -115,8 +115,8 @@ public class OptionQuanLyNhanSu implements ShowOption {
                     NhanVien newNv = new NhanVien(qlns.getNhanSuById(idNhanVien).getId(), qlns.getNhanSuById(idNhanVien).getName(), qlns.getNhanSuById(idNhanVien).getPhone(), qlns.getNhanSuById(idNhanVien).getDiaChi(), qlns.getNhanSuById(idNhanVien).getNamVaoLam(), qlns.getNhanSuById(idNhanVien).getSoNgayNghi(), qlns.getNhanSuById(idNhanVien).getKinhNghiem(), qlns.getNhanSuById(idNhanVien).getLuongCoBan(), qlns.getNhanSuById(idNhanVien).getDsKyLuat(), qlns.getNhanSuById(idNhanVien).getDsKhenThuong(), true);
                     qlns.getDsNhanSu()[index] = newNv;
                     for(PhongBan pb : qlpb.getDsPhongBan()){
-                        if(pb.getTruongPhong().getId().equals(idNhanVien)){
-                            pb.setTruongPhong(null);
+                        if(pb.getDsTruongPhong().getId().equals(idNhanVien)){
+                            pb.setDsTruongPhong(null);
                             pb.addNhanVien(newNv);
                         }
                     }

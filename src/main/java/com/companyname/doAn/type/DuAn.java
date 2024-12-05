@@ -13,7 +13,10 @@ public class DuAn {
     public DuAn(){}
 
     public DuAn(String nameDuAn, String idDuAn){
-        this(nameDuAn, idDuAn, false);
+        this.nameDuAn = nameDuAn;
+        this.dsNhanSu = new NhanSu[0];
+        this.idDuAn = idDuAn;
+        this.isDelete = false;
     }
 
     // HÀM DÙNG ĐỂ ĐỌC FILE

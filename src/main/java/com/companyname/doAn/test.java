@@ -33,7 +33,7 @@ public class test {
         for (int i = 0; i < 10; i++) {
             PhongBan pb = new PhongBan("Phong Ban " + i, String.valueOf(i), false);
             TruongPhong tp = new TruongPhong( "tp" + String.valueOf(i), "Nguyen Van " + (i + "pt"), "012345678" + (i + 10), "Ha Noi", 2020 + i, 0, 0, 3000000, new KyLuat[0], new KhenThuong[0], false);
-            pb.setTruongPhong(tp);
+            pb.setDsTruongPhong(tp);
             quanLyNhanSu.addNhanSu(tp);
             quanLyPhongBan.addPhongBan(pb);
         }

@@ -1,9 +1,8 @@
 package com.companyname.doAn.ql;
 
-import java.util.Arrays;
-
-import com.companyname.doAn.Gui.ShowOption;
 import com.companyname.doAn.type.DuAn;
+
+import java.util.Arrays;
 
 public class QuanLyDuAn {
     private DuAn[] dsDuAn;
@@ -26,25 +25,6 @@ public class QuanLyDuAn {
     public void setDsDuAn(DuAn[] dsDuAn){
         this.dsDuAn = dsDuAn;
     }
-
-//    public void removeDuAn(String id){
-//        for(int i=0; i<this.dsDuAn.length; i++){
-//            if(this.dsDuAn[i].getIdDuAn().equals(id)){
-//                this.dsDuAn[i].setIsDelete(true);
-//                break;
-//            }
-//        }
-//    }
-
-//    public int getSoLuongDuAn(){
-//        int count = 0;
-//        for(DuAn da : this.dsDuAn){
-//            if(!da.getIsDelete()){
-//                count++;
-//            }
-//        }
-//        return count;
-//    }
 
     public void addDuAn(DuAn duAn){
         this.dsDuAn = Arrays.copyOf(this.dsDuAn, this.dsDuAn.length + 1);

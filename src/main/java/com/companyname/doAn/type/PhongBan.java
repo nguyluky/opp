@@ -2,17 +2,19 @@ package com.companyname.doAn.type;
 
 import java.util.Arrays;
 
+import static com.companyname.doAn.Gui.StaticScanner.qlns;
+
 
 public class PhongBan {
     private String namePhongBan;
     private String idPhongBan;
     private NhanVien[] dsNhanVien;
-    private TruongPhong truongPhong;
+    private TruongPhong[] truongPhong;
     private DuAn[] dsDuAn;
     private boolean isDelete;
 
     // Dùng để đọc ghi file
-    public PhongBan(String name, String id, NhanVien[] dsNhanVien, TruongPhong truongPhong, DuAn[] dsDuAn, boolean isDelete) {
+    public PhongBan(String name, String id, NhanVien[] dsNhanVien, TruongPhong[] truongPhong, DuAn[] dsDuAn, boolean isDelete) {
         this.namePhongBan = name;
         this.idPhongBan = id;
         this.dsNhanVien = dsNhanVien;
@@ -29,13 +31,13 @@ public class PhongBan {
         this.namePhongBan = name;
         this.idPhongBan = id;
         this.dsNhanVien = new NhanVien[0];
-        this.truongPhong = null;
+        this.truongPhong = new TruongPhong[0];
         this.dsDuAn = new DuAn[0];
         this.isDelete = isDelete;
     }
 
     //----------GET--------------
-    public TruongPhong getTruongPhong(){
+    public TruongPhong[] getDsTruongPhong(){
         return this.truongPhong;
     }
 
@@ -60,7 +62,7 @@ public class PhongBan {
     }
 
     //----------------SET------------
-    public void setTruongPhong(TruongPhong tp){
+    public void setDsTruongPhong(TruongPhong[] tp){
         this.truongPhong = tp;
     }
 
@@ -88,12 +90,19 @@ public class PhongBan {
     public void printThongTinPhongBan(){
         System.out.println("Tên: " + this.namePhongBan);
         System.out.println("ID: " + this.idPhongBan);
-        System.out.print("Trưởng phòng: ");
-        if(this.truongPhong != null && !this.truongPhong.getIsDelete()){
-            System.out.println(this.truongPhong.getName() + ". ID: " + this.truongPhong.getId());
-        }
+        if(this.truongPhong.length == 0) System.out.println("Trưởng phòng: Chưa có");
         else{
-            System.out.println("Chưa có");
+            int index = -1;
+            for(int i=0; i<this.truongPhong.length; i++){
+                if(!this.truongPhong[i].getIsDelete()){
+                    index = i;
+                    break;
+                }
+            }
+            if(index != -1){
+                System.out.println("Trưởng phòng: " + this.truongPhong[index].getName() + ". ID: " + this.truongPhong[index].getId());
+            }
+            else System.out.println("Trưởng phòng: Chưa có");
         }
         System.out.println("Số lượng nhân viên đang làm: " + this.dsNhanVien.length);
         int i=1;
@@ -136,8 +145,20 @@ public class PhongBan {
 
     public void printDsNhanSu(){
         System.out.println("-----------------------------------");
-        if(this.truongPhong == null) System.out.println("Truong phong: chua co");
-        else System.out.println("Truong phong: " + this.truongPhong.getName() + ". ID: " + truongPhong.getId());
+        if(this.truongPhong.length == 0) System.out.println("Trưởng phòng: Chưa có");
+        else{
+            int index = -1;
+            for(int i=0; i<this.truongPhong.length; i++){
+                if(!this.truongPhong[i].getIsDelete()){
+                    index = i;
+                    break;
+                }
+            }
+            if(index != -1){
+                System.out.println("Trưởng phòng: " + this.truongPhong[index].getName() + ". ID: " + this.truongPhong[index].getId());
+            }
+            else System.out.println("Trưởng phòng: Chưa có");
+        }
         System.out.println("Danh sach nhan vien: " + this.dsNhanVien.length);
         int i=1;
         for(NhanVien nv : this.dsNhanVien){
@@ -206,5 +227,44 @@ public class PhongBan {
             }
         }
         return null;
+    }
+
+    public void changeTruongPhong(TruongPhong newTruongPhong){
+        //nếu mảng danh sách truong phong la 0
+        if(this.getDsTruongPhong().length == 0){
+            TruongPhong[] tmpDs = Arrays.copyOf(this.truongPhong, this.truongPhong.length + 1);
+            tmpDs[tmpDs.length - 1] = newTruongPhong;
+            this.setDsTruongPhong(tmpDs);
+            return;
+        }
+        //nếu all danh sách trường phòng đều nghỉ việc isDelete: true
+        int index = -1;
+        for(int i = 0; i<this.getDsTruongPhong().length; i++){
+            if(!this.getDsTruongPhong()[i].getIsDelete()){
+                index = i;
+                break;
+            }
+        }
+        if(index == -1){
+            TruongPhong[] tmpDs = Arrays.copyOf(this.truongPhong, this.truongPhong.length + 1);
+            tmpDs[tmpDs.length - 1] = newTruongPhong;
+            this.setDsTruongPhong(tmpDs);
+            return;
+        }
+        // nếu có trưởng phòng cũ thì chuyển đổi
+        for(int i=0; i<qlns.getDsNhanSu().length; i++){
+            if(qlns.getDsNhanSu()[i].getId().equals(this.truongPhong[index].getId())) {
+                //chuyển trưởng phòng cũ thành nhân viên mới
+                NhanVien newNv = new NhanVien(this.truongPhong[index].getId(),this.truongPhong[index].getName(),this.truongPhong[index].getPhone(),this.truongPhong[index].getDiaChi(),this.truongPhong[index].getNamVaoLam(),this.truongPhong[index].getKinhNghiem());
+                newNv.setDsKhenThuong(this.truongPhong[index].getDsKhenThuong());
+                newNv.setDsKyLuat(this.truongPhong[index].getDsKyLuat());
+                qlns.getDsNhanSu()[i] = newNv;
+                this.addNhanVien(newNv);
+            }
+        }
+        //set trưởng phòng mới
+        TruongPhong[] tmpDs = Arrays.copyOf(this.truongPhong, this.truongPhong.length + 1);
+        tmpDs[tmpDs.length - 1] = newTruongPhong;
+        this.setDsTruongPhong(tmpDs);
     }
 }

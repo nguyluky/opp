@@ -98,18 +98,12 @@ public class TruongPhong extends NhanSu {
         System.out.println("Loại: Trưởng phòng");
         PhongBan pb = null;
         for(PhongBan phongBan : qlpb.getDsPhongBan()){
-            if(!phongBan.getIsDelete() && phongBan != null) {
-                if (phongBan.getTruongPhong().getId().equals(super.getId())) {
-                    pb = phongBan;
+            for (TruongPhong tp : phongBan.getDsTruongPhong()) {
+                if (tp.getId().equals(this.getId()) && !tp.getIsDelete()) {
+                    System.out.println("Phòng ban: " + phongBan.getNamePhongBan() + ". ID: " + phongBan.getIdPhongBan());
                 }
             }
         }
-        if (this.getIsDelete() || pb == null) {
-            System.out.println("Truong Phong chua co phong ban");
-            return;
-        }
-        System.out.println("Phòng ban: " + pb.getNamePhongBan());
-
         System.out.println("Danh sách dự án tham gia: ");
         boolean checkFindDuAn = false;
         int i=1;

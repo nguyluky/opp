@@ -90,7 +90,7 @@ public class PhongBanReaderWriter implements BaseReader<PhongBan>, BaseWriter<Ph
 
             if (!arr[4].equals("")) {
                 // System.out.println(arr[4]);
-                phongBan[phongBan.length - 1].setTruongPhong((TruongPhong) (qLyNhanSu.getNhanSuById(arr[4])));
+                phongBan[phongBan.length - 1].setDsTruongPhong((TruongPhong) (qLyNhanSu.getNhanSuById(arr[4])));
             }
         
 
@@ -120,8 +120,8 @@ public class PhongBanReaderWriter implements BaseReader<PhongBan>, BaseWriter<Ph
 
             String truongPhongId = "";
 
-            if (phongBan.getTruongPhong() != null) {
-                truongPhongId = phongBan.getTruongPhong().getId();
+            if (phongBan.getDsTruongPhong() != null) {
+                truongPhongId = phongBan.getDsTruongPhong().getId();
             }
 
             String[] dataSave = {
