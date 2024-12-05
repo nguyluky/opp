@@ -4,7 +4,8 @@ import java.time.LocalDate;
 
 public abstract class NhanSu  {
     private String id;
-    private String name;
+    private String ho;
+    private String ten;
     private String phone;
     private String diaChi;
     private int namVaoLam;
@@ -16,9 +17,10 @@ public abstract class NhanSu  {
 
     public NhanSu() {};
 
-    public NhanSu(String id, String name, String phone, String diaChi, int namVaoLam, int soNgayNghi, KyLuat[] dsKyLuat, KhenThuong[] dsKhenThuong, int kinhNghiem) {
+    public NhanSu(String id, String ho, String ten, String phone, String diaChi, int namVaoLam, int soNgayNghi, KyLuat[] dsKyLuat, KhenThuong[] dsKhenThuong, int kinhNghiem) {
         this.id = id;
-        this.name = name;
+        this.ho = ho;
+        this.ten = ten;
         this.phone = phone;
         this.diaChi = diaChi;
         this.namVaoLam = namVaoLam;
@@ -29,22 +31,10 @@ public abstract class NhanSu  {
         this.isDelete = false;
     }
 
-    public NhanSu(String id, String name, String phone, String diaChi, int namVaoLam, int kinhNghiem) {
-        this(id, name, phone, diaChi, namVaoLam, namVaoLam, kinhNghiem, false);
-    }
-
-    public NhanSu(
-        String id,
-        String name,
-        String phone,
-        String diaChi,
-        int namVaoLam,
-        int soNgayNghi,
-        int kinhNghiem,
-        boolean isDelete
-    ) {
+    public NhanSu(String id, String ho, String ten, String phone, String diaChi, int namVaoLam, int kinhNghiem) {
         this.id = id;
-        this.name = name;
+        this.ho = ho;
+        this.ten = ten;
         this.phone = phone;
         this.diaChi = diaChi;
         this.namVaoLam = namVaoLam;
@@ -52,8 +42,30 @@ public abstract class NhanSu  {
         this.dsKyLuat = new KyLuat[0];
         this.dsKhenThuong = new KhenThuong[0];
         this.kinhNghiem = kinhNghiem;
-        this.isDelete = isDelete;
+        this.isDelete = false;
     }
+
+//    public NhanSu(
+//        String id,
+//        String name,
+//        String phone,
+//        String diaChi,
+//        int namVaoLam,
+//        int soNgayNghi,
+//        int kinhNghiem,
+//        boolean isDelete
+//    ) {
+//        this.id = id;
+//        this.name = name;
+//        this.phone = phone;
+//        this.diaChi = diaChi;
+//        this.namVaoLam = namVaoLam;
+//        this.soNgayNghi = 0;
+//        this.dsKyLuat = new KyLuat[0];
+//        this.dsKhenThuong = new KhenThuong[0];
+//        this.kinhNghiem = kinhNghiem;
+//        this.isDelete = isDelete;
+//    }
 
     //---------------------------------//
 
@@ -63,11 +75,17 @@ public abstract class NhanSu  {
     public void setId(String id) {
         this.id = id;
     }
-    public String getName() {
-        return name;
+    public String getHo() {
+        return this.ho;
     }
-    public void setName(String name) {
-        this.name = name;
+    public void setHo(String ho) {
+        this.ho = ho;
+    }
+    public String getTen() {
+        return this.ten;
+    }
+    public void setTen(String ten) {
+        this.ten = ten;
     }
     public String getPhone() {
         return phone;
@@ -136,6 +154,6 @@ public abstract class NhanSu  {
 
 //    ---------------------------------
     public String toString() {
-        return this.getChucVu() + "{" + "id=" + id + ", name=" + name + ", phone=" + phone + ", daiChi=" + diaChi + ", namVaoLam=" + namVaoLam + "}";
+        return this.getChucVu() + "{" + "id=" + id + ", ho=" + ho + ", ten=" + ten + ", phone=" + phone + ", daiChi=" + diaChi + ", namVaoLam=" + namVaoLam + "}";
     }
 }

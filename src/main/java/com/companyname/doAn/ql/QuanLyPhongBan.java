@@ -1,7 +1,9 @@
 package com.companyname.doAn.ql;
-import java.util.Arrays;
 
+import com.companyname.doAn.type.NhanVien;
 import com.companyname.doAn.type.PhongBan;
+
+import java.util.Arrays;
 
 public class QuanLyPhongBan {
     private PhongBan[] dsPhongBan;
@@ -58,25 +60,6 @@ public class QuanLyPhongBan {
         this.dsPhongBan[this.dsPhongBan.length - 1] = phongBan;
     }
 
-//    public void deletePhongBan(String id){
-//        for(int i=0; i<this.dsPhongBan.length; i++){
-//            if(this.dsPhongBan[i].getIdPhongBan().equals(id)){
-//                this.dsPhongBan[i].setIsDelete(true);
-//                break;
-//            }
-//        }
-//    }
-
-//    public int getSoLuongPhongBan(){
-//        int count = 0;
-//        for(PhongBan pb : this.dsPhongBan){
-//            if(!pb.getIsDelete()){
-//                count++;
-//            }
-//        }
-//        return count;
-//    }
-
     public PhongBan getPhongBanByID(String id){
         for(PhongBan pb : this.getDsPhongBan()){
             if(pb.getIdPhongBan().equals(id)){
@@ -93,6 +76,23 @@ public class QuanLyPhongBan {
             }
         }
         return null;
+    }
+
+    public void moveNhanVien(NhanVien nv, PhongBan newPhongBan){
+        for(PhongBan pb : this.getDsPhongBan()){
+            for(NhanVien nhanVien : pb.getDsNhanVien()){
+                if(nhanVien.getId().equals(nv.getId())){
+                    pb.removeNhanVien(nv.getId());
+                    break;
+                }
+            }
+        }
+        for(int i=0; i<this.dsPhongBan.length; i++) {
+            if (this.dsPhongBan[i].getIdPhongBan().equals(newPhongBan.getIdPhongBan())) {
+                this.dsPhongBan[i].addNhanVien(nv);
+                break;
+            }
+        }
     }
 }
 

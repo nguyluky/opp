@@ -14,14 +14,15 @@ public class NhanVien extends NhanSu {
     public NhanVien() {
     }
 
-    public NhanVien(String id, String name, String phone, String diaChi, int namVaolam, int kinhNghiem) {
-        super(id, name, phone, diaChi, namVaolam, kinhNghiem);
+    public NhanVien(String id, String ho, String ten, String phone, String diaChi, int namVaolam, int kinhNghiem) {
+        super(id, ho, ten, phone, diaChi, namVaolam, kinhNghiem);
     }
 
     // THIS
     public NhanVien(
         String id,
-        String name,
+        String ho,
+        String ten,
         String phone,
         String diaChi,
         int namVaoLam,
@@ -29,11 +30,11 @@ public class NhanVien extends NhanSu {
         int kinhNghiem,
         int luongCoBan,
         KyLuat[] dsKyLuat,
-        KhenThuong[] dsKhenThuong,
-        boolean isDelete
+        KhenThuong[] dsKhenThuong
     )
     {
-        super(id, name, phone, diaChi, namVaoLam, soNgayNghi, kinhNghiem, isDelete);
+        super(id, ho, ten, phone, diaChi, namVaoLam, kinhNghiem);
+        this.setSoNgayNghi(soNgayNghi);
         this.luongCoBan = luongCoBan;
         this.setDsKyLuat(dsKyLuat);
         this.setDsKhenThuong(dsKhenThuong);
@@ -99,7 +100,7 @@ public class NhanVien extends NhanSu {
         System.out.println("---------------------------------------");
 //        ShowOption.clearScreen();
 
-        System.out.println("Tên: " + super.getName());
+        System.out.println("Họ và tên: " + super.getHo() + " " + this.getTen());
         System.out.println("ID: " + super.getId());
         System.out.println("Số điện thoại: " + super.getPhone());
         System.out.println("Địa chỉ: " + super.getDiaChi());

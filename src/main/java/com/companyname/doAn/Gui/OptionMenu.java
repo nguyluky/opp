@@ -53,13 +53,14 @@ public class OptionMenu implements ShowOption {
             System.out.println("2: Thêm dự án");
             System.out.println("3: Xóa dự án");
             System.out.println("4: Chức năng đối với dự án cụ thể. Cần nhập ID dự án");
+            System.out.println("5: Tìm kiếm dự án theo tên");
             System.out.println("0: Quay lại menu trước");
             System.out.print("Chọn chức năng: ");
             int choice;
             while (true) {
                 try {
                     choice = Integer.parseInt(sc.nextLine());
-                    if (choice > 4 || choice < 0) {
+                    if (choice > 5 || choice < 0) {
                         System.out.println("Cần chọn chức năng hợp lệ");
                     } else
                         break;
@@ -81,6 +82,8 @@ public class OptionMenu implements ShowOption {
                 case 4:
                     optionQuanLyDuAn.show();
                     break;
+                case 5:
+                    optionQuanLyDuAn.searchByName();
                 case 0:
                     // show();
                     return;
@@ -105,6 +108,7 @@ public class OptionMenu implements ShowOption {
             System.out.println("3: Xóa phòng ban");
             System.out.println("4: Chuyển nhân viên");
             System.out.println("5: Chức năng đối với phòng ban cụ thể. Cần nhập ID phòng ban");
+            System.out.println("6: Tìm kiếm phòng ban theo tên");
             System.out.println("0: Quay lại menu trước");
             System.out.print("Chon chuc nang: ");
 
@@ -139,6 +143,8 @@ public class OptionMenu implements ShowOption {
                 case 5:
                     optionQuanLyPhongBan.show();
                     break;
+                case 6:
+                    optionQuanLyPhongBan.searchByTen();
                 case 0:
                     return;
             }
@@ -157,14 +163,17 @@ public class OptionMenu implements ShowOption {
             System.out.println("1: Xem danh sách nhân sự");
             System.out.println("2: Thêm nhân sự");
             System.out.println("3: Xóa nhân sự");
-            System.out.println("4: Chuc nang doi voi nhan su cu the");
+            System.out.println("4: Chức năng đối với nhân sự cụ thể");
+            System.out.println("5: Liệt kê các nhân sự bị kỷ luật và khen thưởng");
+            System.out.println("6: Tìm kiếm nhân sự theo tên");
+            System.out.println("7: Sắp xếp nhân sự theo tên (chữ cái đầu của tên)");
             System.out.println("0: Quay lại menu trước");
             System.out.print("Chọn chức năng: ");
             int choice;
             while (true) {
                 try {
                     choice = Integer.parseInt(sc.nextLine());
-                    if (choice > 4) {
+                    if (choice > 7) {
                         System.out.println("Vui lòng nhập đúng lựa chọn");
                     } else {
                         break;
@@ -187,6 +196,12 @@ public class OptionMenu implements ShowOption {
                     break;
                 case 4:
                     optionQuanLyNhanSu.show();
+                case 5:
+                    optionQuanLyNhanSu.list();
+                case 6:
+                    optionQuanLyNhanSu.searchByName();
+                case 7:
+                    optionQuanLyNhanSu.rangeByName();
                 case 0:
                     return;
             }

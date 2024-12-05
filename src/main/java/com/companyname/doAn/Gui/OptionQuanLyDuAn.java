@@ -184,4 +184,19 @@ public class OptionQuanLyDuAn implements ShowOption{
 
 
     }
+
+    public void searchByName(){
+        System.out.print("Nhập tên dự án: ");
+        String ten = sc.nextLine().trim().toLowerCase();
+        int k=1;
+        for(int i=0; i<qlda.getDsDuAn().length; i++){
+            if(qlda.getDsDuAn()[i].getNameDuAn().toLowerCase().contains(ten)){
+                System.out.println("Dự án thứ " + k + ": " + qlda.getDsDuAn()[i].getNameDuAn() + ". ID: " + qlda.getDsDuAn()[i].getIdDuAn());
+                k++;
+            }
+        }
+        if(k==1){
+            System.out.println("Không tìm thấy");
+        }
+    }
 }
