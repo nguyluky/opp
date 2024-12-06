@@ -11,8 +11,7 @@ public class NhanVien extends NhanSu {
     private final int soNgayNghiToiDa = 2;
 
 
-    public NhanVien() {
-    }
+    public NhanVien() {}
 
     public NhanVien(String id, String ho, String ten, String phone, String diaChi, int namVaolam, int kinhNghiem) {
         super(id, ho, ten, phone, diaChi, namVaolam, kinhNghiem);

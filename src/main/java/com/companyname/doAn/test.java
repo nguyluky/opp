@@ -5,114 +5,122 @@ import com.companyname.doAn.ql.QuanLyDuAn;
 import com.companyname.doAn.ql.QuanLyNhanSu;
 import com.companyname.doAn.ql.QuanLyPhongBan;
 import com.companyname.doAn.type.*;
+import java.util.Random;
 
 public class test {
-    public static void main(String[] args) {
-        QuanLyNhanSu quanLyNhanSu = QuanLyNhanSu.getInstance();
-        QuanLyDuAn quanLyDuAn = QuanLyDuAn.getInstance();
-        QuanLyPhongBan quanLyPhongBan = QuanLyPhongBan.getInstance();
 
+    public static NhanVien taoNhanVienNgauNhien() {
+        Random rand = new Random();
+        String id = "NV" + rand.nextInt(1000);
+        String ho = "Nguyen";
+        String ten = "Van " + (char) (rand.nextInt(26) + 'A');
+        String phone = "09" + (rand.nextInt(90000000) + 10000000);
+        String diaChi = "Dia chi " + rand.nextInt(100);
+        int namVaoLam = 2000 + rand.nextInt(23);
+        int soNgayNghi = rand.nextInt(5);
+        int kinhNghiem = rand.nextInt(20);
+        int luongCoBan = 3000000 + rand.nextInt(2000000);
+        KyLuat[] dsKyLuat = new KyLuat[0];
+        KhenThuong[] dsKhenThuong = new KhenThuong[0];
+        NhanVien nv = new NhanVien(id, ho, ten, phone, diaChi, namVaoLam, soNgayNghi, kinhNghiem, luongCoBan, dsKyLuat, dsKhenThuong);
+        QuanLyNhanSu.getInstance().addNhanSu(nv);
+        return nv;
+        }
+
+    public static PhongBan taoPhongBanNgauNhien() {
+        Random rand = new Random();
+        String idPhongBan = "PB" + rand.nextInt(100);
+        String namePhongBan = "Phong " + (char) (rand.nextInt(26) + 'A');
+        TruongPhong truongPhong = taoTruongPhongNgauNhien();
+        NhanVien[] dsNhanVien = new NhanVien[0];
+        TruongPhong[] dsTruongPhong = {truongPhong};
+
+        // Chọn ngẫu nhiên các dự án từ QuanLyDuAn để thêm vào phòng ban
+        DuAn[] allDuAn = QuanLyDuAn.getInstance().getDsDuAn();
+        int soDuAn = rand.nextInt(allDuAn.length + 1);
+        DuAn[] dsDuAn = new DuAn[soDuAn];
+        for (int i = 0; i < soDuAn; i++) {
+            dsDuAn[i] = allDuAn[rand.nextInt(allDuAn.length)];
+        }
+
+        boolean isDelete = false;
+        PhongBan pb = new PhongBan(namePhongBan, idPhongBan, dsNhanVien, dsTruongPhong, dsDuAn, isDelete);
+        QuanLyPhongBan.getInstance().addPhongBan(pb);
+        return pb;
+    }
+
+    public static TruongPhong taoTruongPhongNgauNhien() {
+        Random rand = new Random();
+        String id = "TP" + rand.nextInt(1000);
+        String ho = "Nguyen";
+        String ten = "Van " + (char) (rand.nextInt(26) + 'A');
+        String phone = "09" + (rand.nextInt(90000000) + 10000000);
+        String diaChi = "Dia chi " + rand.nextInt(100);
+        int namVaoLam = 2000 + rand.nextInt(23);
+        int kinhNghiem = rand.nextInt(20);
+        KyLuat[] dsKyLuat = new KyLuat[0];
+        KhenThuong[] dsKhenThuong = new KhenThuong[0];
+
+        TruongPhong t = new TruongPhong(id, ho, ten, phone, diaChi, namVaoLam, 0, dsKyLuat, dsKhenThuong, kinhNghiem);
+        QuanLyNhanSu.getInstance().addNhanSu(t);
+        return t;
+    }
+
+    public static DuAn taoDuAnNgauNhienVaThemNhanVien() {
+        Random rand = new Random();
+        String idDuAn = "DA" + rand.nextInt(1000);
+        String nameDuAn = "Du An " + (char) (rand.nextInt(26) + 'A');
+        DuAn duAn = new DuAn(nameDuAn, idDuAn);
+
+        QuanLyNhanSu qlns = QuanLyNhanSu.getInstance();
+        NhanSu[] dsNhanSu = qlns.getDsNhanSu();
+        int soNhanSu = rand.nextInt(dsNhanSu.length + 1);
+
+        for (int i = 0; i < soNhanSu; i++) {
+            duAn.addNhanSu(dsNhanSu[i]);
+        }
+
+        QuanLyDuAn.getInstance().addDuAn(duAn);
+        return duAn;
+    }
+
+
+    static void testSave() {
         for (int i = 0; i < 10; i++) {
-            NhanVien nv = new NhanVien(String.valueOf(i), "Nguyen Van " + i, "012345678" + i, "Ha Noi", 2020 + i, 0, 0, 3000000, new KyLuat[0], new KhenThuong[0], false);
-            quanLyNhanSu.addNhanSu(nv);
+            taoNhanVienNgauNhien();
         }
 
         for (int i = 0; i < 10; i++) {
-            DuAn da = new DuAn("Du An " + i, String.valueOf(i),  false);
-
-            for (int j = 0; j < 10; j++) {
-                NhanVien nv = new NhanVien("a" + String.valueOf(j) + String.valueOf(i), "Nguyen Van " + (i + j), "012345678" + (i + j), "Ha Noi", 2020 + j, 0, 0, 3000000, new KyLuat[0], new KhenThuong[0], false);
-                da.addNhanSu(nv);
-                quanLyNhanSu.addNhanSu(nv);
-            }
-
-            quanLyDuAn.addDuAn(da);
-
+            taoDuAnNgauNhienVaThemNhanVien();
         }
 
         for (int i = 0; i < 10; i++) {
-            PhongBan pb = new PhongBan("Phong Ban " + i, String.valueOf(i), false);
-            TruongPhong tp = new TruongPhong( "tp" + String.valueOf(i), "Nguyen Van " + (i + "pt"), "012345678" + (i + 10), "Ha Noi", 2020 + i, 0, 0, 3000000, new KyLuat[0], new KhenThuong[0], false);
-            pb.setDsTruongPhong(tp);
-            quanLyNhanSu.addNhanSu(tp);
-            quanLyPhongBan.addPhongBan(pb);
+            taoPhongBanNgauNhien();
         }
 
+        FileManager fileManager = new FileManager();
         try {
-            FileManager fileManager = new FileManager();
             fileManager.write();
         }
         catch (Exception e) {
             e.printStackTrace();
         }
+    }
 
-        // try {
-        //     FileManager fileManager = new FileManager();
-        //     fileManager.read();
-        // }
-        // catch (Exception e) {
-        //     e.printStackTrace();
-        // }
+    static void testLoad() {
+        try {
 
-        // try {
-        //     for (NhanVien nv: nhanVienReaderWriter.read()) {
-        //         System.out.println(nv);
-        //     }
-        //     for (TruongPhong tp: truongPhongReaderWriter.read()) {
-        //         System.out.println(tp);
-        //     }
+            FileManager fileManager = new FileManager();
+            fileManager.read();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        //     for (DuAn da: duAnReaderWriter.read()) {
-        //         System.out.println(da);
-        //         for (NhanSu a: da.getDsNhanSu()) {
-        //             System.out.println(a);
-        //         }
-        //     }
+    }
 
-        //     for (PhongBan pb: phongBanReaderWriter.read()) {
-        //         System.out.println(pb);
-        //         for (NhanSu a: pb.getDsNhanVien()) {
-        //             System.out.println(a);
-        //         }
-
-        //         for (DuAn a: pb.getDsDuAn()) {
-        //             System.out.println(a);
-        //         }
-        //     }
-        // } catch (Exception e) {
-        //     e.printStackTrace();
-        // }
-
-        // try {
-        //     System.out.println("Phong Ban");
-        //     for (PhongBan pb: quanLyPhongBan.getDsPhongBan()) {
-        //         System.out.println(pb);
-        //         System.out.println(pb.getTruongPhong());
-        //         System.out.println("Nhan Vien");
-        //         for (NhanSu ns: pb.getDsNhanVien()) {
-        //             System.out.println(ns);
-        //         }
-        //         System.out.println("Du An");
-        //         for (DuAn da: pb.getDsDuAn()) {
-        //             System.out.println(da);
-        //         }
-        //     }   
-
-        //     System.out.println("Du An");
-        //     for (DuAn da: quanLyDuAn.getDsDuAn()) {
-        //         System.out.println(da);
-        //     }
-
-        //     System.out.println("Nhan Vien");
-        //     for (NhanVien nv: quanLyNhanSu.getNhanViens()) {
-        //         System.out.println(nv);
-        //     }
-
-
-
-        // } catch (Exception e) {
-        //     e.printStackTrace();
-        // }
-
+    public static void main(String[] args) {
+        // testLoad();
+        testSave();
+        
     }
 }

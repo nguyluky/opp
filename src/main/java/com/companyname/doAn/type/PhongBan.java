@@ -13,6 +13,8 @@ public class PhongBan {
     private DuAn[] dsDuAn;
     private boolean isDelete;
 
+    PhongBan() {}
+
     // Dùng để đọc ghi file
     public PhongBan(String name, String id, NhanVien[] dsNhanVien, TruongPhong[] truongPhong, DuAn[] dsDuAn, boolean isDelete) {
         this.namePhongBan = name;

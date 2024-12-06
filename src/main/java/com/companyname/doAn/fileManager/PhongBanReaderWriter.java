@@ -15,131 +15,76 @@ import com.companyname.doAn.ql.QuanLyNhanSu;
 import com.companyname.doAn.type.DuAn;
 import com.companyname.doAn.type.NhanVien;
 
-public class PhongBanReaderWriter implements BaseReader<PhongBan>, BaseWriter<PhongBan> {
-    private final String FILE_NAME = "PhongBans.txt";
-    private String filePath;
-    File file;
-    Scanner sc;
-
+public class PhongBanReaderWriter extends FileReaderWriter<PhongBan> {
     public PhongBanReaderWriter(String folder) {
-        this.filePath = folder + FILE_NAME;
-        file = new File(this.filePath);
-        if (!file.exists()) {
-            try {
-                file.createNewFile();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private NhanVien[] getDsNhanVien(String text) {
-        QuanLyNhanSu qLyNhanSu = QuanLyNhanSu.getInstance();
-        String[] listId = text.split(",");
-        NhanVien[] listNhanViens = new NhanVien[0];
-        int i = 0;
-        for (String nvId : listId) {
-            if (nvId.equals("")) {
-                continue;
-            }
-            listNhanViens = Arrays.copyOf(listNhanViens, listNhanViens.length + 1);
-            listNhanViens[i] = (NhanVien) qLyNhanSu.getNhanSuById(nvId);
-            i++;
-        }
-        return listNhanViens;
-    }
-
-    private DuAn[] getDsDuAn(String text) {
-        QuanLyDuAn qLyDuAn = QuanLyDuAn.getInstance();
-        String[] listId = text.split(",");
-        DuAn[] listDuAns = new DuAn[0];
-        int i = 0;
-        for (String daId : listId) {
-            if (daId.equals("")) {
-                continue;
-            }
-            listDuAns = Arrays.copyOf(listDuAns, listDuAns.length + 1);
-            listDuAns[i] = qLyDuAn.getDuAnById(daId);
-            i++;
-        }
-        return listDuAns;
+        super(PhongBan.class, folder + "PhongBans.txt");
     }
 
     @Override
-    public PhongBan[] read() throws FileNotFoundException {
-        sc = new Scanner(file);
-        QuanLyNhanSu qLyNhanSu = QuanLyNhanSu.getInstance();
-
-        PhongBan[] phongBan = new PhongBan[0];
-
-        while (sc.hasNextLine()) {
-            String data = sc.nextLine();
-            String[] arr = BaseReader.split(data);
-            phongBan = Arrays.copyOf(phongBan, phongBan.length + 1);
-            phongBan[phongBan.length - 1] = new PhongBan(
-                arr[0],
-                arr[1],
-                Boolean.parseBoolean(arr[5])
-            );
-
-            NhanVien[] dsNhanVien = getDsNhanVien(arr[2]);
-            phongBan[phongBan.length - 1].setDsNhanVien(dsNhanVien);
-
-            DuAn[] dsDuAn = getDsDuAn(arr[3]);
-            phongBan[phongBan.length - 1].setDsDuAn(dsDuAn);
-
-            if (!arr[4].equals("")) {
-                // System.out.println(arr[4]);
-                phongBan[phongBan.length - 1].setDsTruongPhong((TruongPhong) (qLyNhanSu.getNhanSuById(arr[4])));
+    String valueToString(String fieldName, Object value) {
+        if (value == null) return "";
+        switch (fieldName) {
+            case "dsNhanVien": {
+                NhanVien[] nvs = (NhanVien[]) value;
+                String[] ids = new String[nvs.length];
+                for (int i =0; i< nvs.length; i++) {
+                    ids[i] = nvs[i].getId();
+                }
+                return String.join(",", ids);
             }
-        
+            case "truongPhong": {
+                TruongPhong[] tps = (TruongPhong[]) value;
+                String[] ids = new String[tps.length];
+                for (int i = 0; i < tps.length; i++) {
+                    ids[i] = tps[i].getId();
+                }
+                return String.join(",", ids);
+            }
+            case "dsDuAn": {
+                DuAn[] ans = (DuAn[]) value;
+                String[] ids = new String[ans.length];
+                for (int i = 0; i < ans.length; i++) {
+                    ids[i] = ans[i].getIdDuAn();
+                }
 
+                return String.join(",", ids);
+            }
         }
 
-        return phongBan;
+        return null;
     }
+
 
     @Override
-    public void save(PhongBan[] data) throws IOException {
-        FileWriter writer = new FileWriter(file);
+    Object stringToValue(Class fieldType, String value) {
+        if (fieldType == NhanVien[].class) {
+            String[] ids = value.split(",");
 
-        for (PhongBan phongBan : data) {
-            NhanVien[] nhanViens = phongBan.getDsNhanVien();
-            String[] listIdNhanVien = new String[nhanViens.length];
-
-            for (int i = 0; i < nhanViens.length; i++) {
-                listIdNhanVien[i] = nhanViens[i].getId();
+            NhanVien[] nhanViens = new NhanVien[0];
+            for (String id: ids) {
+                NhanVien nv = QuanLyNhanSu.getInstance().getNhanVienById(id);
+                if (nv != null) {
+                    nhanViens = Arrays.copyOf(nhanViens, nhanViens.length + 1);
+                    nhanViens[nhanViens.length - 1] = nv;
+                }
             }
+            return nhanViens;
+        }
+        if (fieldType == TruongPhong[].class) {
+            String[] ids = value.split(",");
 
-            DuAn[] duAns = phongBan.getDsDuAn();
-            String[] listIdDuAn = new String[duAns.length];
-
-            for (int i = 0; i < duAns.length; i++) {
-                listIdDuAn[i] = duAns[i].getIdDuAn();
+            TruongPhong[] tps = new TruongPhong[0];
+            for (String id: ids) {
+                TruongPhong nv = (TruongPhong) QuanLyNhanSu.getInstance().getNhanSuById(id);
+                if (nv != null) {
+                    tps = Arrays.copyOf(tps, tps.length + 1);
+                    tps[tps.length - 1] = nv;
+                }
             }
-
-            String truongPhongId = "";
-
-            if (phongBan.getDsTruongPhong() != null) {
-                truongPhongId = phongBan.getDsTruongPhong().getId();
-            }
-
-            String[] dataSave = {
-                phongBan.getNamePhongBan(),
-                phongBan.getIdPhongBan(),
-                String.join(",", listIdNhanVien),
-                String.join(",", listIdDuAn),
-                truongPhongId,
-                phongBan.getIsDelete() + ""
-            };
-
-            for (int i = 0; i < dataSave.length; i++) {
-                dataSave[i] = BaseWriter.escape(dataSave[i]);
-            }
-
-            writer.write(String.join(this.separated, dataSave) + "\n");
+            return tps;
         }
 
-        writer.close();
+        return super.stringToValue(fieldType, value);
     }
+    
 }   
