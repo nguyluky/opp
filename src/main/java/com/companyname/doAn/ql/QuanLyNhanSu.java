@@ -101,9 +101,9 @@ public class QuanLyNhanSu {
         for(NhanSu ns : this.dsNhanSu){
             if(ns.getIsDelete()){
                 if(ns instanceof NhanVien) {
-                    System.out.println("Nhân sự thứ " + i + ": " + ns.getName() + ". ID: " + ns.getId() + " Loại: Nhân viên");
+                    System.out.println("Nhân sự thứ " + i + ": " + ns.getHo() +" "+ns.getTen() + ". ID: " + ns.getId() + " Loại: Nhân viên");
                 }
-                else System.out.println("Nhân sự thứ " + i + ": " + ns.getName() + ". ID: " + ns.getId() + " Loại: Trưởng phòng");
+                else System.out.println("Nhân sự thứ " + i + ": "  + ns.getHo() +" "+ns.getTen() + ". ID: " + ns.getId() + " Loại: Trưởng phòng");
                 i++;
             }
         }
@@ -114,9 +114,9 @@ public class QuanLyNhanSu {
         for(NhanSu ns : this.dsNhanSu){
             if(!ns.getIsDelete()){
                 if(ns instanceof NhanVien) {
-                    System.out.println("Nhân sự thứ " + j + ": " + ns.getName() + ". ID: " + ns.getId() + " Loại: Nhân viên");
+                    System.out.println("Nhân sự thứ " + j + ": "  + ns.getHo() +" "+ns.getTen() + ". ID: " + ns.getId() + " Loại: Nhân viên");
                 }
-                else System.out.println("Nhân sự thứ " + j + ": " + ns.getName() + ". ID: " + ns.getId() + " Loại: Trưởng phòng");
+                else System.out.println("Nhân sự thứ " + j + ": "  + ns.getHo() +" "+ns.getTen() + ". ID: " + ns.getId() + " Loại: Trưởng phòng");
                 j++;
             }
         }

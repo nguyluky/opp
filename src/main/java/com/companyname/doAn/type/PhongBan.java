@@ -100,7 +100,7 @@ public class PhongBan {
                 }
             }
             if(index != -1){
-                System.out.println("Trưởng phòng: " + this.truongPhong[index].getName() + ". ID: " + this.truongPhong[index].getId());
+                System.out.println("Trưởng phòng: " + this.truongPhong[index].getHo() +" "+ this.truongPhong[index].getTen() + ". ID: " + this.truongPhong[index].getId());
             }
             else System.out.println("Trưởng phòng: Chưa có");
         }
@@ -108,7 +108,7 @@ public class PhongBan {
         int i=1;
         for(NhanVien nv : this.dsNhanVien){
             if(!nv.getIsDelete()) {
-                System.out.println("Nhân viên thứ " + i + ": " + nv.getName() + ". ID: " + nv.getId());
+                System.out.println("Nhân viên thứ " + i + ": " + nv.getHo()+" "+nv.getTen() + ". ID: " + nv.getId());
                 i++;
             }
         }
@@ -155,7 +155,7 @@ public class PhongBan {
                 }
             }
             if(index != -1){
-                System.out.println("Trưởng phòng: " + this.truongPhong[index].getName() + ". ID: " + this.truongPhong[index].getId());
+                System.out.println("Trưởng phòng: " + this.truongPhong[index].getHo()+" "+this.truongPhong[index].getTen() + ". ID: " + this.truongPhong[index].getId());
             }
             else System.out.println("Trưởng phòng: Chưa có");
         }
@@ -164,7 +164,7 @@ public class PhongBan {
         for(NhanVien nv : this.dsNhanVien){
             if(!nv.getIsDelete()){
                 System.out.print("Nhân viên thứ " + i + " : ");
-                System.out.println(nv.getName() + ". ID: " + nv.getId());
+                System.out.println(nv.getHo()+" "+nv.getTen() + ". ID: " + nv.getId());
                 i++;
             }
         }
@@ -255,7 +255,7 @@ public class PhongBan {
         for(int i=0; i<qlns.getDsNhanSu().length; i++){
             if(qlns.getDsNhanSu()[i].getId().equals(this.truongPhong[index].getId())) {
                 //chuyển trưởng phòng cũ thành nhân viên mới
-                NhanVien newNv = new NhanVien(this.truongPhong[index].getId(),this.truongPhong[index].getName(),this.truongPhong[index].getPhone(),this.truongPhong[index].getDiaChi(),this.truongPhong[index].getNamVaoLam(),this.truongPhong[index].getKinhNghiem());
+                NhanVien newNv = new NhanVien(this.truongPhong[index].getId(),this.truongPhong[index].getHo(),this.truongPhong[index].getTen(),this.truongPhong[index].getPhone(),this.truongPhong[index].getDiaChi(),this.truongPhong[index].getNamVaoLam(),this.truongPhong[index].getKinhNghiem());
                 newNv.setDsKhenThuong(this.truongPhong[index].getDsKhenThuong());
                 newNv.setDsKyLuat(this.truongPhong[index].getDsKyLuat());
                 qlns.getDsNhanSu()[i] = newNv;

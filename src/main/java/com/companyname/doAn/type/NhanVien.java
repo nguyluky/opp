@@ -100,7 +100,7 @@ public class NhanVien extends NhanSu {
         System.out.println("---------------------------------------");
 //        ShowOption.clearScreen();
 
-        System.out.println("Họ và tên: " + super.getHo() + " " + this.getTen());
+        System.out.println("Họ và tên: " + super.getHo() + " " + super.getTen());
         System.out.println("ID: " + super.getId());
         System.out.println("Số điện thoại: " + super.getPhone());
         System.out.println("Địa chỉ: " + super.getDiaChi());

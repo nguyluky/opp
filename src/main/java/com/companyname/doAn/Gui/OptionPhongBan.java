@@ -240,7 +240,7 @@ public class OptionPhongBan{
             System.out.println("ID nhan vien khong ton tai trong phong ban nay");
             return;
         }
-        TruongPhong newTruongPhong = new TruongPhong(oldNv.getId(), oldNv.getName(), oldNv.getPhone(), oldNv.getDiaChi(), oldNv.getNamVaoLam(), oldNv.getKinhNghiem());
+        TruongPhong newTruongPhong = new TruongPhong(oldNv.getId(), oldNv.getHo(), oldNv.getTen(), oldNv.getPhone(), oldNv.getDiaChi(), oldNv.getNamVaoLam(), oldNv.getKinhNghiem());
         newTruongPhong.setDsKyLuat(oldNv.getDsKyLuat());
         newTruongPhong.setDsKhenThuong(oldNv.getDsKhenThuong());
 

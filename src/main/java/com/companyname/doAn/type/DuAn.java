@@ -89,7 +89,7 @@ public class DuAn {
         int i=1;
         for(NhanSu ns : this.dsNhanSu) {
             if (!ns.getIsDelete()) {
-                System.out.println("Nhân sự thứ " + i + ": " + ns.getName() + ". ID: " + ns.getId());
+                System.out.println("Nhân sự thứ " + i + ": " +ns.getHo() +" "+ ns.getTen() + ". ID: " + ns.getId());
             }
         }
     }
@@ -132,10 +132,10 @@ public class DuAn {
             for(NhanSu ns : this.dsNhanSu){
                 if(!ns.getIsDelete()){
                     if(ns instanceof NhanVien) {
-                        System.out.println("Nhân sự thứ " + i + ": " + ns.getName() + ". ID: " + ns.getId() + ". Loại: Nhân viên");
+                        System.out.println("Nhân sự thứ " + i + ": " + ns.getHo() +" "+ ns.getTen() + ". ID: " + ns.getId() + ". Loại: Nhân viên");
                     }
                     else{
-                        System.out.println("Nhân sự thứ " + i + ": " + ns.getName() + ". ID: " + ns.getId() + ". Loại: Trưởng phòng");
+                        System.out.println("Nhân sự thứ " + i + ": " + ns.getHo()+" "+ns.getTen() + ". ID: " + ns.getId() + ". Loại: Trưởng phòng");
                     }
                     i++;
                 }

@@ -9,29 +9,30 @@ public class TruongPhong extends NhanSu {
 
     public TruongPhong() {}
 
-    public TruongPhong(String id, String name, String phone, String diaChi, int namVaoLam, int soNgayNghi, KyLuat[] dsKyLuat, KhenThuong[] dsKhenThuong, int kinhNghiem) {
-        super(id, name, phone, diaChi, namVaoLam, soNgayNghi, dsKyLuat, dsKhenThuong, kinhNghiem);
+    public TruongPhong(String id, String ho, String ten, String phone, String diaChi, int namVaoLam, int soNgayNghi, KyLuat[] dsKyLuat, KhenThuong[] dsKhenThuong, int kinhNghiem) {
+        super(id, ho,ten, phone, diaChi, namVaoLam, soNgayNghi, dsKyLuat, dsKhenThuong, kinhNghiem);
     }
 
-    public TruongPhong(String id, String name, String phone, String diaChi, int namVaolam, int kinhNghiem) {
-        super(id, name, phone, diaChi, namVaolam, kinhNghiem);
+    public TruongPhong(String id,  String ho, String ten, String phone, String diaChi, int namVaolam, int kinhNghiem) {
+        super(id, ho,ten, phone, diaChi, namVaolam, kinhNghiem);
     }
 
     // Dùng cho việc đọc file
     public TruongPhong(
         String id,
-        String name,
+        String ho,
+        String ten,
         String phone,
         String diaChi,
         int namVaoLam,
-        int soNgayNghi,
         int kinhNghiem,
         int luongCoBan,
+        int soNgayNghi,
         KyLuat[] dsKyLuat,
-        KhenThuong[] dsKhenThuong,
-        boolean isDelete
+        KhenThuong[] dsKhenThuong
     ) {
-        super(id, name, phone, diaChi, namVaoLam, soNgayNghi, kinhNghiem, isDelete);
+        super(id, ho, ten, phone, diaChi, namVaoLam, kinhNghiem);
+        setSoNgayNghi(soNgayNghi);
         this.luongCoBan = luongCoBan;
         this.setDsKyLuat(dsKyLuat);
         this.setDsKhenThuong(dsKhenThuong);
@@ -88,7 +89,7 @@ public class TruongPhong extends NhanSu {
     }
 
     public void printThongTinCoBan(){
-        System.out.println("Tên: " + super.getName());
+        System.out.println("Tên: " + super.getTen());
         System.out.println("ID: " + super.getId());
         System.out.println("Số điện thoại: " + super.getPhone());
         System.out.println("Địa chỉ: " + super.getDiaChi());
