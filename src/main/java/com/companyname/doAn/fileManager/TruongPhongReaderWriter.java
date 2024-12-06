@@ -104,6 +104,7 @@ public class TruongPhongReaderWriter implements BaseReader<TruongPhong>, BaseWri
             String data = sc.nextLine();
             String[] arr = BaseReader.split(data);
             truongPhongs = Arrays.copyOf(truongPhongs, truongPhongs.length + 1);
+            TruongPhong.class.getFields()
             truongPhongs[truongPhongs.length - 1] = new TruongPhong(
                 arr[0],
                 arr[1],
