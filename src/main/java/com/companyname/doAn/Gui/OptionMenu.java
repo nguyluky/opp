@@ -1,7 +1,4 @@
 package com.companyname.doAn.Gui;
-
-
-
 import static com.companyname.doAn.Gui.StaticScanner.*;
 
 public class OptionMenu implements ShowOption {
@@ -117,7 +114,7 @@ public class OptionMenu implements ShowOption {
             while (true) {
                 try {
                     choice = Integer.parseInt(sc.nextLine());
-                    if (choice < 0 || choice > 5) {
+                    if (choice < 0 || choice > 6) {
                         System.out.println("Can chon chuc nang hop le");
                     } else
                         break;

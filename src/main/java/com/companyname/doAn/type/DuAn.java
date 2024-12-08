@@ -105,7 +105,6 @@ public class DuAn {
     
     public void printThongTinCoBan(){
         System.out.println("---------------------------------------");
-//        ShowOption.clearScreen();
 
         System.out.println("Tên: " + this.nameDuAn);
         System.out.println("ID: " + this.idDuAn);

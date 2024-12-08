@@ -237,20 +237,26 @@ public class PhongBan {
             TruongPhong[] tmpDs = Arrays.copyOf(this.truongPhong, this.truongPhong.length + 1);
             tmpDs[tmpDs.length - 1] = newTruongPhong;
             this.setDsTruongPhong(tmpDs);
+            this.removeNhanVien(newTruongPhong.getId());
+            System.out.println("---------------------------------------");
+            System.out.println("Thay đổi trưởng phòng thành công");
             return;
         }
-        //nếu all danh sách trường phòng đều nghỉ việc isDelete: true
+
         int index = -1;
         for(int i = 0; i<this.getDsTruongPhong().length; i++){
             if(!this.getDsTruongPhong()[i].getIsDelete()){
-                index = i;
+                index = i; //lấy vị trí trưởng phòng hiện tại
                 break;
             }
         }
-        if(index == -1){
+        if(index == -1){ //nếu all danh sách trường phòng đều nghỉ việc isDelete: true
             TruongPhong[] tmpDs = Arrays.copyOf(this.truongPhong, this.truongPhong.length + 1);
             tmpDs[tmpDs.length - 1] = newTruongPhong;
             this.setDsTruongPhong(tmpDs);
+            this.removeNhanVien(newTruongPhong.getId());
+            System.out.println("---------------------------------------");
+            System.out.println("Thay đổi trưởng phòng thành công");
             return;
         }
         // nếu có trưởng phòng cũ thì chuyển đổi
@@ -267,6 +273,9 @@ public class PhongBan {
         //set trưởng phòng mới
         TruongPhong[] tmpDs = Arrays.copyOf(this.truongPhong, this.truongPhong.length + 1);
         tmpDs[tmpDs.length - 1] = newTruongPhong;
+        this.removeNhanVien(newTruongPhong.getId());
+        System.out.println("---------------------------------------");
+        System.out.println("Thay đổi trưởng phòng thành công");
         this.setDsTruongPhong(tmpDs);
     }
 }

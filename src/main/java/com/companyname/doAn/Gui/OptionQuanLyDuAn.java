@@ -9,19 +9,19 @@ public class OptionQuanLyDuAn implements ShowOption{
 
 
     public void themDuAn(){
-        System.out.print("Nhap so du an muon them: ");
+        System.out.print("Nhập số dự án muốn thêm: ");
         int slDa;
         while(true){
             try {
                 slDa = Integer.parseInt(sc.nextLine());
                 if(slDa<0){
-                    System.out.println("Nhap so nguyen duong");
+                    System.out.println("Nhập số nguyên dương");
                 }
                 else{
                     break;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Nhap so nguyen duong");
+                System.out.println("Nhập số nguyên dương");
             }
         }
 
@@ -164,8 +164,7 @@ public class OptionQuanLyDuAn implements ShowOption{
                 }
             }
 
-           ShowOption.clearScreen();
-
+//           ShowOption.clearScreen();
 
             switch (choice) {
                 case 1:

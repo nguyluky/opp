@@ -37,56 +37,64 @@ public class OptionQuanLyNhanSu implements ShowOption {
                 } else
                     break;
             }
-            System.out.print("Nhập họ: ");
-            String ho = sc.nextLine().trim();
-            String ten;
-            while(true) {
-                System.out.println("Nhập tên: ");
-                ten = sc.nextLine().trim();
-                boolean checkFirst = true;
-                for(int j=1; j<ten.length(); j++) {
-                    if(!(ten.charAt(0) >= 65 && ten.charAt(0) <= 90)) {
-                        checkFirst = false;
-                    }
-                }
+            String ho;
+            while(true){
                 boolean check = true;
-                for(int j=1; j<ten.length(); j++) {
-                    if(ten.charAt(j) == ' ' && !(ten.charAt(j) >= 97 && ten.charAt(j) <= 122)) {
+                System.out.print("Nhập họ: ");
+                ho = sc.nextLine().trim();
+                for(int k=0; k<ho.length(); k++){
+                    if(!(ho.charAt(k) >= 'A' && ho.charAt(k) <= 'Z' || ho.charAt(k) >= 'a' && ho.charAt(k) <= 'z')){
+                        System.out.println("Họ chỉ chứa kí tự A -> Z, a->z");
                         check = false;
+                        break;
                     }
                 }
-                if(check && checkFirst) {
-                    break;
-                }
-                else{
-                    System.out.println("Nhập lại");
-                }
+                if(check) break;
             }
+
+            String ten;
+            while(true){
+                boolean check = true;
+                System.out.print("Nhập tên: ");
+                ten = sc.nextLine().trim();
+
+                if(ten.isEmpty()){
+                    continue;
+                }
+                for(int k=0; k<ten.length(); k++){
+                    if(!(ten.charAt(k) >= 'A' && ten.charAt(k) <= 'Z' || ten.charAt(k) >= 'a' && ten.charAt(k) <= 'z' || ten.charAt(k) == ' ')){
+                        System.out.println("Tên chỉ chứa kí tự A -> Z, a->z");
+                        check = false;
+                        break;
+                    }
+                }
+
+                if(check) break;
+            }
+
             String phone;
             while (true) {
                 System.out.print("Nhập số điện thoại: ");
                 phone = sc.nextLine().trim();
-                boolean check = true;
+                boolean checkPhone = true;
                 for (int k = 0; k < phone.length(); k++) {
                     if (!Character.isDigit(phone.charAt(k))) {
-                        check = false;
+                        checkPhone = false;
                     }
                 }
-                if (phone.length() != 10 || !check) {
+                if (phone.length() != 10 || !checkPhone) {
                     System.out.println("Cần nhập đúng định dạng số điện thoại");
                     continue;
                 }
                 boolean checkExist = false;
-                for (NhanSu ns : qlns.getDsNhanSu()) {
-                    if (ns.getPhone().equals(phone)) {
+                for(int k=0; k<qlns.getDsNhanSu().length; k++) {
+                    if (qlns.getDsNhanSu()[k].getPhone().equals(phone)) {
+                        System.out.println("Số điện thoại đã tồn tại");
                         checkExist = true;
                         break;
                     }
                 }
-                if (checkExist) {
-                    System.out.println("Số điện thoại đã tồn tại");
-                    continue;
-                }
+                if (checkExist) {continue;}
                 break;
             }
             System.out.print("Nhập địa chỉ: ");
@@ -225,8 +233,10 @@ public class OptionQuanLyNhanSu implements ShowOption {
 
     public void rangeByName(){
         for(int i=0; i<qlns.getDsNhanSu().length; i++){
+            int index_1 = qlns.getDsNhanSu()[i].getTen().lastIndexOf(' ');
             for(int j=i; j<qlns.getDsNhanSu().length-1; j++){
-                if(qlns.getDsNhanSu()[i].getTen().charAt(0) > qlns.getDsNhanSu()[j].getTen().charAt(0)){
+                int index_2 = qlns.getDsNhanSu()[j].getTen().lastIndexOf(' ');
+                if(qlns.getDsNhanSu()[i].getTen().charAt((index_1)+1) > qlns.getDsNhanSu()[j].getTen().charAt((index_2+1))){
                     NhanSu tmp = qlns.getDsNhanSu()[i];
                     qlns.getDsNhanSu()[i] = qlns.getDsNhanSu()[j];
                     qlns.getDsNhanSu()[j] = tmp;
