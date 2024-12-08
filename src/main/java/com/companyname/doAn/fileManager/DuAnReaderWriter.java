@@ -1,5 +1,8 @@
 package com.companyname.doAn.fileManager;
 
+import java.util.Arrays;
+
+import com.companyname.doAn.ql.QuanLyNhanSu;
 import com.companyname.doAn.type.DuAn;
 import com.companyname.doAn.type.NhanSu;
 
@@ -26,4 +29,20 @@ public class DuAnReaderWriter extends FileReaderWriter<DuAn> {
         return null;
     }
     
+    @Override
+    Object stringToValue(Class fieldType, String value)  {
+        if (fieldType == NhanSu[].class) {
+            NhanSu[] nhanSus = new NhanSu[0];
+            for (String id: value.split(",")) {
+                NhanSu nhanSu = QuanLyNhanSu.getInstance().getNhanSuById(id);
+                if (nhanSu != null) {
+                    nhanSus = Arrays.copyOf(nhanSus, nhanSus.length + 1);
+                    nhanSus[nhanSus.length - 1] = nhanSu;
+                }
+            }
+            return nhanSus;
+        }
+
+        return super.stringToValue(fieldType, value);
+    }
 }

@@ -1,19 +1,13 @@
 package com.companyname.doAn.fileManager;
 
-import com.companyname.doAn.type.PhongBan;
-import com.companyname.doAn.type.TruongPhong;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Arrays;
-import java.util.Scanner;
 
 import com.companyname.doAn.ql.QuanLyDuAn;
 import com.companyname.doAn.ql.QuanLyNhanSu;
 import com.companyname.doAn.type.DuAn;
 import com.companyname.doAn.type.NhanVien;
+import com.companyname.doAn.type.PhongBan;
+import com.companyname.doAn.type.TruongPhong;
 
 public class PhongBanReaderWriter extends FileReaderWriter<PhongBan> {
     public PhongBanReaderWriter(String folder) {
@@ -82,6 +76,21 @@ public class PhongBanReaderWriter extends FileReaderWriter<PhongBan> {
                 }
             }
             return tps;
+        }
+        if (fieldType == DuAn[].class) {
+            String[] ids = value.split(",");
+
+            DuAn[] duAns = new DuAn[0];
+
+            for(String id: ids) {
+                DuAn duAn = QuanLyDuAn.getInstance().getDuAnById(id);
+                if (duAn != null) {
+                    duAns = Arrays.copyOf(duAns, duAns.length + 1);
+                    duAns[duAns.length] = duAn;
+                }
+            }
+
+            return duAns;
         }
 
         return super.stringToValue(fieldType, value);
