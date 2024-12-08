@@ -18,8 +18,20 @@ public class OptionMenu implements ShowOption {
             System.out.println("2: Quản lý phòng ban");
             System.out.println("3: Quản lý nhân sự");
             System.out.println("0: Thoát chương trình");
-            System.out.print("Chọn chức năng quản lý: ");
-            int choice = Integer.parseInt(sc.nextLine());
+
+            int choice;
+            while (true) {
+                try {
+                    System.out.print("Chọn chức năng quản lý: ");
+                    choice = Integer.parseInt(sc.nextLine());
+                    if (choice > 4 || choice < 0) {
+                        System.out.println("Cần chọn chức năng hợp lệ");
+                    } else
+                        break;
+                } catch (NumberFormatException e) {
+                    System.out.println("Cần chọn chức năng hợp lệ");
+                }
+            }
             ShowOption.clearScreen();
             switch (choice) {
                 case 1:
@@ -52,10 +64,11 @@ public class OptionMenu implements ShowOption {
             System.out.println("4: Chức năng đối với dự án cụ thể. Cần nhập ID dự án");
             System.out.println("5: Tìm kiếm dự án theo tên");
             System.out.println("0: Quay lại menu trước");
-            System.out.print("Chọn chức năng: ");
+
             int choice;
             while (true) {
                 try {
+                    System.out.print("Chọn chức năng: ");
                     choice = Integer.parseInt(sc.nextLine());
                     if (choice > 5 || choice < 0) {
                         System.out.println("Cần chọn chức năng hợp lệ");
@@ -107,19 +120,18 @@ public class OptionMenu implements ShowOption {
             System.out.println("5: Chức năng đối với phòng ban cụ thể. Cần nhập ID phòng ban");
             System.out.println("6: Tìm kiếm phòng ban theo tên");
             System.out.println("0: Quay lại menu trước");
-            System.out.print("Chon chuc nang: ");
 
             int choice;
-            
             while (true) {
                 try {
+                    System.out.print("Chọn chức năng: ");
                     choice = Integer.parseInt(sc.nextLine());
                     if (choice < 0 || choice > 6) {
-                        System.out.println("Can chon chuc nang hop le");
+                        System.out.println("Cần chọn chức năng hợp lệ");
                     } else
                         break;
                 } catch (NumberFormatException e) {
-                    System.out.println("Can chon chuc nang hop le");
+                    System.out.println("Cần chọn chức năng hợp lệ");
                 }
             }
 
@@ -193,12 +205,16 @@ public class OptionMenu implements ShowOption {
                     break;
                 case 4:
                     optionQuanLyNhanSu.show();
+                    break;
                 case 5:
                     optionQuanLyNhanSu.list();
+                    break;
                 case 6:
                     optionQuanLyNhanSu.searchByName();
+                    break;
                 case 7:
                     optionQuanLyNhanSu.rangeByName();
+                    break;
                 case 0:
                     return;
             }

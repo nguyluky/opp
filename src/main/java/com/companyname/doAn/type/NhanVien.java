@@ -99,6 +99,9 @@ public class NhanVien extends NhanSu {
         System.out.println("---------------------------------------");
 //        ShowOption.clearScreen();
 
+        System.out.print("Tình trạng: ");
+        if(this.getIsDelete()) System.out.println("Đã nghỉ việc");
+        else System.out.println("Đang làm");
         System.out.println("Họ và tên: " + super.getHo() + " " + super.getTen());
         System.out.println("ID: " + super.getId());
         System.out.println("Số điện thoại: " + super.getPhone());
@@ -125,16 +128,17 @@ public class NhanVien extends NhanSu {
         boolean checkFindDuAn = false;
         int i=1;
         for(DuAn da : qlda.getDsDuAn()){
-            if(!da.getIsDelete()) {
-                for (NhanSu ns : da.getDsNhanSu()) {
-                    if (ns.getId().equals(super.getId())) {
-                        System.out.println("Dự án thứ " + i + ": " + da.getNameDuAn() + ". ID: " + da.getIdDuAn());
-                        i++;
-                        checkFindDuAn = true;
-                        break;
-                    }
+            for (NhanSu ns : da.getDsNhanSu()) {
+                if (ns.getId().equals(super.getId())) {
+                    System.out.print("Dự án thứ " + i + ": " + da.getNameDuAn() + ". ID: " + da.getIdDuAn());
+                    if(da.getIsDelete()) System.out.println("Tình trạng: Đã dừng hoạt động");
+                    else System.out.println("Tình trạng: Đang hoạt động");
+                    i++;
+                    checkFindDuAn = true;
+                    break;
                 }
             }
+
         }
         if(!checkFindDuAn)  System.out.println("Không có");
     }

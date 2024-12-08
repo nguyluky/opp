@@ -1,13 +1,13 @@
 package com.companyname.doAn.fileManager;
 
-import java.util.Arrays;
-
 import com.companyname.doAn.ql.QuanLyDuAn;
 import com.companyname.doAn.ql.QuanLyNhanSu;
 import com.companyname.doAn.type.DuAn;
 import com.companyname.doAn.type.NhanVien;
 import com.companyname.doAn.type.PhongBan;
 import com.companyname.doAn.type.TruongPhong;
+
+import java.util.Arrays;
 
 public class PhongBanReaderWriter extends FileReaderWriter<PhongBan> {
     public PhongBanReaderWriter(String folder) {
@@ -86,7 +86,7 @@ public class PhongBanReaderWriter extends FileReaderWriter<PhongBan> {
                 DuAn duAn = QuanLyDuAn.getInstance().getDuAnById(id);
                 if (duAn != null) {
                     duAns = Arrays.copyOf(duAns, duAns.length + 1);
-                    duAns[duAns.length] = duAn;
+                    duAns[duAns.length-1] = duAn;
                 }
             }
 

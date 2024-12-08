@@ -88,7 +88,11 @@ public class TruongPhong extends NhanSu {
         return luongCoBan + getLuongMem();
     }
 
+    @Override
     public void printThongTinCoBan(){
+        System.out.print("Tình trạng: ");
+        if(this.getIsDelete()) System.out.println("Đã nghỉ việc");
+        else System.out.println("Đang làm");
         System.out.println("Tên: " + super.getTen());
         System.out.println("ID: " + super.getId());
         System.out.println("Số điện thoại: " + super.getPhone());
@@ -100,7 +104,7 @@ public class TruongPhong extends NhanSu {
         PhongBan pb = null;
         for(PhongBan phongBan : qlpb.getDsPhongBan()){
             for (TruongPhong tp : phongBan.getDsTruongPhong()) {
-                if (tp.getId().equals(this.getId()) && !tp.getIsDelete()) {
+                if (tp.getId().equals(this.getId())) {
                     System.out.println("Phòng ban: " + phongBan.getNamePhongBan() + ". ID: " + phongBan.getIdPhongBan());
                 }
             }
@@ -114,6 +118,8 @@ public class TruongPhong extends NhanSu {
                     if (ns.getId().equals(super.getId())) {
                         System.out.println("Dự án thứ " + i + ": " + da.getNameDuAn() + ". ID: " + da.getIdDuAn());
                         i++;
+                        if(da.getIsDelete()) System.out.println("Tình trạng: Đã dừng hoạt động");
+                        else System.out.println("Tình trạng: Đang hoạt động");
                         checkFindDuAn = true;
                         break;
                     }

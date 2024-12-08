@@ -60,13 +60,13 @@ public class OptionDuAn {
     }
 
     public void xoaNhanSu(DuAn currentDuAn) { // xóa nhân viên khỏi dự án
-        System.out.print("Nhập số lượng nhân viên muốn xóa khỏi dự án: ");
+        System.out.print("Nhập số lượng nhân sự muốn xóa khỏi dự án: ");
         int slNhanSu;
         // kiểm tra nhập đúng số >0 thì dừng
         while (true) {
             try {
                 slNhanSu = Integer.parseInt(sc.nextLine());
-                if (slNhanSu > 0) {
+                if (slNhanSu > 0 && slNhanSu <= currentDuAn.getDsNhanSu().length) {
                     break;
                 } else {
                     System.out.println("Nhập số âm là lỗi. Thoát");
@@ -77,13 +77,16 @@ public class OptionDuAn {
         }
 
         for (int i = 0; i < slNhanSu; i++) {
-            System.out.printf("Nhập ID nhân viên thứ: " + (i + 1) + " muốn xóa khỏi dự án: ");
+            currentDuAn.printDsNhanSu();
+            System.out.printf("Nhập ID nhân sự thứ " + (i + 1) + " muốn xóa khỏi dự án: ");
             String idNhanSu = sc.nextLine();
             // nếu ID không tồn tại, bỏ qua
             if (currentDuAn.getNhanSuByID(idNhanSu) == null || currentDuAn.getNhanSuByID(idNhanSu).getIsDelete()) {
-                System.out.println("ID nhân viên không tồn tại trong dự án");
+                System.out.println("ID nhân sự không tồn tại trong dự án");
             } else {
                 currentDuAn.removeNhanSu(idNhanSu);
+                System.out.println("---------------------------------------");
+                System.out.println("Xóa thành công");
             }
         }
     }

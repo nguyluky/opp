@@ -9,13 +9,13 @@ public class OptionPhongBan{
 
     public void themDuAn(PhongBan currentPhongBan){
         System.out.println("-----------------------------------");
-        System.out.print("Nhập số dự án muốn thêm: ");
         int slDa;
         while(true){
             try {
+                System.out.print("Nhập số dự án muốn thêm: ");
                 slDa = Integer.parseInt(sc.nextLine());
-                if(slDa<0){
-                    System.out.println("Nhập số âm là lỗi");
+                if(slDa<0 && slDa<qlda.getDsDuAn().length){
+                    System.out.println("Nhập số nguyên dương");
                 }
                 else{
                     break;
@@ -24,68 +24,37 @@ public class OptionPhongBan{
                 System.out.println("Vui lòng nhập số");
             }
         }
-
-        DuAn[] dsDuAn = new DuAn[slDa];
-
-        for(int i=0; i<slDa; i++){
-            String nameDuAn;
-            while(true){
-                System.out.printf("Nhập tên dự án thứ " + (i+1) + ": ");
-                nameDuAn = sc.nextLine().trim();
-                if(qlda.getDuAnByName(nameDuAn) != null){
-                    System.out.println("-----------------------------------");
-                    System.out.println("Tên dự án đã tồn tại");
-                }
-                else break;
+        qlda.printDsDuAn();
+        for(int i = 0; i < slDa; i++){
+            System.out.print("Nhập ID dự án thứ" + (i+1) + " muốn thêm vào phòng ban: ");
+            String id = sc.nextLine().trim();
+            if(qlda.getDuAnById(id) == null || qlda.getDuAnById(id).getIsDelete()){
+                System.out.println("-----------------------------------");
+                System.out.println("ID dự án không tồn tại");
+                break;
             }
-            String idDuAn;
-            while (true) {
-                System.out.printf("Nhập id dự án: " + (i + 1) + ": ");
-                idDuAn = sc.nextLine().trim();
-                if(qlda.getDuAnById(idDuAn) != null){
+            for(DuAn da : currentPhongBan.getDsDuAn()){
+                if(da.getIdDuAn().equals(id)){
                     System.out.println("-----------------------------------");
-                    System.out.println("ID dự án đã tồn tại");
+                    System.out.println("Dự án đang hoạt động trong phòng ban này");
+                    break;
                 }
-                else break;
             }
-            System.out.printf("Nhập số lượng nhân sự dự án: "  + (i+1) + ": ");
-            int slNhanSu;
-            while(true) {
-                try {
-                    slNhanSu = Integer.parseInt(sc.nextLine());
-                    if (slNhanSu < 0) {
-                        System.out.println("Cần nhập số nguyên dương");
+            boolean checkExistOther = false;
+            for(PhongBan pb : qlpb.getDsPhongBan()){
+                for(DuAn da : pb.getDsDuAn()){
+                    if(da.getIdDuAn().equals(id)){
+                        System.out.println("-----------------------------------");
+                        System.out.println("Dự án đã thuộc phòng ban khác");
+                        checkExistOther = true;
+                        break;
                     }
-                    else break;
-                } catch (NumberFormatException e) {
-                    System.out.println("Cần nhập số nguyên dương");
                 }
+                if(checkExistOther) break;
             }
-
-            NhanSu[] dsNhanSu = new NhanSu[slNhanSu];
-
-            qlns.printDsNhanSu();
-            for(int j=0; j<slNhanSu; j++){
-                System.out.println("---------------------------------------");
-                System.out.print("Nhập ID nhân sự thứ " + (j + 1) + " muốn thêm vào dự án: ");
-                String idNhanSu = sc.nextLine().trim();
-                NhanSu ns = qlns.getNhanSuById(idNhanSu);
-                if(ns != null && !ns.getIsDelete()){
-                    dsNhanSu[j] = ns;
-                    System.out.println("---------------------------------------");
-                    System.out.println("Thêm thành công");
-                }
-                else{
-                    System.out.println("---------------------------------------");
-                    System.out.println("ID nhân sự không tồn tại");
-                    j--;
-                }
-            }
-            dsDuAn[i] = new DuAn(nameDuAn, idDuAn);
-            dsDuAn[i].setDsNhanSu(dsNhanSu);
-
-            qlda.addDuAn(dsDuAn[i]);
-            currentPhongBan.addDuAn(dsDuAn[i]);
+            currentPhongBan.addDuAn(qlda.getDuAnById(id));
+            System.out.println("-----------------------------------");
+            System.out.println("Thêm thành công");
         }
     }
 
@@ -243,6 +212,7 @@ public class OptionPhongBan{
         TruongPhong newTruongPhong = new TruongPhong(oldNv.getId(), oldNv.getHo(), oldNv.getTen(), oldNv.getPhone(), oldNv.getDiaChi(), oldNv.getNamVaoLam(), oldNv.getKinhNghiem());
         newTruongPhong.setDsKyLuat(oldNv.getDsKyLuat());
         newTruongPhong.setDsKhenThuong(oldNv.getDsKhenThuong());
+        newTruongPhong.setSoNgayNghi(oldNv.getSoNgayNghi());
 
         currentPhongBan.changeTruongPhong(newTruongPhong);
     }

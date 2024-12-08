@@ -83,7 +83,6 @@ public class QuanLyPhongBan {
             for(NhanVien nhanVien : pb.getDsNhanVien()){
                 if(nhanVien.getId().equals(nv.getId())){
                     pb.removeNhanVien(nv.getId());
-                    break;
                 }
             }
         }

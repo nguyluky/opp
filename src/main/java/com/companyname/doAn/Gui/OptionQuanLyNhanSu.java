@@ -113,10 +113,10 @@ public class OptionQuanLyNhanSu implements ShowOption {
 
     public void xoaNhanSu() {
         qlns.printDsNhanSu();
-        System.out.print("Nhập số lượng nhân sự muốn xóa: ");
         int slNhanSu;
         while (true) {
             try {
+                System.out.print("Nhập số lượng nhân sự muốn xóa: ");
                 slNhanSu = Integer.parseInt(sc.nextLine());
                 if (slNhanSu < 0 || slNhanSu > qlns.getDsNhanSu().length) {
                     System.out.println("Vui lòng nhập số nguyên dương");
@@ -145,6 +145,7 @@ public class OptionQuanLyNhanSu implements ShowOption {
     @Override
     public void show() {
         // ShowOption.clearScreen();
+        while (true) {
             qlns.printDsNhanSu();
             System.out.println("---------------------------------------");
             System.out.print("Nhập ID nhân sự: ");
@@ -153,7 +154,7 @@ public class OptionQuanLyNhanSu implements ShowOption {
                 System.out.println("ID nhân sự không tồn tại");
                 return;
             }
-            if(qlns.getNhanSuById(idNhanSu).getIsDelete()){
+            if (qlns.getNhanSuById(idNhanSu).getIsDelete()) {
                 qlns.getNhanSuById(idNhanSu).printThongTinCoBan();
                 return;
             }
@@ -195,29 +196,36 @@ public class OptionQuanLyNhanSu implements ShowOption {
                     optionNhanSu.kyLuat(currentNhanSu);
                     break;
                 case 0:
-                    break;
-            }
-        }
-
-    public void list(){
-        System.out.println("---------------------------------------");
-        System.out.println("Danh sách nhân sự được khen thưởng: ");
-        for(int i=0; i<qlns.getDsNhanSu().length; i++){
-            if(!qlns.getDsNhanSu()[i].getIsDelete() && qlns.getDsNhanSu()[i].getDsKhenThuong().length>0){
-                System.out.println("Nhân sự thứ " + (i+1) + ": " + qlns.getDsNhanSu()[i].getHo() + " " + qlns.getDsNhanSu()[i].getTen() + ". ID: " + qlns.getDsNhanSu()[i].getId());
-            }
-        }
-        System.out.println("Danh sách nhân sự bị kỷ luật: ");
-        for(int i=0; i<qlns.getDsNhanSu().length; i++){
-            if(!qlns.getDsNhanSu()[i].getIsDelete() && qlns.getDsNhanSu()[i].getDsKyLuat().length>0){
-                System.out.println("Nhân sự thứ " + (i+1) + ": " + qlns.getDsNhanSu()[i].getHo() + " " + qlns.getDsNhanSu()[i].getTen() + ". ID: " + qlns.getDsNhanSu()[i].getId());
+                    return;
             }
         }
     }
 
+    public void list(){
+        System.out.println("---------------------------------------");
+        System.out.println("Danh sách nhân sự được khen thưởng: ");
+        int countKt = 0;
+        for(int i=0; i<qlns.getDsNhanSu().length; i++){
+            if(!qlns.getDsNhanSu()[i].getIsDelete() && qlns.getDsNhanSu()[i].getDsKhenThuong().length>0){
+                System.out.println("Nhân sự thứ " + (i+1) + ": " + qlns.getDsNhanSu()[i].getHo() + " " + qlns.getDsNhanSu()[i].getTen() + ". ID: " + qlns.getDsNhanSu()[i].getId());
+                countKt++;
+            }
+        }
+        if(countKt==0) System.out.println("Không có");
+        int countKl = 0;
+        System.out.println("Danh sách nhân sự bị kỷ luật: ");
+        for(int i=0; i<qlns.getDsNhanSu().length; i++){
+            if(!qlns.getDsNhanSu()[i].getIsDelete() && qlns.getDsNhanSu()[i].getDsKyLuat().length>0){
+                System.out.println("Nhân sự thứ " + (i+1) + ": " + qlns.getDsNhanSu()[i].getHo() + " " + qlns.getDsNhanSu()[i].getTen() + ". ID: " + qlns.getDsNhanSu()[i].getId());
+                countKl++;
+            }
+        }
+        if(countKl==0) System.out.println("Không có");
+    }
+
     public void searchByName(){
         System.out.println("---------------------------------------");
-        System.out.println("Nhập tên nhân sự: ");
+        System.out.print("Nhập tên nhân sự: ");
         String name = sc.nextLine().trim().toLowerCase();
         boolean checkSearch = false;
         for(int i=0; i<qlns.getDsNhanSu().length; i++){

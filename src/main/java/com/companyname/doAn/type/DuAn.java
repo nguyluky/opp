@@ -106,6 +106,9 @@ public class DuAn {
     public void printThongTinCoBan(){
         System.out.println("---------------------------------------");
 
+        System.out.print("Tình trạng: ");
+        if(this.getIsDelete()) System.out.println("Đã dừng hoạt động");
+        else System.out.println("Đang hoạt động");
         System.out.println("Tên: " + this.nameDuAn);
         System.out.println("ID: " + this.idDuAn);
         PhongBan phongBan=null;
