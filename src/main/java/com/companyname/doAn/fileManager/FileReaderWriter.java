@@ -8,13 +8,7 @@ import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.Arrays;
-import java.util.FormatterClosedException;
 import java.util.Scanner;
-
-import javax.annotation.processing.FilerException;
-
-import com.companyname.doAn.type.NhanVien;
-import com.companyname.doAn.type.TruongPhong;
 
 public abstract class FileReaderWriter<T> implements BaseReader<T>, BaseWriter<T> {
 

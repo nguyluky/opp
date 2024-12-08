@@ -83,6 +83,21 @@ public class PhongBanReaderWriter extends FileReaderWriter<PhongBan> {
             }
             return tps;
         }
+        if (fieldType == DuAn[].class) {
+            String[] ids = value.split(",");
+
+            DuAn[] duAns = new DuAn[0];
+
+            for(String id: ids) {
+                DuAn duAn = QuanLyDuAn.getInstance().getDuAnById(id);
+                if (duAn != null) {
+                    duAns = Arrays.copyOf(duAns, duAns.length + 1);
+                    duAns[duAns.length] = duAn;
+                }
+            }
+
+            return duAns;
+        }
 
         return super.stringToValue(fieldType, value);
     }
