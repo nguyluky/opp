@@ -15,7 +15,7 @@ public class DuAnReaderWriter extends FileReaderWriter<DuAn> {
     @Override
     String valueToString(String fieldName, Object value) {
 
-        if (fieldName == "NhanSu") {
+        if (fieldName == "dsNhanSu") {
             NhanSu[] ns = (NhanSu[]) value;
 
             String[] ids = new String[ns.length];
