@@ -9,6 +9,8 @@ import java.util.Random;
 
 public class test {
 
+    
+
     public static NhanVien taoNhanVienNgauNhien() {
         Random rand = new Random();
         String id = "NV" + rand.nextInt(1000);
