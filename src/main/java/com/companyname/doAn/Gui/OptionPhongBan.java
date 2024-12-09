@@ -33,13 +33,16 @@ public class OptionPhongBan{
                 System.out.println("ID dự án không tồn tại");
                 break;
             }
+            boolean checkExist = false;
             for(DuAn da : currentPhongBan.getDsDuAn()){
                 if(da.getIdDuAn().equals(id)){
                     System.out.println("-----------------------------------");
                     System.out.println("Dự án đang hoạt động trong phòng ban này");
+                    checkExist = true;
                     break;
                 }
             }
+            if(!checkExist) break;
             boolean checkExistOther = false;
             for(PhongBan pb : qlpb.getDsPhongBan()){
                 for(DuAn da : pb.getDsDuAn()){
@@ -50,8 +53,8 @@ public class OptionPhongBan{
                         break;
                     }
                 }
-                if(checkExistOther) break;
             }
+            if(checkExistOther) break;
             currentPhongBan.addDuAn(qlda.getDuAnById(id));
             System.out.println("-----------------------------------");
             System.out.println("Thêm thành công");
